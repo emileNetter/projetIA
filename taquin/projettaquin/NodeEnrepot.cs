@@ -13,13 +13,16 @@ namespace projettaquin
 
         void InitialiserEntrepot()
         {
-            for(int i=2; i<22; i+=2)
-            {
+            for (int l = 0; l < tabEntrepot.GetLength(0); l++)
+                for (int m = 0; m < tabEntrepot.GetLength(1); m++) { tabEntrepot[l, m] = 0; }
 
-                for (int premiereLigne = 4; premiereLigne < 13; premiereLigne++) { tabEntrepot[premiereLigne, i] = -1; }
-                for (int deuxiemeLigne = 16; deuxiemeLigne < 25; deuxiemeLigne++) { tabEntrepot[deuxiemeLigne, i] = -1; }
+                    for (int i = 2; i < 22; i += 2)
+                    {
 
-            }
+                        for (int premiereLigne = 4; premiereLigne < 13; premiereLigne++) { tabEntrepot[premiereLigne, i] = -1; }
+                        for (int deuxiemeLigne = 16; deuxiemeLigne < 25; deuxiemeLigne++) { tabEntrepot[deuxiemeLigne, i] = -1; }
+
+                    }
 
             for(int j=0; j<25;j++)
             {
