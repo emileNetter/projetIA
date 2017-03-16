@@ -13,6 +13,7 @@ namespace projettaquin
         private int posY { get; set; }
         private enum orientation { nord,sud};
         private int hauteur;
+        Random rd = new Random();
         
 
         public Chariot (int _posX, int _posY)
@@ -24,7 +25,7 @@ namespace projettaquin
         public Chariot()
         {
             posX = 0;
-            posY = 0;
+            posY = rd.Next(0,25);
         }
     }
 }
