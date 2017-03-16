@@ -12,18 +12,16 @@ namespace projettaquin
 {
     public partial class FormViewGlobal : Form
     {
-        int largeurForm;
-        int hauteurForm;
         FormeRectangle[,] tabForme = new FormeRectangle[25, 25];
+        public int[,] tabEntrepot = NodeEnrepot.InitialiserEntrepot();
+
         public FormViewGlobal()
         {
             InitializeComponent();
-            largeurForm = this.Width;
-            hauteurForm = this.Height;
             setView();
 
         }
-        public int[,] tabEntrepot = NodeEnrepot.tabEntrepot;
+        
 
         public void setView()
         {
@@ -32,8 +30,8 @@ namespace projettaquin
             {
                 for (int j = 0; j < tabEntrepot.GetLength(1); j++)
                 {
-                    int positionX = largeurForm * i / tabEntrepot.GetLength(0);
-                    int positionY = hauteurForm * j / tabEntrepot.GetLength(1);
+                    int positionX = 20 * i ;
+                    int positionY = 20 * j;
                     int value = tabEntrepot[i, j];
                     switch (value)
                     {
@@ -60,9 +58,9 @@ namespace projettaquin
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < tabEntrepot.GetLength(0); i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < tabEntrepot.GetLength(1); j++)
                 {
                     FormeRectangle.creationFormeColorée(tabForme[i, j], this);
 

@@ -31,28 +31,35 @@ namespace projettaquin
             SolidBrush whiteBrush = new SolidBrush(Color.White);
             SolidBrush greenBrush = new SolidBrush(Color.Green);
 
+            Pen blackPen = new Pen(Brushes.Black);
+            blackPen.Width = 1.0F;
+
             Graphics formGraphics = form.CreateGraphics();
             
+            Rectangle rect=new Rectangle(f.positionX, f.positionY, largeur, hauteur);
 
             switch (f.couleur)
             {
                 case "blue":
                     
 
-                    formGraphics.FillRectangle(blueBrush, new Rectangle(f.positionX, f.positionY, largeur, hauteur));
+                    formGraphics.FillRectangle(blueBrush, rect);
+                    formGraphics.DrawRectangle(blackPen, rect);
                     blueBrush.Dispose();
                     formGraphics.Dispose();
                     break;
 
                 case "white":
 
-                    formGraphics.FillRectangle(whiteBrush, new Rectangle(f.positionX, f.positionY, largeur, hauteur));
+                    formGraphics.FillRectangle(whiteBrush, rect);
+                    formGraphics.DrawRectangle(blackPen, rect);
                     whiteBrush.Dispose();
                     formGraphics.Dispose();
                     break;
 
                 case "green":
-                    formGraphics.FillRectangle(greenBrush, new Rectangle(f.positionX, f.positionY, largeur, hauteur));
+                    formGraphics.FillRectangle(greenBrush, rect);
+                    formGraphics.DrawRectangle(blackPen, rect);
                     greenBrush.Dispose();
                     formGraphics.Dispose();
                     break;

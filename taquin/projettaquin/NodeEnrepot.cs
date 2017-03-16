@@ -11,7 +11,7 @@ namespace projettaquin
         public static int[,] tabEntrepot = new int[25, 25];
         int NBC;
 
-        void InitialiserEntrepot()
+        public static int[,] InitialiserEntrepot()
         {
             for (int l = 0; l < tabEntrepot.GetLength(0); l++)
                 for (int m = 0; m < tabEntrepot.GetLength(1); m++) { tabEntrepot[l, m] = 0; }
@@ -28,6 +28,7 @@ namespace projettaquin
             {
                 tabEntrepot[0, j] = -2;
             }
+            return tabEntrepot;
         }
 
         public override bool IsEqual(projettaquin.GenericNode N2)
