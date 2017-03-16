@@ -14,11 +14,16 @@ namespace projettaquin
     {
         FormeRectangle[,] tabForme = new FormeRectangle[25, 25];
         public int[,] tabEntrepot = NodeEnrepot.InitialiserEntrepot();
+        int hForm;
+        int lForm;
 
         public FormViewGlobal()
         {
             InitializeComponent();
+            hForm = this.Height;
+            lForm = this.Width;
             setView();
+
 
         }
         
@@ -30,8 +35,8 @@ namespace projettaquin
             {
                 for (int j = 0; j < tabEntrepot.GetLength(1); j++)
                 {
-                    int positionX = 20 * i ;
-                    int positionY = 20 * j;
+                    int positionX = i* (lForm/25);
+                    int positionY = j* (hForm/25);
                     int value = tabEntrepot[i, j];
                     switch (value)
                     {

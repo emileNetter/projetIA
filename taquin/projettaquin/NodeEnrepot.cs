@@ -19,8 +19,8 @@ namespace projettaquin
                     for (int i = 2; i < 22; i += 2)
                     {
 
-                        for (int premiereLigne = 4; premiereLigne < 13; premiereLigne++) { tabEntrepot[premiereLigne, i] = -1; }
-                        for (int deuxiemeLigne = 16; deuxiemeLigne < 25; deuxiemeLigne++) { tabEntrepot[deuxiemeLigne, i] = -1; }
+                        for (int premiereLigne = 2; premiereLigne < 11; premiereLigne++) { tabEntrepot[premiereLigne, i] = -1; }
+                        for (int deuxiemeLigne = 14; deuxiemeLigne < 23; deuxiemeLigne++) { tabEntrepot[deuxiemeLigne, i] = -1; }
 
                     }
 
