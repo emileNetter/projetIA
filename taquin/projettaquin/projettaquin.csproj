@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chariot.cs" />
     <Compile Include="Entrepot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +61,7 @@
     </Compile>
     <Compile Include="GenericNode.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="Objet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
