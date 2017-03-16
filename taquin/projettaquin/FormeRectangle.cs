@@ -32,7 +32,7 @@ namespace projettaquin
             SolidBrush greenBrush = new SolidBrush(Color.Green);
 
             Graphics formGraphics = form.CreateGraphics();
-            Point[] triangle = new Point[] { new Point(129, 279), new Point(229, 279), new Point(179, 179) };//sommet gauche, sommet droite, sommet haut
+            
 
             switch (f.couleur)
             {

@@ -37,7 +37,6 @@
             this.ClientSize = new System.Drawing.Size(282, 253);
             this.Name = "FormViewGlobal";
             this.Text = "FormViewGlobal";
-            this.Load += new System.EventHandler(this.FormViewGlobal_Load);
             this.ResumeLayout(false);
 
         }

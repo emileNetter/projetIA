@@ -20,6 +20,7 @@ namespace projettaquin
             InitializeComponent();
             largeurForm = this.Width;
             hauteurForm = this.Height;
+            setView();
 
         }
         public int[,] tabEntrepot = NodeEnrepot.tabEntrepot;
