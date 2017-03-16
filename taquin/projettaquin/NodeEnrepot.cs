@@ -29,5 +29,27 @@ namespace projettaquin
                 tabEntrepot[0, j] = -2;
             }
         }
+
+        public override bool IsEqual(projettaquin.GenericNode N2)
+        {
+            throw new NotImplementedException();
+        }
+        public override double GetArcCost(GenericNode N2)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool EndState()
+        {
+            throw new NotImplementedException();
+        }
+        public override List<GenericNode> GetListSucc()
+        {
+            throw new NotImplementedException();
+        }
+        public override void CalculeHCost()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
