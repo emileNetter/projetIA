@@ -44,13 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chariot.cs" />
     <Compile Include="Entrepot.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Entrepot.Designer.cs">
       <DependentUpon>Entrepot.cs</DependentUpon>
     </Compile>
-    <Compile Include="NodeEnrepot.cs" />
     <Compile Include="NodeTaquin.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -60,8 +60,12 @@
     </Compile>
     <Compile Include="GenericNode.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="Objet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Entrepot.resx">
+      <DependentUpon>Entrepot.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

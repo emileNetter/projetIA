@@ -12,6 +12,8 @@ namespace projettaquin
 {
     public partial class Entrepot : Form
     {
+        private List<Chariot> chariots = new List<Chariot>();
+
         public Entrepot()
         {
             InitializeComponent();
