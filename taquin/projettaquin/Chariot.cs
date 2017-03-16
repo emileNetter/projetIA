@@ -9,8 +9,8 @@ namespace projettaquin
 {
     public class Chariot
     {
-        private int posX { get; set; }
-        private int posY { get; set; }
+        public int posX { get; set; }
+        public int posY { get; set; }
         private enum orientation { nord,sud};
         private int hauteur;
         Random rd = new Random();
@@ -22,10 +22,12 @@ namespace projettaquin
             posY = _posY;
         }
 
+        // Constructeur par défaut (positionné sur la première colonne)
         public Chariot()
         {
-            posX = 0;
-            posY = rd.Next(0,25);
+            posX = 12;
+            posY = rd.Next(12,800);
         }
+      
     }
 }

@@ -23,11 +23,8 @@ namespace projettaquin
             hForm = this.Height;
             lForm = this.Width;
             setView();
-
-
         }
         
-
         public void setView()
         {
             string color = "";
@@ -50,12 +47,9 @@ namespace projettaquin
                             color = "green";
                             break;
 
-
                     }
                     FormeRectangle r = new FormeRectangle(color, positionX, positionY);
-                    tabForme[i, j] = r;
-
-
+                    tabForme[i, j] = r;             
                 }
             }
         }
@@ -68,13 +62,19 @@ namespace projettaquin
                 for (int j = 0; j < tabEntrepot.GetLength(1); j++)
                 {
                     FormeRectangle.creationFormeColorée(tabForme[i, j], this);
-
                 }
             }
+            initialiseChariots(e.Graphics);
+        }  
 
-
-
+        protected void initialiseChariots(Graphics g)
+        {
+            Chariot c = new Chariot();
+            Pen p = new Pen(Color.Black);          
+            g.DrawEllipse(p, c.posX, c.posY, 15, 15);
+            g.Dispose();
 
         }
+        
     }
 }
