@@ -32,10 +32,11 @@
             // 
             // FormViewGlobal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 733);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1232, 753);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormViewGlobal";
             this.Text = "FormViewGlobal";
             this.ResumeLayout(false);
