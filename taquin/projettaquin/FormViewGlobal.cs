@@ -17,15 +17,17 @@ namespace projettaquin
         int hForm;
         int lForm;
 
+
+
         public FormViewGlobal()
         {
             InitializeComponent();
             hForm = this.Height;
             lForm = this.Width;
-            setView();
+            setViewEntrepot();
         }
 
-        public void setView()
+        public void setViewEntrepot()
         {
             string color = "";
             //Définition de la position des cases 
@@ -98,14 +100,16 @@ namespace projettaquin
 
         protected void initialiseChariots(Graphics g)
         {
-            Chariot c = new Chariot();
-            Pen p = new Pen(Color.Black);          
-            g.DrawEllipse(p, c.posX, c.posY, 15, 15);
+            Chariot c = new Chariot(20,18);
+            Pen p = new Pen(Color.Black);  
+            g.DrawEllipse(p, (c.posX+1)*(lForm/25), (c.posY+1)*(hForm/25), lForm/25, hForm/25);
             g.Dispose();
 
         
 
         }
+
+        
 
         /*private void FormViewGlobal_Resize(object sender, EventArgs e)
         {

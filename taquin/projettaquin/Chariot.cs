@@ -25,8 +25,8 @@ namespace projettaquin
         // Constructeur par défaut (positionné sur la première colonne)
         public Chariot()
         {
-            posX = 12;
-            posY = rd.Next(12,800);
+            posX = 0;
+            posY = 0;
         }
       
     }
