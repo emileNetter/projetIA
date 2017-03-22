@@ -29,6 +29,11 @@ namespace projettaquin
             posX = 0;
             posY = 0;
         }
+
+        public override string ToString()
+        {
+            return "x : "+posX+" y : "+posY;
+        }
       
     }
 }
