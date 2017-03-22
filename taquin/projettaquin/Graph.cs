@@ -10,7 +10,12 @@ namespace projettaquin
     {
         public List<GenericNode> L_Ouverts;
         public List<GenericNode> L_Fermes;
+        public Objet objet;
 
+        public Graph (Objet obj)
+        {
+            objet = obj;
+        }
         public int CountInOpenList()
         {
             return L_Ouverts.Count;
@@ -55,7 +60,7 @@ namespace projettaquin
             L_Ouverts.Add(N0);
 
             // tant que le noeud n'est pas terminal et que ouverts n'est pas vide
-            while (L_Ouverts.Count != 0 && N.EndState() == false)
+            while (L_Ouverts.Count != 0 && N.EndState(objet) == false)
             {
                 // Le meilleur noeud des ouverts est supposé placé en tête de liste
                 // On le place dans les fermés
@@ -132,7 +137,7 @@ namespace projettaquin
                     {
                         // N2 est nouveau, MAJ et insertion dans les ouverts
                         N2.SetGCost(N.GetGCost() + N.GetArcCost(N2));
-                        N2.CalculeHCost();
+                        N2.CalculeHCost(objet);
                         N2.SetNoeud_Parent(N);
                         N2.calculCoutTotal(); // somme de GCost et HCost
                         this.InsertNewNodeInOpenList(N2);

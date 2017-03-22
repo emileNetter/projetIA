@@ -61,7 +61,7 @@ namespace projettaquin
 
             }
 
-            if (tabEntrepot==null) { tabEntrepot = NodeEnrepot.InitialiserEntrepot(); }
+            if (tabEntrepot==null) { tabEntrepot = NodeEntrepot.InitialiserEntrepot(); }
             else
             {
 
@@ -122,7 +122,7 @@ namespace projettaquin
 
         private void button3_Click(object sender, EventArgs e) // Bouton placement manuel
         {
-            tabEntrepot = NodeEnrepot.InitialiserEntrepot(); // On initialise le tableau "source"
+            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); // On initialise le tableau "source"
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
 
@@ -136,7 +136,7 @@ namespace projettaquin
 
         private void button1_Click(object sender, EventArgs e) // Bonton placement aléaoire
         {
-            tabEntrepot = NodeEnrepot.InitialiserEntrepot(); // On initialise le tableau "source"
+            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); // On initialise le tableau "source"
             Random rd = new Random();
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
