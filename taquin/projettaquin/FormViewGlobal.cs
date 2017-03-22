@@ -13,7 +13,7 @@ namespace projettaquin
     public partial class FormViewGlobal : Form
     {
         FormeRectangle[,] tabForme = new FormeRectangle[25, 25];
-        public int[,] tabEntrepot = NodeEnrepot.InitialiserEntrepot();
+        public int[,] tabEntrepot = null;
         int hForm;
         int lForm;
 
@@ -24,11 +24,11 @@ namespace projettaquin
             InitializeComponent();
             hForm = this.Height;
             lForm = this.Width;
-            setViewEntrepot();
         }
 
         public void setViewEntrepot()
         {
+            tabEntrepot = NodeEnrepot.InitialiserEntrepot();
             string color = "";
             //Définition de la position des cases 
             for (int i = 1; i < 26; i++)
@@ -88,14 +88,17 @@ namespace projettaquin
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            for (int i = 0; i < tabEntrepot.GetLength(0); i++)
+            if (tabEntrepot != null)
             {
-                for (int j = 0; j < tabEntrepot.GetLength(1); j++)
+                for (int i = 0; i < tabEntrepot.GetLength(0); i++)
                 {
-                    FormeRectangle.creationFormeColorée(tabForme[i, j], this);
+                    for (int j = 0; j < tabEntrepot.GetLength(1); j++)
+                    {
+                        FormeRectangle.creationFormeColorée(tabForme[i, j], this);
+                    }
                 }
+                initialiseChariots(e.Graphics);
             }
-            initialiseChariots(e.Graphics);
         }  
 
         protected void initialiseChariots(Graphics g)
@@ -107,6 +110,11 @@ namespace projettaquin
 
         
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            setViewEntrepot();
         }
 
         
