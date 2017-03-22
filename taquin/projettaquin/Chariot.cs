@@ -20,6 +20,7 @@ namespace projettaquin
         {
             posX = _posX;
             posY = _posY;
+            NodeEntrepot.tabEntrepot[posX, posY] = -1;
         }
 
         // Constructeur par défaut (positionné sur la première colonne)

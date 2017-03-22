@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace projettaquin
 {
 
-    class Objet
+    public class Objet
     {
-        private int posX { get; set; }
-        private int posY { get; set; }
+        public int posX { get; set; }
+        public int posY { get; set; }
         public enum Orientation { Nord, Sud };
         public Orientation orientation { get; set; }
         private int hauteur { get; set; }

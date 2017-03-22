@@ -83,9 +83,9 @@ namespace projettaquin
         // Méthodes abstrates, donc à surcharger obligatoirement avec override dans une classe fille
         public abstract bool IsEqual(GenericNode N2);
         public abstract double GetArcCost(GenericNode N2);
-        public abstract bool EndState();
+        public abstract bool EndState(Objet obj);
         public abstract List<GenericNode> GetListSucc();
-        public abstract void CalculeHCost();
+        public abstract void CalculeHCost(Objet objet);
         // On peut aussi penser à surcharger ToString() pour afficher correctement un état
         // c'est utile pour l'affichage du treenode
     }

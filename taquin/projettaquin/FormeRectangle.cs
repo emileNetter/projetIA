@@ -64,12 +64,6 @@ namespace projettaquin
                     formGraphics.Dispose();
                     break;
             }
-
-
-
         }
-
-    }
-
-    
+    }  
 }
