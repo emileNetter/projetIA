@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace projettaquin
 {
@@ -110,13 +111,20 @@ namespace projettaquin
                     initialiseAffichageChariot(e.Graphics, c);
                 }
             }
+
         }  
 
         protected void initialiseAffichageChariot(Graphics g, Chariot chariot)
         {
-                Pen p = new Pen(Color.Black);
-                g.DrawEllipse(p, (chariot.posX + 1) * (lForm / 25), (chariot.posY + 1) * (hForm / 25), lForm / 25, hForm / 25);
-                g.Dispose();
+            Pen p = new Pen(Color.Black);
+           
+            
+            Debug.WriteLine((chariot.posX + 1) * (Width/25));
+            g.FillEllipse(new SolidBrush(Color.Black), 100, 100, 50, 50);
+            //g.FillEllipse(new SolidBrush(Color.Black), (chariot.posX + 1) * (Height / 25), (chariot.posY + 1) * (Width /25), 100, 100);
+            //valeurs tests
+            g.FillEllipse(new SolidBrush(Color.Black), (chariot.posX) * (Width / 25), (chariot.posY) * (Height / 25), Width/25, Height/25);
+            g.Dispose();
 
         }
 
@@ -161,7 +169,17 @@ namespace projettaquin
 
         private void btn_valider_Click(object sender, EventArgs e) // Bouton valider
         {
-            setViewEntrepot(); 
+            setViewEntrepot();
+            foreach (Control l in this.Controls.OfType<Control>())
+            {
+                if(l is Label)
+                {
+                    if(l.Name == "label1" || l.Name == "label2" || l.Name == "label3" || l.Name == "label4")
+                    {
+                        l.Visible = false;                    }
+                }
+                else l.Visible = false;
+            }
         }
 
         private void comboBoxManuel_SelectedIndexChanged(object sender, EventArgs e)
@@ -177,8 +195,6 @@ namespace projettaquin
             c.posX = Convert.ToInt32(textBoxX.Text);
             c.posY = Convert.ToInt32(textBoxY.Text);
         }
-
-
        
     }
 }
