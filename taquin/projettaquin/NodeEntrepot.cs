@@ -63,7 +63,7 @@ namespace projettaquin
                 positionFinaleY = objet.posY + 1;
             }
 
-            if(this.posX == 3 && this.posY == 3)
+            if(this.posX == objet.posX && this.posY == positionFinaleY)
             {
                 return true;
             } else
