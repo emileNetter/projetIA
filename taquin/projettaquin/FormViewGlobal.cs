@@ -17,6 +17,7 @@ namespace projettaquin
         Chariot[] tabChariot = null;
         FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
+        List<GenericNode> Lres = null;
         Objet objet;
         int hForm;
         int lForm;
@@ -41,8 +42,7 @@ namespace projettaquin
             Graph g = new Graph(objet);
             //NodeEntrepot N0 = new NodeEntrepot(tabChariot[0].posX -1, tabChariot[0].posY -1);
             NodeEntrepot N0 = new NodeEntrepot(1, 1);
-            List<GenericNode> Lres = g.RechercheSolutionAEtoile(N0);
-            Panel affichage = new Panel();
+            List<GenericNode> Lres = g.RechercheSolutionAEtoile(N0); // pour la méthode A*
             this.Height = 800;
             this.Width = 1000;
             tabForme = new FormeRectangle[25, 25];
@@ -252,6 +252,15 @@ namespace projettaquin
             button2.Enabled = false;
             button3.Enabled = false;
             btn_ValiderPos.Enabled = false;
+
+            foreach(GenericNode n in Lres)
+            {
+                NodeEntrepot node = (NodeEntrepot)n;
+                int positionX = node.posX;
+                int positionY = node.posY;
+                FormeRectangle objet = new FormeRectangle("black", positionX, positionY);
+                FormeRectangle.creationFormeColorée(objet, this);
+            }
         }
     }
 }
