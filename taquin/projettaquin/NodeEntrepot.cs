@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace projettaquin
 {
@@ -15,6 +16,7 @@ namespace projettaquin
 
         public NodeEntrepot(int posX, int posY)
         {
+            // retirer 1 puisque indice du tableau commence à 0
             this.posX = posX;
             this.posY = posY;
         }
@@ -73,24 +75,37 @@ namespace projettaquin
         public override List<GenericNode> GetListSucc()
         {
             List<GenericNode> lsucc = new List<GenericNode>();
-            if (tabEntrepot[posX,posY+1]!= -1)
+            if(posY<24)
             {
-                lsucc.Add(new NodeEntrepot(posX, posY + 1));
+                if (tabEntrepot[posX, posY + 1] != -1)
+                {
+                    lsucc.Add(new NodeEntrepot(posX , posY + 1));
+                }
             }
-            if(tabEntrepot[posX,posY-1] != -1)
+           if(posY>0)
             {
-                lsucc.Add(new NodeEntrepot(posX, posY + 1));
+                if (tabEntrepot[posX, posY - 1] != -1)
+                {
+                    lsucc.Add(new NodeEntrepot(posX , posY -1));
+                }
             }
-            if(tabEntrepot[posX + 1, posY] != -1)
+            if(posX<24)
             {
-                lsucc.Add(new NodeEntrepot(posX + 1, posY));
+                if (tabEntrepot[posX + 1, posY] != -1 && posX < 24)
+                {
+                    lsucc.Add(new NodeEntrepot(posX + 1, posY ));
+                }
             }
-
-            if(tabEntrepot[posX - 1, posY] != -1)
+            
+            if(posX>0)
             {
-                lsucc.Add(new NodeEntrepot(posX - 1, posY));
+                if (tabEntrepot[posX - 1, posY] != -1)
+                {
+                    lsucc.Add(new NodeEntrepot(posX-1, posY));
+                }
             }
-
+            
+            
             return lsucc;
 
         }
@@ -102,7 +117,9 @@ namespace projettaquin
             distX = Math.Abs(this.posX - objet.posX);
             distY = Math.Abs(this.posY - objet.posY);
 
-            distF = Math.Sqrt(Math.Pow(distX,2) + Math.Pow(distY,2));      
+            distF = Math.Sqrt(Math.Pow(distX,2) + Math.Pow(distY,2));
+            HCost = distF;
+            SetEstimation(distF);
         }
 
     }

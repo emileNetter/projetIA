@@ -16,6 +16,7 @@ namespace projettaquin
         Chariot[] tabChariot = null;
         FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
+        Objet objet;
         int hForm;
         int lForm;
 
@@ -29,11 +30,16 @@ namespace projettaquin
             hForm = this.Height;
             lForm = this.Width;
             numericUpDown1.Value = 1;
+           
         }
 
 
         public void setViewEntrepot()
         {
+            objet = new Objet(3, 3, Objet.Orientation.Nord, 5);
+            Graph g = new Graph(objet);
+            NodeEntrepot N0 = new NodeEntrepot(tabChariot[0].posX -1, tabChariot[0].posY -1);
+            List<GenericNode> Lres = g.RechercheSolutionAEtoile(N0);
             Panel affichage = new Panel();
             this.Height = 800;
             this.Width = 1000;
@@ -51,7 +57,7 @@ namespace projettaquin
                 labelX.Text = i.ToString();
                 labelX.TextAlign = ContentAlignment.MiddleCenter;
                 labelX.Size=new Size(25,25);
-                labelX.Name = "labelX" + i+1;
+                labelX.Name = "labelX" + i;
                 this.Controls.Add(labelX);
 
                
@@ -61,7 +67,7 @@ namespace projettaquin
                 labelY.Text = i.ToString();
                 labelY.TextAlign = ContentAlignment.MiddleCenter;
                 labelY.Size = new Size(25,25);
-                labelY.Name = "labelY" + i+1;
+                labelY.Name = "labelY" + i;
                 this.Controls.Add(labelY);
 
 

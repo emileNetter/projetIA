@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace projettaquin
 {
@@ -107,7 +108,7 @@ namespace projettaquin
             // problème. Elle doit retourner la liste complète des noeuds successeurs de N.
             List<GenericNode> listsucc = N.GetListSucc();
             foreach (GenericNode N2 in listsucc)
-            {
+            {               
                 // N2 est-il une copie d'un nœud déjà vu et placé dans la liste des fermés ?
                 GenericNode N2bis = ChercheNodeDansFermes(N2);
                 if (N2bis == null)
