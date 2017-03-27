@@ -21,7 +21,6 @@ namespace projettaquin
             this.posY = posY;
         }
 
-
         public static int[,] InitialiserEntrepot()
         {
             for (int l = 0; l < tabEntrepot.GetLength(0); l++)
@@ -64,7 +63,7 @@ namespace projettaquin
                 positionFinaleY = objet.posY + 1;
             }
 
-            if(this.posX == objet.posX && this.posY == positionFinaleY)
+            if(this.posX == 3 && this.posY == 3)
             {
                 return true;
             } else
@@ -104,7 +103,6 @@ namespace projettaquin
                     lsucc.Add(new NodeEntrepot(posX-1, posY));
                 }
             }
-            
             
             return lsucc;
 

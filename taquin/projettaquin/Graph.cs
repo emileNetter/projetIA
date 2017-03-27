@@ -12,7 +12,6 @@ namespace projettaquin
         public List<GenericNode> L_Ouverts;
         public List<GenericNode> L_Fermes;
         public Objet objet;
-
         public Graph (Objet obj)
         {
             objet = obj;
@@ -107,6 +106,7 @@ namespace projettaquin
             // On fait appel à GetListSucc, méthode abstraite qu'on doit réécrire pour chaque
             // problème. Elle doit retourner la liste complète des noeuds successeurs de N.
             List<GenericNode> listsucc = N.GetListSucc();
+
             foreach (GenericNode N2 in listsucc)
             {               
                 // N2 est-il une copie d'un nœud déjà vu et placé dans la liste des fermés ?

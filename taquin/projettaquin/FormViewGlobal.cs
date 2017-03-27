@@ -39,7 +39,8 @@ namespace projettaquin
         {
             objet = new Objet(3, 3, Objet.Orientation.Nord, 5);
             Graph g = new Graph(objet);
-            NodeEntrepot N0 = new NodeEntrepot(tabChariot[0].posX -1, tabChariot[0].posY -1);
+            //NodeEntrepot N0 = new NodeEntrepot(tabChariot[0].posX -1, tabChariot[0].posY -1);
+            NodeEntrepot N0 = new NodeEntrepot(1, 1);
             List<GenericNode> Lres = g.RechercheSolutionAEtoile(N0);
             Panel affichage = new Panel();
             this.Height = 800;
