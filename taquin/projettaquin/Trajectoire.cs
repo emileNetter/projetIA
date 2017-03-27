@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace projettaquin
 {
+    //Classe permettant de calculer la durée en sec d'un chemin ( liste de nodeEntrepot)
     class Trajectoire
     {
         private List<GenericNode> noeuds;
@@ -17,13 +18,23 @@ namespace projettaquin
             this.noeuds = noeuds;
         }
 
-        public int calculeTemps()
+        public int GetTemps()
+        {
+            return temps;
+        }
+
+        public void SetTemps(int i)
+        {
+            temps = i;
+        }
+
+        public void calculeTemps()
         {
             temps = 0;
             Point direction = new Point(0, 0);
             if(noeuds.Count == 0)
             {
-                return temps;
+                SetTemps(0);
             }
 
             for(int i =1; i < noeuds.Count; i++)
@@ -53,7 +64,13 @@ namespace projettaquin
 
                 }
             }
-            return temps;
+            SetTemps(temps); 
         }
+
+        public override string ToString()
+        {
+            return temps.ToString();
+        }
+
     }
 }

@@ -18,6 +18,7 @@ namespace projettaquin
         FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
         static List<GenericNode> Lres;
+        Trajectoire t;
 
         Objet objet;
         Graph g;
@@ -189,10 +190,12 @@ namespace projettaquin
         private void btn_valider_Click(object sender, EventArgs e) // Bouton valider
         {
             btn_valider.Enabled = false;
-            objet = new Objet(tabObjet[0].posX -1, tabObjet[0].posY -1, tabObjet[0].orientation,5);
+            objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
             g = new Graph(objet);
-            N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY -1);
+            N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
             Lres = g.RechercheSolutionAEtoile(N0);
+            t = new Trajectoire(Lres); // on passe la liste de generic node à la trajectoire
+            t.calculeTemps(); // on calcule le temps mis pour ce chemin
 
             setViewEntrepot();
             if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }

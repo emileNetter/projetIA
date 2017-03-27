@@ -72,6 +72,7 @@
     <Compile Include="Objet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trajectoire.cs" />
     <EmbeddedResource Include="Entrepot.resx">
       <DependentUpon>Entrepot.cs</DependentUpon>
     </EmbeddedResource>
