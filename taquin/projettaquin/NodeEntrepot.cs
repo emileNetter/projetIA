@@ -27,7 +27,7 @@ namespace projettaquin
             for (int l = 0; l < tabEntrepot.GetLength(0); l++)
                 for (int m = 0; m < tabEntrepot.GetLength(1); m++) { tabEntrepot[l, m] = 0; }
 
-                    for (int i = 2; i < 22; i += 2)
+                    for (int i = 2; i < 24; i += 2)
                     {
 
                         for (int premiereLigne = 2; premiereLigne < 11; premiereLigne++) { tabEntrepot[premiereLigne, i] = -1; }

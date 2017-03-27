@@ -13,6 +13,7 @@ namespace projettaquin
 {
     public partial class FormViewGlobal : Form
     {
+        Objet[] tabObjet = null;
         Chariot[] tabChariot = null;
         FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
@@ -124,6 +125,13 @@ namespace projettaquin
                     FormeRectangle chariot = new FormeRectangle("black", positionX, positionY);
                     FormeRectangle.creationFormeColorée(chariot, this);
                 }
+                foreach(Objet o in tabObjet)
+                {
+                    int positionX = 25 * o.posX;
+                    int positionY = 25 * o.posY;
+                    FormeRectangle objet = new FormeRectangle("orange", positionX, positionY);
+                    FormeRectangle.creationFormeColorée(objet, this);
+                }
             }
 
         }  
@@ -153,12 +161,12 @@ namespace projettaquin
 
             for (int i = 0; i < tabChariot.Length; i++)
             {
-                int posX = rd.Next(0, 25);
-                int posY = rd.Next(0, 25);
-                while (tabEntrepot[posX, posY] != -1 || tabEntrepot[posX,posY] > 0) 
+                int posX = rd.Next(1, 25);
+                int posY = rd.Next(1, 25);
+                while ( tabEntrepot[posX-1,posY-1] < 0) // -1 car le tableau est décalé
                 {
-                    posX = rd.Next(0, 25);
-                    posY = rd.Next(0, 25);
+                    posX = rd.Next(1, 25);
+                    posY = rd.Next(1, 25);
                 }
                 tabChariot[i] = new Chariot(posX, posY);
             }
@@ -172,7 +180,7 @@ namespace projettaquin
         private void btn_valider_Click(object sender, EventArgs e) // Bouton valider
         {
             setViewEntrepot();
-            foreach (Control l in this.Controls.OfType<Control>())
+            /*foreach (Control l in this.Controls.OfType<Control>())
             {
                 if(l is Label)
                 {
@@ -181,7 +189,7 @@ namespace projettaquin
                         l.Visible = false;                    }
                 }
                 else l.Visible = false;
-            }
+            }*/
         }
 
         private void comboBoxManuel_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,6 +205,42 @@ namespace projettaquin
             c.posX = Convert.ToInt32(textBoxX.Text);
             c.posY = Convert.ToInt32(textBoxY.Text);
         }
-       
+
+        private void textBoxX_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormViewGlobal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e) // placement aléatoire des objets
+        {
+            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); 
+            Random rd = new Random();
+            int NBO = Convert.ToInt32(numericUpDown2.Value);
+            tabObjet = new Objet[NBO];
+
+            for (int i = 0; i < tabObjet.Length; i++)
+            {
+                int posX = rd.Next(1, 25);
+                int posY = rd.Next(1, 25);
+                int orientation = rd.Next(0, 2);
+                while (tabEntrepot[posX-1, posY-1] != -1)
+                {
+                    posX = rd.Next(1, 25);
+                    posY = rd.Next(1, 25);
+                }
+                if(orientation==0) { tabObjet[i] = new Objet(posX, posY, Objet.Orientation.Nord, 0); }
+                else tabObjet[i] = new Objet(posX, posY,Objet.Orientation.Sud,0);
+            }
+
+            foreach (Objet o in tabObjet)
+            {
+                comboBoxAleatoire.Items.Add("Objet : x=" + o.posX + " y=" + o.posY + " orientation=" + o.orientation);
+            }
+        }
     }
 }
