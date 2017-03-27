@@ -108,25 +108,13 @@ namespace projettaquin
                 }
                 foreach(Chariot c in tabChariot)
                 {
-                    initialiseAffichageChariot(e.Graphics, c);
+                    Chariot.initialiseAffichageChariot(this, c);
                 }
             }
 
         }  
 
-        protected void initialiseAffichageChariot(Graphics g, Chariot chariot)
-        {
-            Pen p = new Pen(Color.Black);
-           
-            
-            Debug.WriteLine((chariot.posX + 1) * (Width/25));
-            //g.FillEllipse(new SolidBrush(Color.Black), 100, 100, 50, 50);
-            //g.FillEllipse(new SolidBrush(Color.Black), (chariot.posX + 1) * (Height / 25), (chariot.posY + 1) * (Width /25), 100, 100);
-            //valeurs tests
-            g.DrawEllipse(p, (chariot.posX) * (Width / 25), (chariot.posY) * (Height / 25), Width/25, Height/25);
-            g.Dispose();
-
-        }
+      
 
         private void button3_Click(object sender, EventArgs e) // Bouton placement manuel
         {
