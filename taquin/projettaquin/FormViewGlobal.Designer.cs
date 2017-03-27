@@ -46,6 +46,7 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBoxAleatoire = new System.Windows.Forms.ComboBox();
+            this.btn_LancerSimulation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -183,7 +184,7 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 625);
+            this.splitter1.Size = new System.Drawing.Size(3, 690);
             this.splitter1.TabIndex = 13;
             this.splitter1.TabStop = false;
             // 
@@ -231,11 +232,23 @@
             this.comboBoxAleatoire.Size = new System.Drawing.Size(311, 24);
             this.comboBoxAleatoire.TabIndex = 17;
             // 
+            // btn_LancerSimulation
+            // 
+            this.btn_LancerSimulation.Enabled = false;
+            this.btn_LancerSimulation.Location = new System.Drawing.Point(971, 613);
+            this.btn_LancerSimulation.Name = "btn_LancerSimulation";
+            this.btn_LancerSimulation.Size = new System.Drawing.Size(158, 65);
+            this.btn_LancerSimulation.TabIndex = 18;
+            this.btn_LancerSimulation.Text = "Lancer simulation";
+            this.btn_LancerSimulation.UseVisualStyleBackColor = true;
+            this.btn_LancerSimulation.Click += new System.EventHandler(this.btn_LancerSimulation_Click);
+            // 
             // FormViewGlobal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1309, 625);
+            this.ClientSize = new System.Drawing.Size(1309, 690);
+            this.Controls.Add(this.btn_LancerSimulation);
             this.Controls.Add(this.comboBoxAleatoire);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.numericUpDown2);
@@ -285,5 +298,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox comboBoxAleatoire;
+        private System.Windows.Forms.Button btn_LancerSimulation;
     }
 }

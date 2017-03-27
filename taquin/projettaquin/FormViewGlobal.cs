@@ -184,6 +184,7 @@ namespace projettaquin
                 }
                 else l.Visible = false;
             }*/
+            if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
         }
 
         private void comboBoxManuel_SelectedIndexChanged(object sender, EventArgs e)
@@ -235,6 +236,15 @@ namespace projettaquin
             {
                 comboBoxAleatoire.Items.Add("Objet : x=" + o.posX + " y=" + o.posY + " orientation=" + o.orientation);
             }
+        }
+
+        private void btn_LancerSimulation_Click(object sender, EventArgs e)
+        {
+            btn_valider.Enabled = false;
+            button1.Enabled = false;
+            button2.Enabled = false;
+            button3.Enabled = false;
+            btn_ValiderPos.Enabled = false;
         }
     }
 }
