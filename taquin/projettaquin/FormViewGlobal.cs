@@ -22,8 +22,6 @@ namespace projettaquin
         int hForm;
         int lForm;
 
-
-
         public FormViewGlobal()
         {
             this.Height = 676;
