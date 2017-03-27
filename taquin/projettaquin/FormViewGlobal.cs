@@ -13,12 +13,14 @@ namespace projettaquin
 {
     public partial class FormViewGlobal : Form
     {
+        
+        
         Objet[] tabObjet = null;
         Chariot[] tabChariot = null;
         FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
-        static List<GenericNode> Lres = null;
-        Objet objet;
+        static List<GenericNode> Lres;
+        
         int hForm;
         int lForm;
 
@@ -36,11 +38,12 @@ namespace projettaquin
 
         public void setViewEntrepot()
         {
+            Refresh();
+            
             this.Height = 800;
             this.Width = 1000;
             tabForme = new FormeRectangle[25, 25];
             string color = "";
-
             //Définition de la position des cases 
             for (int i = 0; i < 26; i++)
             {
@@ -98,7 +101,6 @@ namespace projettaquin
                     }
                 }
             }
-
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -126,6 +128,17 @@ namespace projettaquin
                     int positionY = 25 * o.posY;
                     FormeRectangle objet = new FormeRectangle("orange", positionX, positionY);
                     FormeRectangle.creationFormeColorée(objet, this);
+                }
+                if (Lres != null)
+                {
+                    foreach (GenericNode n in Lres)
+                    {
+                        NodeEntrepot node = (NodeEntrepot)n;
+                        int positionX = 25+25*node.posX;
+                        int positionY =25+ 25*node.posY;
+                        FormeRectangle objet = new FormeRectangle("black", positionX, positionY);
+                        FormeRectangle.creationFormeColorée(objet, this);
+                    }
                 }
             }
 
@@ -174,17 +187,15 @@ namespace projettaquin
 
         private void btn_valider_Click(object sender, EventArgs e) // Bouton valider
         {
+            btn_valider.Enabled = false;
+            Objet objet = new Objet(2, 2, Objet.Orientation.Nord, 5);
+            Graph g = new Graph(objet);
+            NodeEntrepot N0 = new NodeEntrepot(24, 24);
+
+            Lres = g.RechercheSolutionAEtoile(N0);
+
+
             setViewEntrepot();
-            /*foreach (Control l in this.Controls.OfType<Control>())
-            {
-                if(l is Label)
-                {
-                    if(l.Name == "label1" || l.Name == "label2" || l.Name == "label3" || l.Name == "label4")
-                    {
-                        l.Visible = false;                    }
-                }
-                else l.Visible = false;
-            }*/
             if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
         }
 
@@ -236,29 +247,6 @@ namespace projettaquin
             foreach (Objet o in tabObjet)
             {
                 comboBoxAleatoire.Items.Add("Objet : x=" + o.posX + " y=" + o.posY + " orientation=" + o.orientation);
-            }
-        }
-
-        private void btn_LancerSimulation_Click(object sender, EventArgs e)
-        {
-            objet = new Objet(3, 3, Objet.Orientation.Nord, 5);
-            Graph g = new Graph(objet);
-            //NodeEntrepot N0 = new NodeEntrepot(tabChariot[0].posX -1, tabChariot[0].posY -1);
-            NodeEntrepot N0 = new NodeEntrepot(1, 1);
-            List<GenericNode> Lres = g.RechercheSolutionAEtoile(N0); // pour la méthode A*
-            btn_valider.Enabled = false;
-            button1.Enabled = false;
-            button2.Enabled = false;
-            button3.Enabled = false;
-            btn_ValiderPos.Enabled = false;
-
-            foreach(GenericNode n in Lres)
-            {
-                NodeEntrepot node = (NodeEntrepot)n;
-                int positionX = node.posX;
-                int positionY = node.posY;
-                FormeRectangle objet = new FormeRectangle("black", positionX, positionY);
-                FormeRectangle.creationFormeColorée(objet, this);
             }
         }
     }

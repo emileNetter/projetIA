@@ -64,7 +64,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(1009, 24);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(160, 22);
             this.numericUpDown1.TabIndex = 1;
@@ -73,7 +73,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(877, 90);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(171, 28);
             this.button1.TabIndex = 2;
@@ -84,7 +84,7 @@
             // btn_valider
             // 
             this.btn_valider.Location = new System.Drawing.Point(971, 485);
-            this.btn_valider.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_valider.Margin = new System.Windows.Forms.Padding(4);
             this.btn_valider.Name = "btn_valider";
             this.btn_valider.Size = new System.Drawing.Size(158, 65);
             this.btn_valider.TabIndex = 3;
@@ -95,7 +95,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(876, 208);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(161, 28);
             this.button3.TabIndex = 4;
@@ -117,7 +117,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(877, 126);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(169, 24);
             this.comboBox1.TabIndex = 6;
@@ -126,7 +126,7 @@
             // 
             this.comboBoxManuel.FormattingEnabled = true;
             this.comboBoxManuel.Location = new System.Drawing.Point(876, 244);
-            this.comboBoxManuel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxManuel.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxManuel.Name = "comboBoxManuel";
             this.comboBoxManuel.Size = new System.Drawing.Size(160, 24);
             this.comboBoxManuel.TabIndex = 7;
@@ -135,7 +135,7 @@
             // textBoxX
             // 
             this.textBoxX.Location = new System.Drawing.Point(1107, 211);
-            this.textBoxX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxX.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxX.Name = "textBoxX";
             this.textBoxX.Size = new System.Drawing.Size(55, 22);
             this.textBoxX.TabIndex = 8;
@@ -144,7 +144,7 @@
             // textBoxY
             // 
             this.textBoxY.Location = new System.Drawing.Point(1107, 246);
-            this.textBoxY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxY.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxY.Name = "textBoxY";
             this.textBoxY.Size = new System.Drawing.Size(55, 22);
             this.textBoxY.TabIndex = 9;
@@ -172,7 +172,7 @@
             // btn_ValiderPos
             // 
             this.btn_ValiderPos.Location = new System.Drawing.Point(1196, 208);
-            this.btn_ValiderPos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_ValiderPos.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ValiderPos.Name = "btn_ValiderPos";
             this.btn_ValiderPos.Size = new System.Drawing.Size(100, 57);
             this.btn_ValiderPos.TabIndex = 12;
@@ -241,7 +241,6 @@
             this.btn_LancerSimulation.TabIndex = 18;
             this.btn_LancerSimulation.Text = "Lancer simulation";
             this.btn_LancerSimulation.UseVisualStyleBackColor = true;
-            this.btn_LancerSimulation.Click += new System.EventHandler(this.btn_LancerSimulation_Click);
             // 
             // FormViewGlobal
             // 
