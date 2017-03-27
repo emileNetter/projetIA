@@ -155,12 +155,12 @@ namespace projettaquin
 
             for (int i = 0; i < tabChariot.Length; i++)
             {
-                int posX = rd.Next(0, 25);
-                int posY = rd.Next(0, 25);
-                while (tabEntrepot[posX, posY] != -1 || tabEntrepot[posX,posY] > 0) 
+                int posX = rd.Next(1, 25);
+                int posY = rd.Next(1, 25);
+                while ( tabEntrepot[posX-1,posY-1] < 0) // -1 car le tableau est décalé
                 {
-                    posX = rd.Next(0, 25);
-                    posY = rd.Next(0, 25);
+                    posX = rd.Next(1, 25);
+                    posY = rd.Next(1, 25);
                 }
                 tabChariot[i] = new Chariot(posX, posY);
             }
@@ -219,13 +219,13 @@ namespace projettaquin
 
             for (int i = 0; i < tabObjet.Length; i++)
             {
-                int posX = rd.Next(0, 25);
-                int posY = rd.Next(0, 25);
+                int posX = rd.Next(1, 25);
+                int posY = rd.Next(1, 25);
                 int orientation = rd.Next(0, 2);
-                while (tabEntrepot[posX, posY] == -1)
+                while (tabEntrepot[posX-1, posY-1] != -1)
                 {
-                    posX = rd.Next(0, 25);
-                    posY = rd.Next(0, 25);
+                    posX = rd.Next(1, 25);
+                    posY = rd.Next(1, 25);
                 }
                 if(orientation==0) { tabObjet[i] = new Objet(posX, posY, Objet.Orientation.Nord, 0); }
                 else tabObjet[i] = new Objet(posX, posY,Objet.Orientation.Sud,0);
