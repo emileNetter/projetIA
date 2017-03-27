@@ -120,10 +120,10 @@ namespace projettaquin
            
             
             Debug.WriteLine((chariot.posX + 1) * (Width/25));
-            g.FillEllipse(new SolidBrush(Color.Black), 100, 100, 50, 50);
+            //g.FillEllipse(new SolidBrush(Color.Black), 100, 100, 50, 50);
             //g.FillEllipse(new SolidBrush(Color.Black), (chariot.posX + 1) * (Height / 25), (chariot.posY + 1) * (Width /25), 100, 100);
             //valeurs tests
-            g.FillEllipse(new SolidBrush(Color.Black), (chariot.posX) * (Width / 25), (chariot.posY) * (Height / 25), Width/25, Height/25);
+            g.DrawEllipse(p, (chariot.posX) * (Width / 25), (chariot.posY) * (Height / 25), Width/25, Height/25);
             g.Dispose();
 
         }
