@@ -17,7 +17,7 @@ namespace projettaquin
         Chariot[] tabChariot = null;
         FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
-        List<GenericNode> Lres = null;
+        static List<GenericNode> Lres = null;
         Objet objet;
         int hForm;
         int lForm;
@@ -38,15 +38,11 @@ namespace projettaquin
 
         public void setViewEntrepot()
         {
-            objet = new Objet(2, 2, Objet.Orientation.Nord, 5);
-            Graph g = new Graph(objet);
-            //NodeEntrepot N0 = new NodeEntrepot(tabChariot[0].posX -1, tabChariot[0].posY -1);
-            NodeEntrepot N0 = new NodeEntrepot(1, 1);
-            List<GenericNode> Lres = g.RechercheSolutionAEtoile(N0); // pour la méthode A*
             this.Height = 800;
             this.Width = 1000;
             tabForme = new FormeRectangle[25, 25];
             string color = "";
+
             //Définition de la position des cases 
             for (int i = 0; i < 26; i++)
             {
@@ -247,6 +243,11 @@ namespace projettaquin
 
         private void btn_LancerSimulation_Click(object sender, EventArgs e)
         {
+            objet = new Objet(3, 3, Objet.Orientation.Nord, 5);
+            Graph g = new Graph(objet);
+            //NodeEntrepot N0 = new NodeEntrepot(tabChariot[0].posX -1, tabChariot[0].posY -1);
+            NodeEntrepot N0 = new NodeEntrepot(1, 1);
+            List<GenericNode> Lres = g.RechercheSolutionAEtoile(N0); // pour la méthode A*
             btn_valider.Enabled = false;
             button1.Enabled = false;
             button2.Enabled = false;
