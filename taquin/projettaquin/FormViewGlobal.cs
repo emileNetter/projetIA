@@ -12,22 +12,22 @@ using System.Diagnostics;
 namespace projettaquin
 {
     public partial class FormViewGlobal : Form
-    {
-        
-        
+    {   
         Objet[] tabObjet = null;
         Chariot[] tabChariot = null;
         FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
         static List<GenericNode> Lres;
-        
+
+        Objet objet;
+        Graph g;
+        NodeEntrepot N0;
+
         int hForm;
         int lForm;
 
         public FormViewGlobal()
         {
-            this.Height = 676;
-            this.Width = 910;
             InitializeComponent();
             hForm = this.Height;
             lForm = this.Width;
@@ -129,6 +129,7 @@ namespace projettaquin
                     FormeRectangle objet = new FormeRectangle("orange", positionX, positionY);
                     FormeRectangle.creationFormeColorée(objet, this);
                 }
+                // Colorie le chemin du noeud initial jusqu'à l'objet
                 if (Lres != null)
                 {
                     foreach (GenericNode n in Lres)
@@ -188,12 +189,10 @@ namespace projettaquin
         private void btn_valider_Click(object sender, EventArgs e) // Bouton valider
         {
             btn_valider.Enabled = false;
-            Objet objet = new Objet(2, 2, Objet.Orientation.Nord, 5);
-            Graph g = new Graph(objet);
-            NodeEntrepot N0 = new NodeEntrepot(24, 24);
-
+            objet = new Objet(tabObjet[0].posX -1, tabObjet[0].posY -1, tabObjet[0].orientation,5);
+            g = new Graph(objet);
+            N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY -1);
             Lres = g.RechercheSolutionAEtoile(N0);
-
 
             setViewEntrepot();
             if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
@@ -211,16 +210,6 @@ namespace projettaquin
             Chariot c = (Chariot)comboBoxManuel.SelectedItem;
             c.posX = Convert.ToInt32(textBoxX.Text);
             c.posY = Convert.ToInt32(textBoxY.Text);
-        }
-
-        private void textBoxX_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormViewGlobal_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e) // placement aléatoire des objets

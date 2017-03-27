@@ -139,7 +139,6 @@
             this.textBoxX.Name = "textBoxX";
             this.textBoxX.Size = new System.Drawing.Size(55, 22);
             this.textBoxX.TabIndex = 8;
-            this.textBoxX.TextChanged += new System.EventHandler(this.textBoxX_TextChanged);
             // 
             // textBoxY
             // 
@@ -269,7 +268,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormViewGlobal";
             this.Text = "FormViewGlobal";
-            this.Load += new System.EventHandler(this.FormViewGlobal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
