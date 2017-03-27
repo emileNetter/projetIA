@@ -23,6 +23,8 @@ namespace projettaquin
 
         public FormViewGlobal()
         {
+            this.Height = 676;
+            this.Width = 910;
             InitializeComponent();
             hForm = this.Height;
             lForm = this.Width;
@@ -32,31 +34,34 @@ namespace projettaquin
 
         public void setViewEntrepot()
         {
+            Panel affichage = new Panel();
+            this.Height = 800;
+            this.Width = 1000;
             tabForme = new FormeRectangle[25, 25];
             string color = "";
             //Définition de la position des cases 
-            for (int i = 1; i < 26; i++)
+            for (int i = 0; i < 26; i++)
             {
                 Label labelX = new Label();
                 Label labelY = new Label();
 
                 labelX.Parent = this;
-                labelX.Location = new Point((i+1) * (lForm / 25), hForm / 25);
+                labelX.Location = new Point(25*i , 0);
                 labelX.BorderStyle = BorderStyle.FixedSingle;
                 labelX.Text = i.ToString();
                 labelX.TextAlign = ContentAlignment.MiddleCenter;
-                labelX.Size=new Size(lForm/25,hForm/25);
-                labelX.Name = "labelX" + i;
+                labelX.Size=new Size(25,25);
+                labelX.Name = "labelX" + i+1;
                 this.Controls.Add(labelX);
 
                
                 labelY.Parent = this;
                 labelY.BorderStyle = BorderStyle.FixedSingle;
-                labelY.Location = new Point((lForm / 25), (i+1)*hForm / 25);
+                labelY.Location = new Point(0,25*i);
                 labelY.Text = i.ToString();
                 labelY.TextAlign = ContentAlignment.MiddleCenter;
-                labelY.Size = new Size(lForm / 25, hForm / 25);
-                labelY.Name = "labelY" + i;
+                labelY.Size = new Size(25,25);
+                labelY.Name = "labelY" + i+1;
                 this.Controls.Add(labelY);
 
 
@@ -70,8 +75,8 @@ namespace projettaquin
                 {
                     for (int j = 0; j < tabEntrepot.GetLength(1); j++)
                     {
-                        int positionX = (i + 2) * (lForm / 25);
-                        int positionY = (j + 2) * (hForm / 25);
+                        int positionX = 25+i*25;
+                        int positionY = 25+j*25;
                         int value = tabEntrepot[i, j];
                         switch (value)
                         {
@@ -108,7 +113,10 @@ namespace projettaquin
                 }
                 foreach(Chariot c in tabChariot)
                 {
-                    Chariot.initialiseAffichageChariot(this, c);
+                    int positionX= 25*c.posX;
+                    int positionY= 25*c.posY;
+                    FormeRectangle chariot = new FormeRectangle("black", positionX, positionY);
+                    FormeRectangle.creationFormeColorée(chariot, this);
                 }
             }
 

@@ -25,11 +25,12 @@ namespace projettaquin
 
         public static void creationFormeColorée(FormeRectangle f, Form form) // la mettre dans la classe forme et la généraliser avec celle de perception
         {
-            int largeur = form.Width/25;
-            int hauteur = form.Height/25;
+            int largeur = 25;
+            int hauteur = 25;
             SolidBrush blueBrush = new SolidBrush(Color.Blue);
             SolidBrush whiteBrush = new SolidBrush(Color.White);
             SolidBrush greenBrush = new SolidBrush(Color.Green);
+            SolidBrush blackBrush = new SolidBrush(Color.Black);
 
             Pen blackPen = new Pen(Brushes.Black);
             blackPen.Width = 1.0F;
@@ -61,6 +62,13 @@ namespace projettaquin
                     formGraphics.FillRectangle(greenBrush, rect);
                     formGraphics.DrawRectangle(blackPen, rect);
                     greenBrush.Dispose();
+                    formGraphics.Dispose();
+                    break;
+
+                case "black":
+                    formGraphics.FillRectangle(blackBrush, rect);
+                    formGraphics.DrawRectangle(blackPen, rect);
+                    blackBrush.Dispose();
                     formGraphics.Dispose();
                     break;
             }
