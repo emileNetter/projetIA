@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 namespace projettaquin
 {
     //Classe permettant de calculer la durée en sec d'un chemin ( liste de nodeEntrepot)
+    //
     class Trajectoire
     {
         private List<GenericNode> noeuds;
         public int temps;
+        public Objet objet;
 
-        public Trajectoire(List<GenericNode> noeuds)
+        public Trajectoire(List<GenericNode> noeuds,Objet objet)
         {
             this.noeuds = noeuds;
+            this.objet = objet;
         }
 
         public int GetTemps()
@@ -42,7 +45,7 @@ namespace projettaquin
                 NodeEntrepot noeudEntrepot = (NodeEntrepot)noeuds[i];
                 NodeEntrepot noeudPrecedent = (NodeEntrepot)noeuds[i - 1];
                 var signX = Math.Sign(noeudEntrepot.posX - noeudPrecedent.posX);
-                var signY = Math.Sign(noeudEntrepot.posY - noeudPrecedent.posY);
+                var signY = Math.Sign(noeudEntrepot.posY - noeudPrecedent.posY);               
 
                 if (i == 1)
                 {
@@ -52,18 +55,20 @@ namespace projettaquin
 
                 else
                 {
-                    if (signX != direction.X || signY != direction.Y)
+                    if (signX != direction.X || signY != direction.Y) // s'il change de direction, 3 secondes sur place + 1 seconde
                     {
                         temps += 4;
                     }
                     else
                     {
-                        temps += 1;
+                        temps += 1; // s'il ne change pas de direction
                     }
-                    direction = new Point(signX, signY);
+                    direction = new Point(signX, signY); //nouveau vecteur direction
 
                 }
             }
+            temps += 10; // Orientation + 10 secondes;
+            temps += 10 * objet.hauteur; // Hauteur de l'objet fois 10
             SetTemps(temps); 
         }
 

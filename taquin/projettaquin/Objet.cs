@@ -13,7 +13,7 @@ namespace projettaquin
         public int posY { get; set; }
         public enum Orientation { Nord, Sud };
         public Orientation orientation { get; set; }
-        private int hauteur { get; set; }
+        public int hauteur { get; set; }
 
         public Objet(int posX, int posY, Orientation orientation, int hauteur )
         {

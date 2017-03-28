@@ -13,16 +13,16 @@ namespace projettaquin
 {
     public partial class FormViewGlobal : Form
     {   
-        Objet[] tabObjet = null;
-        Chariot[] tabChariot = null;
-        FormeRectangle[,] tabForme = null;
+        private Objet[] tabObjet = null;
+        private Chariot[] tabChariot = null;
+        private FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
-        static List<GenericNode> Lres;
-        Trajectoire t;
+        private static List<GenericNode> Lres;
+         public Trajectoire t;
 
-        Objet objet;
-        Graph g;
-        NodeEntrepot N0;
+        private Objet objet;
+        private Graph g;
+        pricate NodeEntrepot N0;
 
         int hForm;
         int lForm;
@@ -156,7 +156,7 @@ namespace projettaquin
 
             for (int i = 0; i < tabChariot.Length; i++)
             {
-                tabChariot[i] = new Chariot(0, 0);
+                tabChariot[i] = new Chariot(1, 1);
                 comboBoxManuel.Items.Add(tabChariot[i]);
             }
 
@@ -194,7 +194,7 @@ namespace projettaquin
             g = new Graph(objet);
             N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
             Lres = g.RechercheSolutionAEtoile(N0);
-            t = new Trajectoire(Lres); // on passe la liste de generic node à la trajectoire
+            t = new Trajectoire(Lres,objet); // on passe la liste de generic node à la trajectoire
             t.calculeTemps(); // on calcule le temps mis pour ce chemin
 
             setViewEntrepot();
