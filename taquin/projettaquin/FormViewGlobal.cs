@@ -197,8 +197,8 @@ namespace projettaquin
             t = new Trajectoire(Lres,objet); // on passe la liste de generic node à la trajectoire
             t.calculeTemps(); // on calcule le temps mis pour ce chemin
             Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
+            reinitialiserView();
             setViewEntrepot();
-            if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
 
         }
 
@@ -256,8 +256,8 @@ namespace projettaquin
                 }
                 else l.Visible = false;
             }*/
-            groupBox1.Visible = false;
-            button_nouveau.Visible = true;
+            groupBox2.Visible = false;
+            button_nouveau1.Visible = true;
         }
 
         private void button_nouveau_Click(object sender, EventArgs e)
@@ -274,8 +274,8 @@ namespace projettaquin
                 else l.Visible = true;
             }*/
             btn_valider.Enabled = true;
-            groupBox1.Visible = true;
-            button_nouveau.Visible = false;
+            groupBox2.Visible = true;
+            button_nouveau1.Visible = false;
         }
 
         
