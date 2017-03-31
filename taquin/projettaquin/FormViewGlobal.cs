@@ -18,11 +18,11 @@ namespace projettaquin
         private FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot = null;
         private static List<GenericNode> Lres;
-         public Trajectoire t;
+        public Trajectoire t;
 
         private Objet objet;
         private Graph g;
-        pricate NodeEntrepot N0;
+        private NodeEntrepot N0;
 
         int hForm;
         int lForm;

@@ -9,7 +9,7 @@ namespace projettaquin
 {
     //Classe permettant de calculer la durée en sec d'un chemin ( liste de nodeEntrepot)
     //
-    class Trajectoire
+    public class Trajectoire
     {
         private List<GenericNode> noeuds;
         public int temps;
