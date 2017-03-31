@@ -48,6 +48,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label_error = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -250,6 +251,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label_error);
             this.groupBox2.Controls.Add(this.btn_valider);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.button3);
@@ -272,6 +274,18 @@
             this.groupBox2.Size = new System.Drawing.Size(433, 571);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
+            // 
+            // label_error
+            // 
+            this.label_error.AutoSize = true;
+            this.label_error.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label_error.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label_error.Location = new System.Drawing.Point(35, 539);
+            this.label_error.Name = "label_error";
+            this.label_error.Size = new System.Drawing.Size(350, 20);
+            this.label_error.TabIndex = 18;
+            this.label_error.Text = "Erreur, il faut au moins un chariot et un objet. ";
+            this.label_error.Visible = false;
             // 
             // FormViewGlobal
             // 
@@ -313,5 +327,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label_error;
     }
 }

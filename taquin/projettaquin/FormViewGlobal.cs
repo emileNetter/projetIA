@@ -16,7 +16,7 @@ namespace projettaquin
         private Objet[] tabObjet = null;
         private Chariot[] tabChariot = null;
         private FormeRectangle[,] tabForme = null;
-        public int[,] tabEntrepot = null;
+        public int[,] tabEntrepot = NodeEntrepot.InitialiserEntrepot();
         private static List<GenericNode> Lres;
         public Trajectoire t;
 
@@ -150,21 +150,23 @@ namespace projettaquin
 
         private void button3_Click(object sender, EventArgs e) // Bouton placement manuel
         {
-            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); // On initialise le tableau "source"
+            comboBoxManuel.Items.Clear();
+            tabEntrepot = NodeEntrepot.tabEntrepot; // On initialise le tableau "source"
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
 
             for (int i = 0; i < tabChariot.Length; i++)
             {
-                tabChariot[i] = new Chariot(1, 1);
+                tabChariot[i] = new Chariot(1, 1);//récupérer position du chariot 
                 comboBoxManuel.Items.Add(tabChariot[i]);
             }
 
         }
 
-        private void button1_Click(object sender, EventArgs e) // Bonton placement aléaoire
+        private void button1_Click(object sender, EventArgs e) // Bonton placement aléaoire chariot
         {
-            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); // On initialise le tableau "source"
+            comboBox1.Items.Clear();
+            tabEntrepot = NodeEntrepot.tabEntrepot; // On initialise le tableau "source"
             Random rd = new Random();
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
@@ -189,16 +191,25 @@ namespace projettaquin
 
         private void btn_valider_Click(object sender, EventArgs e) // Bouton valider
         {
-            btn_valider.Enabled = false;
-            objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
-            g = new Graph(objet);
-            N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
-            Lres = g.RechercheSolutionAEtoile(N0);
-            t = new Trajectoire(Lres,objet); // on passe la liste de generic node à la trajectoire
-            t.calculeTemps(); // on calcule le temps mis pour ce chemin
-            Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
-            reinitialiserView();
-            setViewEntrepot();
+            if (tabChariot != null && tabObjet != null)
+            {
+
+
+                btn_valider.Enabled = false;
+                objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
+                g = new Graph(objet);
+                N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
+                Lres = g.RechercheSolutionAEtoile(N0);
+                t = new Trajectoire(Lres, objet); // on passe la liste de generic node à la trajectoire
+                t.calculeTemps(); // on calcule le temps mis pour ce chemin
+                Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
+                reinitialiserView();
+                setViewEntrepot();
+            }
+            else
+            {
+                label_error.Visible = true;
+            }
 
         }
 
@@ -209,7 +220,7 @@ namespace projettaquin
             textBoxY.Text = Convert.ToString(c.posY);
         }
 
-        private void btn_ValiderPos_Click(object sender, EventArgs e) // bouton valider
+        private void btn_ValiderPos_Click(object sender, EventArgs e) // bouton ok
         {
             Chariot c = (Chariot)comboBoxManuel.SelectedItem;
             c.posX = Convert.ToInt32(textBoxX.Text);
@@ -218,7 +229,9 @@ namespace projettaquin
 
         private void button2_Click(object sender, EventArgs e) // placement aléatoire des objets
         {
-            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); 
+            comboBoxAleatoire.Items.Clear();
+            label_error.Visible = false;
+            tabEntrepot = NodeEntrepot.tabEntrepot; 
             Random rd = new Random();
             int NBO = Convert.ToInt32(numericUpDown2.Value);
             tabObjet = new Objet[NBO];
@@ -256,6 +269,7 @@ namespace projettaquin
                 }
                 else l.Visible = false;
             }*/
+            label_error.Visible = false;
             groupBox2.Visible = false;
             button_nouveau1.Visible = true;
         }
@@ -273,6 +287,8 @@ namespace projettaquin
                 }
                 else l.Visible = true;
             }*/
+            tabEntrepot = NodeEntrepot.InitialiserEntrepot();
+            label_error.Visible = false;
             btn_valider.Enabled = true;
             groupBox2.Visible = true;
             button_nouveau1.Visible = false;
