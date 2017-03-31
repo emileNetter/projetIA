@@ -12,24 +12,15 @@ namespace projettaquin
         public static int[,] tabEntrepot = new int[25, 25];
         public int posX;
         public int posY;
-        //Non def
-        public NodeTemps noeudPcdt = null;
-        public Point direction = new Point(0, 0);
+        public bool directionH;
+        
 
-
-        public NodeTemps(int posX, int posY)
+        public NodeTemps(int posX, int posY, bool b)
         {
             // retirer 1 puisque indice du tableau commence à 0
             this.posX = posX;
             this.posY = posY;
-        }
-
-        public NodeTemps(int posX, int posY, NodeTemps n)
-        {
-            // retirer 1 puisque indice du tableau commence à 0
-            this.posX = posX;
-            this.posY = posY;
-            noeudPcdt = n;
+            directionH = b;
         }
 
         public static int[,] InitialiserEntrepot()
@@ -59,7 +50,10 @@ namespace projettaquin
         }
         public override double GetArcCost(GenericNode N2)
         {
-            return 1;
+            NodeTemps Nres = (NodeTemps)N2;
+            if(this.directionH == Nres.directionH)
+
+            return (1);
         }
         public override bool EndState(Objet objet)
         {
@@ -90,21 +84,21 @@ namespace projettaquin
             {
                 if (tabEntrepot[posX, posY + 1] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX, posY + 1));
+                    lsucc.Add(new NodeTemps(posX, posY + 1,directionH));
                 }
             }
             if (posY > 0)
             {
                 if (tabEntrepot[posX, posY - 1] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX, posY - 1));
+                    lsucc.Add(new NodeTemps(posX, posY - 1,directionH));
                 }
             }
             if (posX < 24)
             {
                 if (tabEntrepot[posX + 1, posY] != -1 && posX < 24)
                 {
-                    lsucc.Add(new NodeTemps(posX + 1, posY));
+                    lsucc.Add(new NodeTemps(posX + 1, posY, directionH));
                 }
             }
 
@@ -112,7 +106,7 @@ namespace projettaquin
             {
                 if (tabEntrepot[posX - 1, posY] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX - 1, posY));
+                    lsucc.Add(new NodeTemps(posX - 1, posY,directionH));
                 }
             }
 
@@ -120,11 +114,21 @@ namespace projettaquin
 
         }
 
-        public NodeTemps GetNoeudPcdt()
+        public bool CalculeDirectionH(NodeTemps N2)
         {
+            // This = noeud prcdt
+            bool res=false;
+            var signX = Math.Sign(N2.posX - this.posX);
+            var signY = Math.Sign(N2.posY - this.posY);
 
-            return null;
+            if (signX != 0 && signY == 0)
+            {
+                res = true;
+            }
+            return res;
+
         }
+        
 
         public override void CalculeHCost(Objet objet)
         {
