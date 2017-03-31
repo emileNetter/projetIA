@@ -16,7 +16,7 @@ namespace projettaquin
         private Objet[] tabObjet = null;
         private Chariot[] tabChariot = null;
         private FormeRectangle[,] tabForme = null;
-        public int[,] tabEntrepot = NodeEntrepot.InitialiserEntrepot();
+        public int[,] tabEntrepot = NodeDistance.InitialiserEntrepot();
         private static List<GenericNode> Lres;
         public Trajectoire t;
 
@@ -150,12 +150,8 @@ namespace projettaquin
 
         private void button3_Click(object sender, EventArgs e) // Bouton placement manuel
         {
-<<<<<<< HEAD
             comboBoxManuel.Items.Clear();
-            tabEntrepot = NodeEntrepot.tabEntrepot; // On initialise le tableau "source"
-=======
             tabEntrepot = NodeDistance.InitialiserEntrepot(); // On initialise le tableau "source"
->>>>>>> 434d1fd50ad209bc420a139281bc57bae28e6a4a
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
 
@@ -169,12 +165,10 @@ namespace projettaquin
 
         private void button1_Click(object sender, EventArgs e) // Bonton placement aléaoire chariot
         {
-<<<<<<< HEAD
+
             comboBox1.Items.Clear();
-            tabEntrepot = NodeEntrepot.tabEntrepot; // On initialise le tableau "source"
-=======
             tabEntrepot = NodeDistance.InitialiserEntrepot(); // On initialise le tableau "source"
->>>>>>> 434d1fd50ad209bc420a139281bc57bae28e6a4a
+
             Random rd = new Random();
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
@@ -199,7 +193,6 @@ namespace projettaquin
 
         private void btn_valider_Click(object sender, EventArgs e) // Bouton valider
         {
-<<<<<<< HEAD
             if (tabChariot != null && tabObjet != null)
             {
 
@@ -207,7 +200,7 @@ namespace projettaquin
                 btn_valider.Enabled = false;
                 objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
                 g = new Graph(objet);
-                N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
+                N0 = new NodeDistance(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
                 Lres = g.RechercheSolutionAEtoile(N0);
                 t = new Trajectoire(Lres, objet); // on passe la liste de generic node à la trajectoire
                 t.calculeTemps(); // on calcule le temps mis pour ce chemin
@@ -219,18 +212,8 @@ namespace projettaquin
             {
                 label_error.Visible = true;
             }
-=======
-            btn_valider.Enabled = false;
-            objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
-            g = new Graph(objet);
-            N0 = new NodeDistance(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
-            Lres = g.RechercheSolutionAEtoile(N0);
-            t = new Trajectoire(Lres,objet); // on passe la liste de generic node à la trajectoire
-            t.calculeTemps(); // on calcule le temps mis pour ce chemin
-            Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
-            reinitialiserView();
-            setViewEntrepot();
->>>>>>> 434d1fd50ad209bc420a139281bc57bae28e6a4a
+
+            
 
         }
 
@@ -250,13 +233,9 @@ namespace projettaquin
 
         private void button2_Click(object sender, EventArgs e) // placement aléatoire des objets
         {
-<<<<<<< HEAD
             comboBoxAleatoire.Items.Clear();
             label_error.Visible = false;
-            tabEntrepot = NodeEntrepot.tabEntrepot; 
-=======
             tabEntrepot = NodeDistance.InitialiserEntrepot(); 
->>>>>>> 434d1fd50ad209bc420a139281bc57bae28e6a4a
             Random rd = new Random();
             int NBO = Convert.ToInt32(numericUpDown2.Value);
             tabObjet = new Objet[NBO];
@@ -312,7 +291,7 @@ namespace projettaquin
                 }
                 else l.Visible = true;
             }*/
-            tabEntrepot = NodeEntrepot.InitialiserEntrepot();
+            tabEntrepot = NodeDistance.InitialiserEntrepot();
             label_error.Visible = false;
             btn_valider.Enabled = true;
             groupBox2.Visible = true;
