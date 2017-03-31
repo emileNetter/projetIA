@@ -198,7 +198,7 @@ namespace projettaquin
             t.calculeTemps(); // on calcule le temps mis pour ce chemin
             Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
             setViewEntrepot();
-            if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
+            //if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
         }
 
         private void comboBoxManuel_SelectedIndexChanged(object sender, EventArgs e)

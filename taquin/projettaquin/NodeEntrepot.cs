@@ -48,6 +48,7 @@ namespace projettaquin
         }
         public override double GetArcCost(GenericNode N2)
         {
+
             return (1);
         }
         public override bool EndState(Objet objet)
