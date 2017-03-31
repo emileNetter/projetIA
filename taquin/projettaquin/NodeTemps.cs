@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-
+using System.Drawing;
 namespace projettaquin
 {
     class NodeTemps : GenericNode
@@ -12,13 +12,24 @@ namespace projettaquin
         public static int[,] tabEntrepot = new int[25, 25];
         public int posX;
         public int posY;
-        int NBC;
+        //Non def
+        public NodeTemps noeudPcdt = null;
+        public Point direction = new Point(0, 0);
+
 
         public NodeTemps(int posX, int posY)
         {
             // retirer 1 puisque indice du tableau commence à 0
             this.posX = posX;
             this.posY = posY;
+        }
+
+        public NodeTemps(int posX, int posY, NodeTemps n)
+        {
+            // retirer 1 puisque indice du tableau commence à 0
+            this.posX = posX;
+            this.posY = posY;
+            noeudPcdt = n;
         }
 
         public static int[,] InitialiserEntrepot()
@@ -48,7 +59,7 @@ namespace projettaquin
         }
         public override double GetArcCost(GenericNode N2)
         {
-            return (1);
+            return 1;
         }
         public override bool EndState(Objet objet)
         {
@@ -108,6 +119,13 @@ namespace projettaquin
             return lsucc;
 
         }
+
+        public NodeTemps GetNoeudPcdt()
+        {
+
+            return null;
+        }
+
         public override void CalculeHCost(Objet objet)
         {
             int distX;
