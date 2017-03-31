@@ -198,7 +198,8 @@ namespace projettaquin
             t.calculeTemps(); // on calcule le temps mis pour ce chemin
             Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
             setViewEntrepot();
-            //if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
+            if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
+
         }
 
         private void comboBoxManuel_SelectedIndexChanged(object sender, EventArgs e)
@@ -241,5 +242,42 @@ namespace projettaquin
                 comboBoxAleatoire.Items.Add("Objet : x=" + o.posX + " y=" + o.posY + " orientation=" + o.orientation);
             }
         }
+
+
+        private void reinitialiserView()
+        {
+            /*foreach (Control l in this.Controls.OfType<Control>())
+            {
+                if(l is Label)
+                {
+                    if(l.Name == "label1" || l.Name == "label2" || l.Name == "label3" || l.Name == "label4")
+                    {
+                        l.Visible = false;                    }
+                }
+                else l.Visible = false;
+            }*/
+            groupBox1.Visible = false;
+            button_nouveau.Visible = true;
+        }
+
+        private void button_nouveau_Click(object sender, EventArgs e)
+        {
+            /*foreach (Control l in this.Controls.OfType<Control>())
+            {
+                if (l is Label)
+                {
+                    if (l.Name == "label1" || l.Name == "label2" || l.Name == "label3" || l.Name == "label4")
+                    {
+                        l.Visible = true;
+                    }
+                }
+                else l.Visible = true;
+            }*/
+            btn_valider.Enabled = true;
+            groupBox1.Visible = true;
+            button_nouveau.Visible = false;
+        }
+
+        
     }
 }
