@@ -68,7 +68,7 @@ namespace projettaquin
                 }
             }
             temps += 10; // Orientation + 10 secondes;
-            temps += 10 * objet.hauteur; // Hauteur de l'objet fois 10
+            temps += 2 * objet.hauteur; // Hauteur de l'objet fois 2
             SetTemps(temps); 
         }
 

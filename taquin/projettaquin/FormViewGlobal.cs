@@ -134,11 +134,11 @@ namespace projettaquin
                 if (Lres != null)
                 {
                     foreach (GenericNode n in Lres)
-                    {
+                    {                        
                         NodeEntrepot node = (NodeEntrepot)n;
                         int positionX = 25+25*node.posX;
                         int positionY =25+ 25*node.posY;
-                        FormeRectangle objet = new FormeRectangle("black", positionX, positionY);
+                        FormeRectangle objet = new FormeRectangle("red", positionX, positionY);
                         FormeRectangle.creationFormeColorée(objet, this);
                     }
                 }
@@ -196,7 +196,7 @@ namespace projettaquin
             Lres = g.RechercheSolutionAEtoile(N0);
             t = new Trajectoire(Lres,objet); // on passe la liste de generic node à la trajectoire
             t.calculeTemps(); // on calcule le temps mis pour ce chemin
-
+            Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
             setViewEntrepot();
             reinitialiserView();
             if (tabChariot.Length != 0 && tabObjet.Length !=0) { btn_LancerSimulation.Enabled = true; }
@@ -209,7 +209,7 @@ namespace projettaquin
             textBoxY.Text = Convert.ToString(c.posY);
         }
 
-        private void btn_ValiderPos_Click(object sender, EventArgs e)
+        private void btn_ValiderPos_Click(object sender, EventArgs e) // bouton valider
         {
             Chariot c = (Chariot)comboBoxManuel.SelectedItem;
             c.posX = Convert.ToInt32(textBoxX.Text);
