@@ -82,8 +82,8 @@ namespace projettaquin
                     break;
 
                 case "red":
-                    formGraphics.FillRectangle(redbrush, rect);
-                    formGraphics.DrawRectangle(blackPen, rect);
+                    formGraphics.FillEllipse(redbrush, rect);
+                    formGraphics.DrawEllipse(blackPen, rect);
                     redbrush.Dispose();
                     formGraphics.Dispose();
                     break;

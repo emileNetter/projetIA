@@ -51,9 +51,11 @@ namespace projettaquin
         public override double GetArcCost(GenericNode N2)
         {
             NodeTemps Nres = (NodeTemps)N2;
-            if(this.directionH == Nres.directionH)
+            CalculeDirectionH(this);
+            CalculeDirectionH(Nres);
+            if (this.directionH == Nres.directionH) return 1;
+            else return 4;
 
-            return (1);
         }
         public override bool EndState(Objet objet)
         {
@@ -114,7 +116,11 @@ namespace projettaquin
 
         }
 
-        public bool CalculeDirectionH(NodeTemps N2)
+        public void setDirection(bool b)
+        {
+            directionH = b;
+        }
+        public void CalculeDirectionH(NodeTemps N2)
         {
             // This = noeud prcdt
             bool res=false;
@@ -124,8 +130,9 @@ namespace projettaquin
             if (signX != 0 && signY == 0)
             {
                 res = true;
+                setDirection(res);
             }
-            return res;
+            setDirection(res);
 
         }
         

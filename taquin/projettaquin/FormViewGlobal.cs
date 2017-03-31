@@ -16,9 +16,8 @@ namespace projettaquin
         private Objet[] tabObjet = null;
         private Chariot[] tabChariot = null;
         private FormeRectangle[,] tabForme = null;
-        public int[,] tabEntrepot = NodeDistance.InitialiserEntrepot();
+        public int[,] tabEntrepot;
         private static List<GenericNode> Lres;
-        public Trajectoire t;
 
         private Objet objet;
         private Graph g;
@@ -33,6 +32,7 @@ namespace projettaquin
             hForm = this.Height;
             lForm = this.Width;
             numericUpDown1.Value = 1;
+            
            
         }
 
@@ -177,15 +177,16 @@ namespace projettaquin
             {
                 int posX = rd.Next(1, 25);
                 int posY = rd.Next(1, 25);
-                while ( tabEntrepot[posX-1,posY-1] < 0) // -1 car le tableau est décalé
+                while ( NodeDistance.tabEntrepot[posX-1,posY-1] < 0) // -1 car le tableau est décalé
                 {
                     posX = rd.Next(1, 25);
                     posY = rd.Next(1, 25);
                 }
                 tabChariot[i] = new Chariot(posX, posY);
+                NodeDistance.tabEntrepot[posX-1, posY-1] = -1; //on utilise le tab du Node distance !
             }
 
-            foreach(Chariot c in tabChariot)
+            foreach (Chariot c in tabChariot)
             {
                 comboBox1.Items.Add("Chariot : x="+c.posX+" y="+c.posY);
             }
@@ -195,16 +196,16 @@ namespace projettaquin
         {
             if (tabChariot != null && tabObjet != null)
             {
-
-
                 btn_valider.Enabled = false;
                 objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
                 g = new Graph(objet);
                 N0 = new NodeDistance(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
                 Lres = g.RechercheSolutionAEtoile(N0);
-                t = new Trajectoire(Lres, objet); // on passe la liste de generic node à la trajectoire
-                t.calculeTemps(); // on calcule le temps mis pour ce chemin
-                Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
+                if (Lres.Count > 1)
+                {
+                    Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
+                }
+                
                 reinitialiserView();
                 setViewEntrepot();
             }
@@ -234,8 +235,7 @@ namespace projettaquin
         private void button2_Click(object sender, EventArgs e) // placement aléatoire des objets
         {
             comboBoxAleatoire.Items.Clear();
-            label_error.Visible = false;
-            tabEntrepot = NodeDistance.InitialiserEntrepot(); 
+            label_error.Visible = false;           
             Random rd = new Random();
             int NBO = Convert.ToInt32(numericUpDown2.Value);
             tabObjet = new Objet[NBO];
@@ -245,7 +245,7 @@ namespace projettaquin
                 int posX = rd.Next(1, 25);
                 int posY = rd.Next(1, 25);
                 int orientation = rd.Next(0, 2);
-                while (tabEntrepot[posX-1, posY-1] != -1)
+                while (NodeDistance.tabEntrepot[posX-1, posY-1] != -1) //on utilise le tab du Node distance !
                 {
                     posX = rd.Next(1, 25);
                     posY = rd.Next(1, 25);

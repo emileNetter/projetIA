@@ -90,7 +90,7 @@ namespace projettaquin
             }
             if(posX<24)
             {
-                if (tabEntrepot[posX + 1, posY] != -1 && posX < 24)
+                if (tabEntrepot[posX + 1, posY] != -1 )
                 {
                     lsucc.Add(new NodeDistance(posX + 1, posY ));
                 }
