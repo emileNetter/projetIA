@@ -42,8 +42,8 @@ namespace projettaquin
 
             for(int i =1; i < noeuds.Count; i++)
             {
-                NodeEntrepot noeudEntrepot = (NodeEntrepot)noeuds[i];
-                NodeEntrepot noeudPrecedent = (NodeEntrepot)noeuds[i - 1];
+                NodeDistance noeudEntrepot = (NodeDistance)noeuds[i];
+                NodeDistance noeudPrecedent = (NodeDistance)noeuds[i - 1];
                 var signX = Math.Sign(noeudEntrepot.posX - noeudPrecedent.posX);
                 var signY = Math.Sign(noeudEntrepot.posY - noeudPrecedent.posY);               
 

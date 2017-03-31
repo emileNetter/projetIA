@@ -21,7 +21,7 @@ namespace projettaquin
         {
             posX = _posX;
             posY = _posY;
-            NodeEntrepot.tabEntrepot[posX - 1, posY - 1] = -1;//tabEntrepot initialsier à 0,0.
+            NodeDistance.tabEntrepot[posX - 1, posY - 1] = -1;//tabEntrepot initialsier à 0,0.
         }
 
         // Constructeur par défaut (positionné sur la première colonne)
