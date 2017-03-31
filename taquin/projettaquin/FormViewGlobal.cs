@@ -22,7 +22,7 @@ namespace projettaquin
 
         private Objet objet;
         private Graph g;
-        private NodeEntrepot N0;
+        private NodeDistance N0;
 
         int hForm;
         int lForm;
@@ -73,7 +73,7 @@ namespace projettaquin
 
             }
 
-            if (tabEntrepot==null) { tabEntrepot = NodeEntrepot.InitialiserEntrepot(); }
+            if (tabEntrepot==null) { tabEntrepot = NodeDistance.InitialiserEntrepot(); }
             else
             {
 
@@ -135,7 +135,7 @@ namespace projettaquin
                 {
                     foreach (GenericNode n in Lres)
                     {                        
-                        NodeEntrepot node = (NodeEntrepot)n;
+                        NodeDistance node = (NodeDistance)n;
                         int positionX = 25+25*node.posX;
                         int positionY =25+ 25*node.posY;
                         FormeRectangle objet = new FormeRectangle("red", positionX, positionY);
@@ -150,7 +150,7 @@ namespace projettaquin
 
         private void button3_Click(object sender, EventArgs e) // Bouton placement manuel
         {
-            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); // On initialise le tableau "source"
+            tabEntrepot = NodeDistance.InitialiserEntrepot(); // On initialise le tableau "source"
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
 
@@ -164,7 +164,7 @@ namespace projettaquin
 
         private void button1_Click(object sender, EventArgs e) // Bonton placement aléaoire
         {
-            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); // On initialise le tableau "source"
+            tabEntrepot = NodeDistance.InitialiserEntrepot(); // On initialise le tableau "source"
             Random rd = new Random();
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
@@ -192,7 +192,7 @@ namespace projettaquin
             btn_valider.Enabled = false;
             objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
             g = new Graph(objet);
-            N0 = new NodeEntrepot(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
+            N0 = new NodeDistance(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
             Lres = g.RechercheSolutionAEtoile(N0);
             t = new Trajectoire(Lres,objet); // on passe la liste de generic node à la trajectoire
             t.calculeTemps(); // on calcule le temps mis pour ce chemin
@@ -218,7 +218,7 @@ namespace projettaquin
 
         private void button2_Click(object sender, EventArgs e) // placement aléatoire des objets
         {
-            tabEntrepot = NodeEntrepot.InitialiserEntrepot(); 
+            tabEntrepot = NodeDistance.InitialiserEntrepot(); 
             Random rd = new Random();
             int NBO = Convert.ToInt32(numericUpDown2.Value);
             tabObjet = new Objet[NBO];
