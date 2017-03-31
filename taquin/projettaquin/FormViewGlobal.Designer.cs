@@ -54,28 +54,25 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(874, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(656, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 17);
+            this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre de chariot";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(1009, 24);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown1.Location = new System.Drawing.Point(757, 20);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(160, 22);
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 1;
             this.numericUpDown1.ThousandsSeparator = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(877, 90);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(658, 73);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(171, 28);
+            this.button1.Size = new System.Drawing.Size(128, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Placement aléatoire ";
             this.button1.UseVisualStyleBackColor = true;
@@ -83,10 +80,9 @@
             // 
             // btn_valider
             // 
-            this.btn_valider.Location = new System.Drawing.Point(971, 485);
-            this.btn_valider.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_valider.Location = new System.Drawing.Point(728, 394);
             this.btn_valider.Name = "btn_valider";
-            this.btn_valider.Size = new System.Drawing.Size(158, 65);
+            this.btn_valider.Size = new System.Drawing.Size(118, 53);
             this.btn_valider.TabIndex = 3;
             this.btn_valider.Text = "Valider";
             this.btn_valider.UseVisualStyleBackColor = true;
@@ -94,10 +90,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(876, 208);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Location = new System.Drawing.Point(657, 169);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(161, 28);
+            this.button3.Size = new System.Drawing.Size(121, 23);
             this.button3.TabIndex = 4;
             this.button3.Text = "placement manuel";
             this.button3.UseVisualStyleBackColor = true;
@@ -106,74 +101,66 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(874, 168);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(656, 136);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 17);
+            this.label2.Size = new System.Drawing.Size(19, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "ou";
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(877, 126);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox1.Location = new System.Drawing.Point(658, 102);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(169, 24);
+            this.comboBox1.Size = new System.Drawing.Size(128, 21);
             this.comboBox1.TabIndex = 6;
             // 
             // comboBoxManuel
             // 
             this.comboBoxManuel.FormattingEnabled = true;
-            this.comboBoxManuel.Location = new System.Drawing.Point(876, 244);
-            this.comboBoxManuel.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxManuel.Location = new System.Drawing.Point(657, 198);
             this.comboBoxManuel.Name = "comboBoxManuel";
-            this.comboBoxManuel.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxManuel.Size = new System.Drawing.Size(121, 21);
             this.comboBoxManuel.TabIndex = 7;
             this.comboBoxManuel.SelectedIndexChanged += new System.EventHandler(this.comboBoxManuel_SelectedIndexChanged);
             // 
             // textBoxX
             // 
-            this.textBoxX.Location = new System.Drawing.Point(1107, 211);
-            this.textBoxX.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxX.Location = new System.Drawing.Point(830, 171);
             this.textBoxX.Name = "textBoxX";
-            this.textBoxX.Size = new System.Drawing.Size(55, 22);
+            this.textBoxX.Size = new System.Drawing.Size(42, 20);
             this.textBoxX.TabIndex = 8;
             // 
             // textBoxY
             // 
-            this.textBoxY.Location = new System.Drawing.Point(1107, 246);
-            this.textBoxY.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxY.Location = new System.Drawing.Point(830, 200);
             this.textBoxY.Name = "textBoxY";
-            this.textBoxY.Size = new System.Drawing.Size(55, 22);
+            this.textBoxY.Size = new System.Drawing.Size(42, 20);
             this.textBoxY.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1077, 214);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(808, 174);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 17);
+            this.label3.Size = new System.Drawing.Size(18, 13);
             this.label3.TabIndex = 10;
             this.label3.Text = "x :";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1076, 251);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(807, 204);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 17);
+            this.label4.Size = new System.Drawing.Size(18, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "y :";
             // 
             // btn_ValiderPos
             // 
-            this.btn_ValiderPos.Location = new System.Drawing.Point(1196, 208);
-            this.btn_ValiderPos.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_ValiderPos.Location = new System.Drawing.Point(897, 169);
             this.btn_ValiderPos.Name = "btn_ValiderPos";
-            this.btn_ValiderPos.Size = new System.Drawing.Size(100, 57);
+            this.btn_ValiderPos.Size = new System.Drawing.Size(75, 46);
             this.btn_ValiderPos.TabIndex = 12;
             this.btn_ValiderPos.Text = "ok";
             this.btn_ValiderPos.UseVisualStyleBackColor = true;
@@ -182,30 +169,33 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 690);
+            this.splitter1.Size = new System.Drawing.Size(2, 561);
             this.splitter1.TabIndex = 13;
             this.splitter1.TabStop = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(874, 326);
+            this.label5.Location = new System.Drawing.Point(656, 265);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 17);
+            this.label5.Size = new System.Drawing.Size(83, 13);
             this.label5.TabIndex = 14;
             this.label5.Text = "Nombre d\'objets";
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(997, 326);
+            this.numericUpDown2.Location = new System.Drawing.Point(748, 265);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numericUpDown2.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(165, 22);
+            this.numericUpDown2.Size = new System.Drawing.Size(124, 20);
             this.numericUpDown2.TabIndex = 15;
             this.numericUpDown2.Value = new decimal(new int[] {
             1,
@@ -215,9 +205,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(877, 370);
+            this.button2.Location = new System.Drawing.Point(658, 301);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(166, 23);
+            this.button2.Size = new System.Drawing.Size(124, 19);
             this.button2.TabIndex = 16;
             this.button2.Text = "Placement aléatoire";
             this.button2.UseVisualStyleBackColor = true;
@@ -226,26 +217,28 @@
             // comboBoxAleatoire
             // 
             this.comboBoxAleatoire.FormattingEnabled = true;
-            this.comboBoxAleatoire.Location = new System.Drawing.Point(877, 399);
+            this.comboBoxAleatoire.Location = new System.Drawing.Point(658, 324);
+            this.comboBoxAleatoire.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxAleatoire.Name = "comboBoxAleatoire";
-            this.comboBoxAleatoire.Size = new System.Drawing.Size(311, 24);
+            this.comboBoxAleatoire.Size = new System.Drawing.Size(234, 21);
             this.comboBoxAleatoire.TabIndex = 17;
             // 
             // btn_LancerSimulation
             // 
             this.btn_LancerSimulation.Enabled = false;
-            this.btn_LancerSimulation.Location = new System.Drawing.Point(971, 613);
+            this.btn_LancerSimulation.Location = new System.Drawing.Point(728, 498);
+            this.btn_LancerSimulation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_LancerSimulation.Name = "btn_LancerSimulation";
-            this.btn_LancerSimulation.Size = new System.Drawing.Size(158, 65);
+            this.btn_LancerSimulation.Size = new System.Drawing.Size(118, 53);
             this.btn_LancerSimulation.TabIndex = 18;
             this.btn_LancerSimulation.Text = "Lancer simulation";
             this.btn_LancerSimulation.UseVisualStyleBackColor = true;
             // 
             // FormViewGlobal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1309, 690);
+            this.ClientSize = new System.Drawing.Size(982, 561);
             this.Controls.Add(this.btn_LancerSimulation);
             this.Controls.Add(this.comboBoxAleatoire);
             this.Controls.Add(this.button2);
@@ -265,7 +258,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormViewGlobal";
             this.Text = "FormViewGlobal";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

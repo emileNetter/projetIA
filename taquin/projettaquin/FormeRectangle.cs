@@ -32,6 +32,7 @@ namespace projettaquin
             SolidBrush greenBrush = new SolidBrush(Color.Green);
             SolidBrush blackBrush = new SolidBrush(Color.Black);
             SolidBrush orangebrush = new SolidBrush(Color.Orange);
+            SolidBrush redbrush = new SolidBrush(Color.Red);
 
             Pen blackPen = new Pen(Brushes.Black);
             blackPen.Width = 1.0F;
@@ -77,6 +78,13 @@ namespace projettaquin
                     formGraphics.FillRectangle(orangebrush, rect);
                     formGraphics.DrawRectangle(blackPen, rect);
                     orangebrush.Dispose();
+                    formGraphics.Dispose();
+                    break;
+
+                case "red":
+                    formGraphics.FillRectangle(redbrush, rect);
+                    formGraphics.DrawRectangle(blackPen, rect);
+                    redbrush.Dispose();
                     formGraphics.Dispose();
                     break;
             }
