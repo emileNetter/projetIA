@@ -261,7 +261,7 @@ namespace projettaquin
 
 
 
-
+                double TempsTot=CalculTempsTot();
                 reinitialiserView();
 
                 setViewEntrepot();
@@ -353,6 +353,13 @@ namespace projettaquin
             btn_valider.Enabled = true;
             groupBox2.Visible = true;
             button_nouveau1.Visible = false;
+        }
+
+        public double CalculTempsTot()
+        {
+            int a = Lres.Count();
+            double TempsTot = Lres[a-1].Cout_Total + objet.hauteur * 2 + 10;
+            return TempsTot;
         }
 
         
