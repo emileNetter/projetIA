@@ -25,9 +25,9 @@ namespace projettaquin
 
         private Objet objet;
         private Graph g;
-        private NodeDistance Ninit;
-        private NodeDistance Nfinal;
-        private NodeDistance Nobj;
+        private NodeTemps Ninit;
+        private NodeTemps Nfinal;
+        private NodeTemps Nobj;
 
         int hForm;
         int lForm;
@@ -79,7 +79,7 @@ namespace projettaquin
 
             }
 
-            if (tabEntrepot==null) { tabEntrepot = NodeDistance.InitialiserEntrepot(); }
+            if (tabEntrepot==null) { tabEntrepot = NodeTemps.InitialiserEntrepot(); }
             else
             {
 
@@ -141,7 +141,7 @@ namespace projettaquin
                 {
                     foreach (GenericNode n in Lres)
                     {                        
-                        NodeDistance node = (NodeDistance)n;
+                        NodeTemps node = (NodeTemps)n;
                         int positionX = 25+25*node.posX;
                         int positionY =25+ 25*node.posY;
                         FormeRectangle objet = new FormeRectangle("red", positionX, positionY);
@@ -152,7 +152,7 @@ namespace projettaquin
                 {
                     foreach (GenericNode n in bestTrajectoire)
                     {
-                        NodeDistance node = (NodeDistance)n;
+                        NodeTemps node = (NodeTemps)n;
                         int positionX = 25 + 25 * node.posX;
                         int positionY = 25 + 25 * node.posY;
                         FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
@@ -168,7 +168,7 @@ namespace projettaquin
         private void button3_Click(object sender, EventArgs e) // Bouton placement manuel
         {
             comboBoxManuel.Items.Clear();
-            tabEntrepot = NodeDistance.InitialiserEntrepot(); // On initialise le tableau "source"
+            tabEntrepot = NodeTemps.InitialiserEntrepot(); // On initialise le tableau "source"
             int NBC = Convert.ToInt32(numericUpDown1.Value);
             tabChariot = new Chariot[NBC];
 
@@ -184,7 +184,7 @@ namespace projettaquin
         {
 
             comboBox1.Items.Clear();
-            tabEntrepot = NodeDistance.InitialiserEntrepot(); // On initialise le tableau "source"
+            tabEntrepot = NodeTemps.InitialiserEntrepot(); // On initialise le tableau "source"
 
             Random rd = new Random();
             int NBC = Convert.ToInt32(numericUpDown1.Value);
@@ -194,13 +194,13 @@ namespace projettaquin
             {
                 int posX = rd.Next(1, 25);
                 int posY = rd.Next(1, 25);
-                while ( NodeDistance.tabEntrepot[posX-1,posY-1] < 0) // -1 car le tableau est décalé
+                while ( NodeTemps.tabEntrepot[posX-1,posY-1] < 0) // -1 car le tableau est décalé
                 {
                     posX = rd.Next(1, 25);
                     posY = rd.Next(1, 25);
                 }
                 tabChariot[i] = new Chariot(posX, posY);
-                NodeDistance.tabEntrepot[posX-1, posY-1] = -1; //on utilise le tab du Node distance !
+                NodeTemps.tabEntrepot[posX-1, posY-1] = -1; //on utilise le tab du Node distance !
             }
 
             foreach (Chariot c in tabChariot)
@@ -214,24 +214,22 @@ namespace projettaquin
             if (tabChariot != null && tabObjet != null)
             {
                 btn_valider.Enabled = false;
-                //objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
-                objet = new Objet(1, 1, Objet.Orientation.Nord, 5);
+                objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
                 g = new Graph(objet);
-<<<<<<< HEAD
-                //N0 = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1, new Point(0, 0));
-                N0 = new NodeTemps(4, 24, new Point(0, 1));
-                Lres = g.RechercheSolutionAEtoile(N0);
-=======
-                Ninit = new NodeDistance(tabChariot[0].posX - 1, tabChariot[0].posY - 1);
+
+                Ninit = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1, new Point(0, 0));
                 Lres = g.RechercheSolutionAEtoile(Ninit);
->>>>>>> ca7c755be5cf4129686a2967e42dc8a7868fa596
+
+                Ninit = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1,new Point(0,0));
+                Lres = g.RechercheSolutionAEtoile(Ninit);
+
                 if (Lres.Count > 1)
                 {
                     Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
                 }
 
                 // Trajet vers la zone finale
-                Nobj = (NodeDistance)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
+                Nobj = (NodeTemps)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
 
                 List<Objet> zoneFinale = new List<Objet>(tabEntrepot.GetLength(0));
                 for (int k=0;k< tabEntrepot.GetLength(0)-1; k++)
@@ -304,7 +302,7 @@ namespace projettaquin
                 int posX = rd.Next(1, 25);
                 int posY = rd.Next(1, 25);
                 int orientation = rd.Next(0, 2);
-                while (NodeDistance.tabEntrepot[posX-1, posY-1] != -1) //on utilise le tab du Node distance !
+                while (NodeTemps.tabEntrepot[posX-1, posY-1] != -1) //on utilise le tab du Node distance !
                 {
                     posX = rd.Next(1, 25);
                     posY = rd.Next(1, 25);
@@ -350,7 +348,7 @@ namespace projettaquin
                 }
                 else l.Visible = true;
             }*/
-            tabEntrepot = NodeDistance.InitialiserEntrepot();
+            tabEntrepot = NodeTemps.InitialiserEntrepot();
             label_error.Visible = false;
             btn_valider.Enabled = true;
             groupBox2.Visible = true;
