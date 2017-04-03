@@ -17,11 +17,17 @@ namespace projettaquin
         private Chariot[] tabChariot = null;
         private FormeRectangle[,] tabForme = null;
         public int[,] tabEntrepot;
+
         private static List<GenericNode> Lres;
+        private static List<GenericNode> TrajectoireF = new List<GenericNode>();
+        private static List<List<GenericNode>> EnsembleTrajectoiresF = new List<List<GenericNode>>();
+        List<GenericNode> bestTrajectoire = new List<GenericNode>();
 
         private Objet objet;
         private Graph g;
-        private NodeTemps N0;
+        private NodeTemps Ninit;
+        private NodeTemps Nfinal;
+        private NodeTemps Nobj;
 
         int hForm;
         int lForm;
@@ -31,7 +37,7 @@ namespace projettaquin
             InitializeComponent();
             hForm = this.Height;
             lForm = this.Width;
-            numericUpDown1.Value = 1;
+            numericUpDown1.Value = 40;
             
            
         }
@@ -142,6 +148,17 @@ namespace projettaquin
                         FormeRectangle.creationFormeColorée(objet, this);
                     }
                 }
+                if (bestTrajectoire != null)
+                {
+                    foreach (GenericNode n in bestTrajectoire)
+                    {
+                        NodeTemps node = (NodeTemps)n;
+                        int positionX = 25 + 25 * node.posX;
+                        int positionY = 25 + 25 * node.posY;
+                        FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
+                        FormeRectangle.creationFormeColorée(objet, this);
+                    }
+                }
             }
 
         }  
@@ -199,14 +216,54 @@ namespace projettaquin
                 btn_valider.Enabled = false;
                 objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
                 g = new Graph(objet);
-                N0 = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1, new Point(0, 0));
-                Lres = g.RechercheSolutionAEtoile(N0);
+
+                Ninit = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1, new Point(0, 0));
+                Lres = g.RechercheSolutionAEtoile(Ninit);
+
+                Ninit = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1,new Point(0,0));
+                Lres = g.RechercheSolutionAEtoile(Ninit);
+
                 if (Lres.Count > 1)
                 {
                     Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
                 }
+
+                // Trajet vers la zone finale
+                Nobj = (NodeTemps)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
+
+                List<Objet> zoneFinale = new List<Objet>(tabEntrepot.GetLength(0));
+                for (int k=0;k< tabEntrepot.GetLength(0)-1; k++)
+                {
+                    Objet o = new Objet(0, k-1, Objet.Orientation.Sud, 0);
+                    zoneFinale.Add(o);
+                }
                 
+                foreach(Objet o in zoneFinale)
+                {
+                    Graph g = new Graph(o);
+                    TrajectoireF = g.RechercheSolutionAEtoile(Nobj);
+                    EnsembleTrajectoiresF.Add(TrajectoireF);
+                }
+                
+                bestTrajectoire = EnsembleTrajectoiresF[0];
+                double cout = 1000000;
+                foreach(List<GenericNode> l in EnsembleTrajectoiresF)
+                {
+                    double c = l[l.Count - 1].Cout_Total;
+                    if(c<cout)
+                    {
+                        cout = c;
+                        bestTrajectoire = l;
+                    }
+
+                    
+                }
+
+
+
+
                 reinitialiserView();
+
                 setViewEntrepot();
             }
             else

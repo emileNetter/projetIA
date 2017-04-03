@@ -14,7 +14,7 @@ namespace projettaquin
         public int posY;
         public bool directionH;
         public Point direction;
-        public int cout;
+        //public int cout;
         
 
         public NodeTemps(int posX, int posY, bool b)
@@ -59,9 +59,16 @@ namespace projettaquin
         }
         public override double GetArcCost(GenericNode N2)
         {
+<<<<<<< HEAD
             //NodeTemps Nres = (NodeTemps)N2;
             //cout = CalculeDirectionH(Nres);
             return 4;
+=======
+            double cout = 0;
+            NodeTemps Nres = (NodeTemps)N2;
+            cout = CalculeDirectionH(Nres);
+            return cout ;
+>>>>>>> 4a2ec869fc0244e0fa923587634e8ba761f3e629
 
         }
         public override bool EndState(Objet objet)
@@ -93,21 +100,21 @@ namespace projettaquin
             {
                 if (tabEntrepot[posX, posY + 1] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX, posY + 1,direction));
+                    lsucc.Add(new NodeTemps(posX, posY + 1,new Point(0,1)));
                 }
             }
             if (posY > 0)
             {
                 if (tabEntrepot[posX, posY - 1] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX, posY - 1,direction));
+                    lsucc.Add(new NodeTemps(posX, posY - 1,new Point(0,-1)));
                 }
             }
             if (posX < 24)
             {
                 if (tabEntrepot[posX + 1, posY] != -1 && posX < 24)
                 {
-                    lsucc.Add(new NodeTemps(posX + 1, posY, direction));
+                    lsucc.Add(new NodeTemps(posX + 1, posY, new Point(1,0)));
                 }
             }
 
@@ -115,7 +122,7 @@ namespace projettaquin
             {
                 if (tabEntrepot[posX - 1, posY] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX - 1, posY,direction));
+                    lsucc.Add(new NodeTemps(posX - 1, posY,new Point(-1,0)));
                 }
             }
 
@@ -130,17 +137,15 @@ namespace projettaquin
         public int CalculeDirectionH(NodeTemps N2)
         {
             // This = noeud prcdt
-            bool res=false;
-            var signX = Math.Sign(N2.posX - this.posX);
-            var signY = Math.Sign(N2.posY - this.posY);
-            if(signX!= direction.X || signY != direction.Y)
+           
+           
+            if(this.direction!=N2.direction)
             {
-                direction = new Point(signX, signY);
-                return 4;
+                
+                return 3;
             }
             else
             {
-                direction = new Point(signX, signY);
                 return 1;
             }                       
         }
