@@ -13,6 +13,8 @@ namespace projettaquin
         public int posX;
         public int posY;
         public bool directionH;
+        public Point direction;
+        public int cout;
         
 
         public NodeTemps(int posX, int posY, bool b)
@@ -21,6 +23,13 @@ namespace projettaquin
             this.posX = posX;
             this.posY = posY;
             directionH = b;
+        }
+        public NodeTemps(int posX, int posY,Point direction)
+        {
+            // retirer 1 puisque indice du tableau commence à 0
+            this.posX = posX;
+            this.posY = posY;
+            this.direction = direction;
         }
 
         public static int[,] InitialiserEntrepot()
@@ -51,10 +60,8 @@ namespace projettaquin
         public override double GetArcCost(GenericNode N2)
         {
             NodeTemps Nres = (NodeTemps)N2;
-            CalculeDirectionH(this);
-            CalculeDirectionH(Nres);
-            if (this.directionH == Nres.directionH) return 1;
-            else return 4;
+            cout = CalculeDirectionH(Nres);
+            return cout;
 
         }
         public override bool EndState(Objet objet)
@@ -86,21 +93,21 @@ namespace projettaquin
             {
                 if (tabEntrepot[posX, posY + 1] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX, posY + 1,directionH));
+                    lsucc.Add(new NodeTemps(posX, posY + 1,direction));
                 }
             }
             if (posY > 0)
             {
                 if (tabEntrepot[posX, posY - 1] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX, posY - 1,directionH));
+                    lsucc.Add(new NodeTemps(posX, posY - 1,direction));
                 }
             }
             if (posX < 24)
             {
                 if (tabEntrepot[posX + 1, posY] != -1 && posX < 24)
                 {
-                    lsucc.Add(new NodeTemps(posX + 1, posY, directionH));
+                    lsucc.Add(new NodeTemps(posX + 1, posY, direction));
                 }
             }
 
@@ -108,7 +115,7 @@ namespace projettaquin
             {
                 if (tabEntrepot[posX - 1, posY] != -1)
                 {
-                    lsucc.Add(new NodeTemps(posX - 1, posY,directionH));
+                    lsucc.Add(new NodeTemps(posX - 1, posY,direction));
                 }
             }
 
@@ -116,38 +123,39 @@ namespace projettaquin
 
         }
 
-        public void setDirection(bool b)
+        public void setDirection(Point p)
         {
-            directionH = b;
+            direction = p;
         }
-        public void CalculeDirectionH(NodeTemps N2)
+        public int CalculeDirectionH(NodeTemps N2)
         {
             // This = noeud prcdt
             bool res=false;
             var signX = Math.Sign(N2.posX - this.posX);
             var signY = Math.Sign(N2.posY - this.posY);
-
-            if (signX != 0 && signY == 0)
+            if(signX!= direction.X || signY != direction.Y)
             {
-                res = true;
-                setDirection(res);
+                direction = new Point(signX, signY);
+                return 4;
             }
-            setDirection(res);
-
+            else
+            {
+                direction = new Point(signX, signY);
+                return 1;
+            }                       
         }
         
-
         public override void CalculeHCost(Objet objet)
         {
-            int distX;
-            int distY;
-            double distF;
-            distX = Math.Abs(this.posX - objet.posX);
-            distY = Math.Abs(this.posY - objet.posY);
+            //int distX;
+            //int distY;
+            //double distF;
+            //distX = Math.Abs(this.posX - objet.posX);
+            //distY = Math.Abs(this.posY - objet.posY);
 
-            distF = Math.Sqrt(Math.Pow(distX, 2) + Math.Pow(distY, 2));
-            HCost = distF;
-            SetEstimation(distF);
+            //distF = Math.Sqrt(Math.Pow(distX, 2) + Math.Pow(distY, 2));
+            //HCost = distF;
+            //SetEstimation(distF);
         }
 
     }
