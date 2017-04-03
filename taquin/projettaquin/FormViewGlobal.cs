@@ -197,11 +197,9 @@ namespace projettaquin
             if (tabChariot != null && tabObjet != null)
             {
                 btn_valider.Enabled = false;
-                //objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
-                objet = new Objet(1,1,Objet.Orientation.Nord,5);
+                objet = new Objet(tabObjet[0].posX - 1, tabObjet[0].posY - 1, tabObjet[0].orientation, 5);
                 g = new Graph(objet);
-                //N0 = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1,new Point(0,0));
-                N0 = new NodeTemps(24,24, new Point(0, 0));
+                N0 = new NodeTemps(tabChariot[0].posX - 1, tabChariot[0].posY - 1, new Point(0, 0));
                 Lres = g.RechercheSolutionAEtoile(N0);
                 if (Lres.Count > 1)
                 {
