@@ -33,6 +33,7 @@ namespace projettaquin
             SolidBrush blackBrush = new SolidBrush(Color.Black);
             SolidBrush orangebrush = new SolidBrush(Color.Orange);
             SolidBrush redbrush = new SolidBrush(Color.Red);
+            SolidBrush purplebrush = new SolidBrush(Color.Purple);
 
             Pen blackPen = new Pen(Brushes.Black);
             blackPen.Width = 1.0F;
@@ -40,6 +41,13 @@ namespace projettaquin
             Graphics formGraphics = form.CreateGraphics();
             
             Rectangle rect=new Rectangle(f.positionX, f.positionY, largeur, hauteur);
+
+            int l =Convert.ToInt32( Math.Round(0.5 * largeur));
+            int h = Convert.ToInt32(Math.Round(0.5 * hauteur));
+            int lx = Convert.ToInt32(Math.Round(0.25 * largeur));
+            int hy = Convert.ToInt32(Math.Round(0.25 * hauteur));
+
+            Rectangle rectPetit = new Rectangle(f.positionX+lx, f.positionY+hy,l,h);
 
             switch (f.couleur)
             {
@@ -85,6 +93,13 @@ namespace projettaquin
                     formGraphics.FillEllipse(redbrush, rect);
                     formGraphics.DrawEllipse(blackPen, rect);
                     redbrush.Dispose();
+                    formGraphics.Dispose();
+                    break;
+
+                case "purple":
+                    formGraphics.FillEllipse(purplebrush, rectPetit);
+                    formGraphics.DrawEllipse(blackPen, rectPetit);
+                    purplebrush.Dispose();
                     formGraphics.Dispose();
                     break;
             }
