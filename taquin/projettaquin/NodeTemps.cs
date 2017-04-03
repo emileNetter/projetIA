@@ -59,9 +59,9 @@ namespace projettaquin
         }
         public override double GetArcCost(GenericNode N2)
         {
-            NodeTemps Nres = (NodeTemps)N2;
-            cout = CalculeDirectionH(Nres);
-            return cout;
+            //NodeTemps Nres = (NodeTemps)N2;
+            //cout = CalculeDirectionH(Nres);
+            return 4;
 
         }
         public override bool EndState(Objet objet)
