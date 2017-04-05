@@ -22,5 +22,10 @@ namespace projettaquin
             this.orientation = orientation;
             this.hauteur = hauteur;
         }
+
+        public override string ToString()
+        {
+            return "Objet : x:" + this.posX + " y :" + this.posY + " Orientation: " + this.orientation + " hauteur: " + this.hauteur;
+        }
     }
 }

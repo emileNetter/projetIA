@@ -21,7 +21,7 @@ namespace projettaquin
         {
             posX = _posX;
             posY = _posY;
-            NodeDistance.tabEntrepot[posX - 1, posY - 1] = -1;//tabEntrepot initialsier à 0,0.
+            GenericNode.tabEntrepot[posX - 1, posY - 1] = -1;//tabEntrepot initialsier à 0,0.
         }
 
         // Constructeur par défaut (positionné sur la première colonne)
@@ -33,7 +33,7 @@ namespace projettaquin
 
         public override string ToString()
         {
-            return "x : "+posX+" y : "+posY;
+            return "Chariot : x : "+posX+" y : "+posY;
         }
 
 
