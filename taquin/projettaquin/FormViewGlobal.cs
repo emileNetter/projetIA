@@ -173,11 +173,22 @@ namespace projettaquin
                 {
                     foreach (GenericNode n in bestTrajectoire)
                     {
-                        NodeTemps node = (NodeTemps)n;
-                        int positionX = 25 + 25 * node.posX;
-                        int positionY = 25 + 25 * node.posY;
-                        FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
-                        FormeRectangle.creationFormeColorée(objet, this);
+                        if (n is NodeDistance)
+                        {
+                            NodeDistance node = (NodeDistance)n;
+                            int positionX = 25 + 25 * node.posX;
+                            int positionY = 25 + 25 * node.posY;
+                            FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
+                            FormeRectangle.creationFormeColorée(objet, this);
+                        }
+                        else
+                        {
+                            NodeTemps node = (NodeTemps)n;
+                            int positionX = 25 + 25 * node.posX;
+                            int positionY = 25 + 25 * node.posY;
+                            FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
+                            FormeRectangle.creationFormeColorée(objet, this);
+                        }
                     }
                 }
             }
@@ -251,8 +262,8 @@ namespace projettaquin
                 {
                 Ninit = new NodeDistance(charChoisi.posX - 1, charChoisi.posY - 1); 
                 nodeTemps = false;
-               }
-               else
+                }
+                else
                 {
                 Ninit = new NodeTemps(charChoisi.posX - 1, charChoisi.posY - 1, new Point(0, 0));
                 nodeTemps = true;
@@ -293,7 +304,44 @@ namespace projettaquin
 
                     }
 
+
                     lbTimeTot.Text=CalculTempsTot().ToString()+" secondes" ;
+                }
+
+                else // c'est un calcul de distance (au plus court)
+                {
+                    // Trajet vers la zone finale
+                    Nobj = (NodeDistance)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
+
+                    List<Objet> zoneFinale = new List<Objet>(tabEntrepot.GetLength(0));
+                    for (int k = 0; k < tabEntrepot.GetLength(0) - 1; k++)
+                    {
+                        Objet o = new Objet(0, k - 1, Objet.Orientation.Sud, 0);
+                        zoneFinale.Add(o);
+                    }
+
+                    foreach (Objet o in zoneFinale)
+                    {
+                        Graph g = new Graph(o);
+                        TrajectoireF = g.RechercheSolutionAEtoile(Nobj);
+                        EnsembleTrajectoiresF.Add(TrajectoireF);
+                    }
+
+                    bestTrajectoire = EnsembleTrajectoiresF[0];
+                    double cout = 1000000;
+                    foreach (List<GenericNode> l in EnsembleTrajectoiresF)
+                    {
+                        double c = l[l.Count - 1].Cout_Total;
+                        if (c < cout)
+                        {
+                            cout = c;
+                            bestTrajectoire = l;
+                        }
+
+
+                    }
+
+                    lbTimeTot.Text = CalculTempsTot().ToString() + " secondes";
                 }
 
                 if (Lres.Count > 1)
