@@ -10,8 +10,8 @@ namespace Projet_IA_Partie2
     class Perceptron
     {
         public List<object> entrees;
-        public PointF coupleXY;
-        public const int constante = 1;
+        public PointF coupleXY; //couple de données (entrées)
+        public const int biais = 1; //le biais qui a son propre poids
         public float sortie;
         private List<double> poids;
         Random random;
