@@ -14,7 +14,6 @@ namespace Projet_IA_Partie2
         public const int biais = 1; //le biais qui a son propre poids
         public double sortie = 0;
         private double[] poids;
-        Random random;
         public int nbErreurs;
         int nbpoids = 3;
         int iteration = 0;
@@ -37,6 +36,10 @@ namespace Projet_IA_Partie2
             0,0,0,0,0,0
         };
 
+        public Perceptron()
+        {
+
+        }
         public Perceptron(double entreeX, double entreeY)
         {
             this.entreeX = entreeX;
@@ -62,6 +65,7 @@ namespace Projet_IA_Partie2
         public void Traitement()
         {
             // initialisation des poids
+            Random random = new Random();
             poids = new double[3];
             for (int i = 0; i < nbpoids; i++)
                 poids[i] = random.NextDouble();
@@ -76,6 +80,7 @@ namespace Projet_IA_Partie2
                     this.entreeX = inputs[i, 0];
                     this.entreeY = inputs[i, 1];
                     sortie = CalculeSortie(poids, entreeX, entreeY);
+                    sortie = Seuillage(sortie);
                     if (sortie == 0 && sortie != outputs[i])
                     {
                         for (int j = 0; j < 2; j++)
@@ -93,10 +98,9 @@ namespace Projet_IA_Partie2
                         nbErreurs++;
                     }
                     iteration++;
-
                 }
-
-            } while (iteration < 500 || nbErreurs ==0);
+                
+            } while (iteration < 500);
 
         }
     }

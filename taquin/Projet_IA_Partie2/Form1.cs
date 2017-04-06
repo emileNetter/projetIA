@@ -16,5 +16,14 @@ namespace Projet_IA_Partie2
         {
             InitializeComponent();
         }
+
+        private void lancer_simulation_Click(object sender, EventArgs e)
+        {
+            Perceptron p = new Perceptron();
+            p.Traitement();
+            textBoxX.Text = p.GetPoids(0).ToString();
+            textBoxY.Text = p.GetPoids(1).ToString();
+            tb_nbErreurs.Text = p.nbErreurs.ToString();
+        }
     }
 }
