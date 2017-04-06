@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace Projet_IA_Partie2
 {
@@ -17,7 +18,7 @@ namespace Projet_IA_Partie2
         public int nbErreurs;
         int nbpoids = 3;
         int iteration = 0;
-        int seuil = 0;
+        int seuil = 30;
 
         //entrees tests
         static double[,] inputs = new double[,]
@@ -58,7 +59,7 @@ namespace Projet_IA_Partie2
         public int CalculeSortie(double[] poids,double x, double y)
         {
             double somme = x * poids[0] + y * poids[1];
-            return (somme >= 0) ? 1 : 0;
+            return (somme >= seuil) ? 1 : 0;
          
         }
 
@@ -80,9 +81,11 @@ namespace Projet_IA_Partie2
                     this.entreeX = inputs[i, 0];
                     this.entreeY = inputs[i, 1];
                     sortie = CalculeSortie(poids, entreeX, entreeY);
-                    sortie = Seuillage(sortie);
+                    //sortie = Seuillage(sortie);
+                    Debug.WriteLine(sortie);
                     if (sortie == 0 && sortie != outputs[i])
                     {
+                        
                         for (int j = 0; j < 2; j++)
                         {
                             poids[j] += inputs[i, j];
