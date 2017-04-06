@@ -9,7 +9,6 @@ namespace projettaquin
 {
     class NodeTemps : GenericNode
     {
-        public static int[,] tabEntrepot = new int[25, 25];
         public int posX;
         public int posY;
         public bool directionH;
@@ -17,13 +16,7 @@ namespace projettaquin
         //public int cout;
         
 
-        public NodeTemps(int posX, int posY, bool b)
-        {
-            // retirer 1 puisque indice du tableau commence à 0
-            this.posX = posX;
-            this.posY = posY;
-            directionH = b;
-        }
+       
         public NodeTemps(int posX, int posY,Point direction)
         {
             // retirer 1 puisque indice du tableau commence à 0
@@ -32,25 +25,6 @@ namespace projettaquin
             this.direction = direction;
         }
 
-        public static int[,] InitialiserEntrepot()
-        {
-            for (int l = 0; l < tabEntrepot.GetLength(0); l++)
-                for (int m = 0; m < tabEntrepot.GetLength(1); m++) { tabEntrepot[l, m] = 0; }
-
-            for (int i = 2; i < 24; i += 2)
-            {
-
-                for (int premiereLigne = 2; premiereLigne < 11; premiereLigne++) { tabEntrepot[premiereLigne, i] = -1; }
-                for (int deuxiemeLigne = 14; deuxiemeLigne < 23; deuxiemeLigne++) { tabEntrepot[deuxiemeLigne, i] = -1; }
-
-            }
-
-            for (int j = 0; j < 25; j++)
-            {
-                tabEntrepot[0, j] = -2;
-            }
-            return tabEntrepot;
-        }
 
         public override bool IsEqual(GenericNode N2)
         {
@@ -92,21 +66,21 @@ namespace projettaquin
             List<GenericNode> lsucc = new List<GenericNode>();
             if (posY < 24)
             {
-                if (tabEntrepot[posX, posY + 1] != -1)
+                if (GenericNode.tabEntrepot[posX, posY + 1] != -1)
                 {
                     lsucc.Add(new NodeTemps(posX, posY + 1,new Point(0,1)));
                 }
             }
             if (posY > 0)
             {
-                if (tabEntrepot[posX, posY - 1] != -1)
+                if (GenericNode.tabEntrepot[posX, posY - 1] != -1)
                 {
                     lsucc.Add(new NodeTemps(posX, posY - 1,new Point(0,-1)));
                 }
             }
             if (posX < 24)
             {
-                if (tabEntrepot[posX + 1, posY] != -1 && posX < 24)
+                if (GenericNode.tabEntrepot[posX + 1, posY] != -1 && posX < 24)
                 {
                     lsucc.Add(new NodeTemps(posX + 1, posY, new Point(1,0)));
                 }
@@ -114,7 +88,7 @@ namespace projettaquin
 
             if (posX > 0)
             {
-                if (tabEntrepot[posX - 1, posY] != -1)
+                if (GenericNode.tabEntrepot[posX - 1, posY] != -1)
                 {
                     lsucc.Add(new NodeTemps(posX - 1, posY,new Point(-1,0)));
                 }
@@ -146,6 +120,7 @@ namespace projettaquin
         
         public override void CalculeHCost(Objet objet)
         {
+           
             //int distX;
             //int distY;
             //double distF;
