@@ -84,7 +84,7 @@ namespace Projet_IA_Partie2
 
         public int CalculeSortie(double[] poids,double x, double y)
         {
-            double somme = x * poids[0] + y * poids[1] +biais*poids[2];
+            double somme = x * poids[0] + y * poids[1] + biais*poids[2];
             somme = Seuillage(somme);
             return (somme >= seuil) ? 1 : 0;
          
@@ -94,7 +94,7 @@ namespace Projet_IA_Partie2
         {
 
             int iteration = 0;
-            double[,] inputsNorm = normalisation(inputs);
+            //double[,] inputs;// = normalisation(inputs);
 
             // initialisation des poids
             Random random = new Random();
@@ -109,15 +109,15 @@ namespace Projet_IA_Partie2
                 //boucle sur chacun des couples d'entrées
                 for (int i = 0; i < nbLignes; i++)
                 {
-                    this.entreeX = inputsNorm[i, 0];
-                    this.entreeY = inputsNorm[i, 1];
+                    this.entreeX = inputs[i, 0];
+                    this.entreeY = inputs[i, 1];
                     sortie = CalculeSortie(poids, entreeX, entreeY);
                     //sortie = Seuillage(sortie);
                     if (sortie == 0 && sortie != outputs[i])
                     {
                         for (int j = 0; j < 2; j++)
                         {
-                            poids[j] += coeff * inputsNorm[i, j];
+                            poids[j] += coeff * inputs[i, j];
                         }
                         nbErreurs++;
                     }
@@ -125,7 +125,7 @@ namespace Projet_IA_Partie2
                     {
                         for (int k = 0; k < 2; k++)
                         {
-                            poids[k] -= coeff * inputsNorm[i, k];
+                            poids[k] -= coeff * inputs[i, k];
                         }
                         nbErreurs++;
                     }
