@@ -33,6 +33,8 @@ namespace projettaquin
         private GenericNode Ninit;
         private GenericNode Nfinal;
         private GenericNode Nobj;
+
+        private static List<List<GenericNode>> EnsembleTrajectoiresInit = new List<List<GenericNode>>();
         
 
         private static Boolean nodeTemps;
@@ -53,7 +55,7 @@ namespace projettaquin
 
         public void setViewEntrepot()
         {
-            Refresh();
+            //Refresh();
             
             this.Height = 800;
             this.Width = 1000;
@@ -145,49 +147,54 @@ namespace projettaquin
                     FormeRectangle.creationFormeColorée(objet, this);
                 }
                 // Colorie le chemin du noeud initial jusqu'à l'objet
-                if (Lres != null)
+                foreach (List<GenericNode> Lres in EnsembleTrajectoiresInit)
                 {
-                    foreach (GenericNode n in Lres)
+
+
+                    if (Lres != null)
                     {
-                        int positionX = 0;
-                        int positionY = 0;
-                        if (nodeTemps)
+                        foreach (GenericNode n in Lres)
                         {
-                            NodeTemps node = (NodeTemps)n;
-                            positionX = 25 + 25 * node.posX;
-                            positionY = 25 + 25 * node.posY;
+                            int positionX = 0;
+                            int positionY = 0;
+                            if (nodeTemps)
+                            {
+                                NodeTemps node = (NodeTemps)n;
+                                positionX = 25 + 25 * node.posX;
+                                positionY = 25 + 25 * node.posY;
+                            }
+                            else
+                            {
+                                NodeDistance node = (NodeDistance)n;
+                                positionX = 25 + 25 * node.posX;
+                                positionY = 25 + 25 * node.posY;
+                            }
+
+
+                            FormeRectangle objet = new FormeRectangle("red", positionX, positionY);
+                            FormeRectangle.creationFormeColorée(objet, this);
                         }
-                        else
-                        {
-                            NodeDistance node = (NodeDistance)n;
-                            positionX = 25 + 25 * node.posX;
-                            positionY = 25 + 25 * node.posY;
-                        }
-                        
-                        
-                        FormeRectangle objet = new FormeRectangle("red", positionX, positionY);
-                        FormeRectangle.creationFormeColorée(objet, this);
                     }
-                }
-                if (bestTrajectoire != null)
-                {
-                    foreach (GenericNode n in bestTrajectoire)
+                    if (bestTrajectoire != null)
                     {
-                        if (n is NodeDistance)
+                        foreach (GenericNode n in bestTrajectoire)
                         {
-                            NodeDistance node = (NodeDistance)n;
-                            int positionX = 25 + 25 * node.posX;
-                            int positionY = 25 + 25 * node.posY;
-                            FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
-                            FormeRectangle.creationFormeColorée(objet, this);
-                        }
-                        else
-                        {
-                            NodeTemps node = (NodeTemps)n;
-                            int positionX = 25 + 25 * node.posX;
-                            int positionY = 25 + 25 * node.posY;
-                            FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
-                            FormeRectangle.creationFormeColorée(objet, this);
+                            if (n is NodeDistance)
+                            {
+                                NodeDistance node = (NodeDistance)n;
+                                int positionX = 25 + 25 * node.posX;
+                                int positionY = 25 + 25 * node.posY;
+                                FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
+                                FormeRectangle.creationFormeColorée(objet, this);
+                            }
+                            else
+                            {
+                                NodeTemps node = (NodeTemps)n;
+                                int positionX = 25 + 25 * node.posX;
+                                int positionY = 25 + 25 * node.posY;
+                                FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
+                                FormeRectangle.creationFormeColorée(objet, this);
+                            }
                         }
                     }
                 }
@@ -250,8 +257,8 @@ namespace projettaquin
         private void btn_valider_Click(object sender, EventArgs e) // Methode pour bouton Calcul
         {
 
-            if (textBoxPosChar.Text != "" && tbObjChois.Text != "")
-            {
+           // if (textBoxPosChar.Text != "" && tbObjChois.Text != "")
+           // {
 
 
 
@@ -260,18 +267,35 @@ namespace projettaquin
 
                 if (sender.Equals(btn_calcul_distance))
                 {
-                Ninit = new NodeDistance(charChoisi.posX - 1, charChoisi.posY - 1); 
-                nodeTemps = false;
+                    /* Ninit = new NodeDistance(charChoisi.posX - 1, charChoisi.posY - 1); 
+                     nodeTemps = false;*/
+                    foreach (Chariot c in tabChariot)
+                    {
+                        Ninit = new NodeDistance(c.posX - 1, c.posY - 1);
+                        Lres = g.RechercheSolutionAEtoile(Ninit);
+                        EnsembleTrajectoiresInit.Add(Lres);
+
+
                 }
-                else
+                }
+                else if(sender.Equals(btn_calcul_temps))
                 {
                 Ninit = new NodeTemps(charChoisi.posX - 1, charChoisi.posY - 1, new Point(0, 0));
                 nodeTemps = true;
                 }
+               /* else
+                {
+                    foreach (Chariot c in tabChariot)
+                    {
+                        Ninit = new NodeDistance(c.posX - 1, c.posY - 1);
+                        Lres = g.RechercheSolutionAEtoile(Ninit);
 
-                Lres = g.RechercheSolutionAEtoile(Ninit);
 
-                if(nodeTemps)// On ne fait le trajet final que si c'est un calcul de temps 
+                    }
+                }*/
+                //Lres = g.RechercheSolutionAEtoile(Ninit);
+
+                if(nodeTemps)// On  le trajet final si c'est un calcul de temps 
                 {
                     // Trajet vers la zone finale
                     Nobj = (NodeTemps)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
@@ -306,7 +330,7 @@ namespace projettaquin
 
 
                     lbTimeTot.Text=CalculTempsTot().ToString()+" secondes" ;
-                }
+               }
 
                 else // c'est un calcul de distance (au plus court)
                 {
@@ -356,11 +380,11 @@ namespace projettaquin
 
                     
                     
-                }
-            else
+                //}
+            /*else
             {
                 label_error.Visible = true;
-            }
+            }*/
 
             
 
@@ -369,10 +393,12 @@ namespace projettaquin
         
         private void listBoxChar_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-            textBoxPosChar.Text = listBoxChar.SelectedItem.ToString();
-            label_error.Visible = false;
-            charChoisi = (Chariot)listBoxChar.SelectedItem;
+            if (listBoxChar.SelectedItem != null)
+            {
+                textBoxPosChar.Text = listBoxChar.SelectedItem.ToString();
+                label_error.Visible = false;
+                charChoisi = (Chariot)listBoxChar.SelectedItem;
+            }
 
         }
 
