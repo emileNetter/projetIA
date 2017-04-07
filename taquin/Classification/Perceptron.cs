@@ -40,8 +40,8 @@ namespace Classification
         {
             for(int i =0; i < outputs.GetLength(0); i++)
             {
-                if (i < 1500) outputs[i, 1] = 1;
-                else outputs[i, 1] = 0;
+                if (i < 1500) outputs[i, 0] = 1;
+                else outputs[i, 0] = 0;
             }
         }
 

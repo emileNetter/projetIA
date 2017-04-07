@@ -11,10 +11,10 @@ namespace Classification
         private int numero;
         public List<Neurone> entrees;
         public List<Neurone> sorties;
-        private int numerocouche;
-        private double sortie;
-        private double somme = 0;
-        private double delta;
+        public int numerocouche;
+        public double sortie;
+        public double somme = 0;
+        public double delta;
 
         public Neurone(int num, int numcouche)
         {

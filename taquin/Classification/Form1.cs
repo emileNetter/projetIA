@@ -21,6 +21,7 @@ namespace Classification
             InitializeComponent();
             p = new Perceptron();
             p.InitialiseInputs();
+            p.InitialiseOutputsSupervise();
             reseau = new Reseau(Convert.ToInt32(textBox_caches.Text));
         }
 
@@ -38,7 +39,7 @@ namespace Classification
 
                 List<double> vect = new List<double>();
                 vect.Add(p.inputs[i,1]);
-                vect.Add(p.inputs[i, 2]);
+                vect.Add(p.inputs[i,2]);
                 lvecteursentrees.Add(vect);
                 // Pour la sortie, idem, en général, on la récupère dans le fichier 
                 // de données; ici on la crée de toute pièce à partir d'une fonction
@@ -61,8 +62,8 @@ namespace Classification
 
         private void Test(Graphics g , Bitmap bmp)
         {
-            int y, x, z, zdesire;
-            double x2, z2;
+            int y, x, z;
+            double z2;
                 
 
             List<List<double>> lvecteursentrees = new List<List<double>>();
@@ -90,10 +91,10 @@ namespace Classification
             for (x = 0; x < 400; x++)
             {
                 z2 = lsortiesobtenues[x];
-
-                // z2 valeur attendu entre 0 et 1 ; conversion pour z qui est retenu pour l'affichage
-                z = (int)(z2 * 400);               
+                z = (int)(z2 * 400);
                 bmp.SetPixel(x, bmp.Height - z - 1, Color.Yellow);
+                // z2 valeur attendu entre 0 et 1 ; conversion pour z qui est retenu pour l'affichage
+
             }
 
         }

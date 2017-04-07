@@ -149,8 +149,8 @@ namespace Classification
                     {
                         // ici 1 seul neurone de sortie, i varie entre 0 et 0 !
                         neur = tabcouches[nbcouches - 1][i];
-                        neur.Setdelta( //(z - neur.sortie);
-                        neur.Derivee(neur.GetSomme()) * (z - neur.GetSortie()));
+                        neur.Setdelta( z - neur.sortie);
+                        neur.Derivee((neur.GetSomme()) * (z - neur.GetSortie()));
                     }
 
                     // On redescend vers les couches les plus basses
@@ -191,7 +191,7 @@ namespace Classification
                     tabcouches[0][i].ImposeSortie(lvecteursentrees[numexemple][i]);
 
                 // On impose ensuite une constante sur le dernier neurone d'entrée
-                neur = tabcouches[0][lvecteursentrees[0].Count];
+                neur = tabcouches[0][2];
                 neur.ImposeSortie(1);
 
                 // Calcul de la sortie de chaque neurone
