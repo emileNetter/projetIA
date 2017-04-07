@@ -25,7 +25,9 @@ namespace Projet_IA_Partie2
             textBoxX.Text = p.GetPoids(0).ToString();
             textBoxY.Text = p.GetPoids(1).ToString();
             tb_nbErreurs.Text = p.nbErreurs.ToString();
+            textBox_nbIterations.Text =Convert.ToString( p.GetNbIteration());
         }
+
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {

@@ -36,6 +36,7 @@
             this.label_poids2 = new System.Windows.Forms.Label();
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.textBox_nbIterations = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,11 +116,19 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
+            // textBox_nbIterations
+            // 
+            this.textBox_nbIterations.Location = new System.Drawing.Point(257, 272);
+            this.textBox_nbIterations.Name = "textBox_nbIterations";
+            this.textBox_nbIterations.Size = new System.Drawing.Size(100, 20);
+            this.textBox_nbIterations.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 532);
+            this.Controls.Add(this.textBox_nbIterations);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.textBoxY);
             this.Controls.Add(this.label_poids2);
@@ -146,6 +155,7 @@
         private System.Windows.Forms.Label label_poids2;
         private System.Windows.Forms.TextBox textBoxY;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TextBox textBox_nbIterations;
     }
 }
 

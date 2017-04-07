@@ -10,6 +10,7 @@ namespace Projet_IA_Partie2
 {
     class Perceptron
     {
+        public int nbIterationsFinal;
         public double entreeX;
         public double entreeY;
         public const int biais = 1; //le biais qui a son propre poids
@@ -18,7 +19,7 @@ namespace Projet_IA_Partie2
         public int nbErreurs;
         int nbpoids = 3;
         int seuil = 1;
-        double coeff = 0.1;
+        double coeff = 1;
 
         //entrees tests
         static double[,] inputs = new double[,]
@@ -69,7 +70,10 @@ namespace Projet_IA_Partie2
             this.entreeY = entreeY;
             
         }
-
+        public int GetNbIteration()
+        {
+            return nbIterationsFinal;
+        }
         public double GetPoids(int i)
         { return poids[i]; }
 
@@ -129,7 +133,7 @@ namespace Projet_IA_Partie2
                 }
                 
             } while (nbErreurs != 0 &&  iteration < nb);
-
+            nbIterationsFinal = iteration;
         }
     }
 }
