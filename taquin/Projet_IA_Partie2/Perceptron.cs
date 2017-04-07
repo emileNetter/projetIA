@@ -10,7 +10,7 @@ namespace Projet_IA_Partie2
 {
     class Perceptron
     {
-        public int nbIterationsFinal;
+        public int nbIterationsFinal=0;
         public double entreeX;
         public double entreeY;
         public const int biais = 1; //le biais qui a son propre poids
@@ -114,10 +114,10 @@ namespace Projet_IA_Partie2
                     sortie = CalculeSortie(poids, entreeX, entreeY);
                     //sortie = Seuillage(sortie);
                     if (sortie == 0 && sortie != outputs[i])
-                    {                       
+                    {
                         for (int j = 0; j < 2; j++)
                         {
-                            poids[j] += coeff*inputsNorm[i, j];
+                            poids[j] += coeff * inputsNorm[i, j];
                         }
                         nbErreurs++;
                     }
@@ -125,14 +125,14 @@ namespace Projet_IA_Partie2
                     {
                         for (int k = 0; k < 2; k++)
                         {
-                            poids[k] -= coeff* inputsNorm[i, k];
+                            poids[k] -= coeff * inputsNorm[i, k];
                         }
                         nbErreurs++;
                     }
                     iteration++;
                 }
-                
-            } while (nbErreurs != 0 &&  iteration < nb);
+
+            } while (nbErreurs != 0 );//iteration < nb);
             nbIterationsFinal = iteration;
         }
     }
