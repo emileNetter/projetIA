@@ -35,11 +35,13 @@
             this.textBoxX = new System.Windows.Forms.TextBox();
             this.label_poids2 = new System.Windows.Forms.Label();
             this.textBoxY = new System.Windows.Forms.TextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // lancer_simulation
             // 
-            this.lancer_simulation.Location = new System.Drawing.Point(211, 172);
+            this.lancer_simulation.Location = new System.Drawing.Point(229, 184);
             this.lancer_simulation.Name = "lancer_simulation";
             this.lancer_simulation.Size = new System.Drawing.Size(148, 50);
             this.lancer_simulation.TabIndex = 0;
@@ -49,7 +51,7 @@
             // 
             // tb_nbErreurs
             // 
-            this.tb_nbErreurs.Location = new System.Drawing.Point(297, 22);
+            this.tb_nbErreurs.Location = new System.Drawing.Point(384, 108);
             this.tb_nbErreurs.Name = "tb_nbErreurs";
             this.tb_nbErreurs.Size = new System.Drawing.Size(96, 20);
             this.tb_nbErreurs.TabIndex = 1;
@@ -57,7 +59,7 @@
             // label_nbErreurs
             // 
             this.label_nbErreurs.AutoSize = true;
-            this.label_nbErreurs.Location = new System.Drawing.Point(204, 25);
+            this.label_nbErreurs.Location = new System.Drawing.Point(393, 77);
             this.label_nbErreurs.Name = "label_nbErreurs";
             this.label_nbErreurs.Size = new System.Drawing.Size(87, 13);
             this.label_nbErreurs.TabIndex = 2;
@@ -95,11 +97,30 @@
             this.textBoxY.Size = new System.Drawing.Size(93, 20);
             this.textBoxY.TabIndex = 6;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(257, 29);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 7;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 532);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.textBoxY);
             this.Controls.Add(this.label_poids2);
             this.Controls.Add(this.textBoxX);
@@ -109,6 +130,7 @@
             this.Controls.Add(this.lancer_simulation);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,6 +145,7 @@
         private System.Windows.Forms.TextBox textBoxX;
         private System.Windows.Forms.Label label_poids2;
         private System.Windows.Forms.TextBox textBoxY;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

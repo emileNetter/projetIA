@@ -17,17 +17,24 @@ namespace Projet_IA_Partie2
         private double[] poids;
         public int nbErreurs;
         int nbpoids = 3;
-        int iteration = 0;
         int seuil = 1;
-        double coeff = 0.01;
+        double coeff = 0.1;
 
         //entrees tests
         static double[,] inputs = new double[,]
         {
-            { 36.1, 17}, { 41.1, 16.5 }, { 47.9, 18 },
-            { 47, 18.5 }, { 49.8, 22 }, { 48.5, 21 },
-            { 47.8, 11.7 }, { 55.5, 16.4 }, { 62.0, 13.0 },
-            { 64.1, 22 }, { 64.3, 18.5 }, { 65.3, 2 }
+            { 36.1, 17},
+            {47.8,11.7 },
+            {41.1,16.5 },
+            {55.5,16.4 },
+            {47.9,18 },
+            {62.0,13.0 },
+            {47,18.5 },
+            {64.1,22 },
+            { 49.8,22 },
+            {64.3,18.5 },
+            {48.5,21 },
+            {65.3,21 }
         };
 
         public double[,] normalisation(double[,]tableau)
@@ -47,8 +54,9 @@ namespace Projet_IA_Partie2
         // sorties tests
         static int[] outputs = new int[]
         {
-            1,1,1,1,1,1,
-            0,0,0,0,0,0
+            1,0,1,0,1,0,
+            1,0,1,0,1,0
+
         };
 
         public Perceptron()
@@ -72,14 +80,16 @@ namespace Projet_IA_Partie2
 
         public int CalculeSortie(double[] poids,double x, double y)
         {
-            double somme = x * poids[0]*coeff + y * poids[1]*coeff +biais*poids[2];
+            double somme = x * poids[0] + y * poids[1] +biais*poids[2];
             somme = Seuillage(somme);
             return (somme >= seuil) ? 1 : 0;
          
         }
 
-        public void Traitement()
+        public void Traitement(int nb)
         {
+
+            int iteration = 0;
             double[,] inputsNorm = normalisation(inputs);
 
             // initialisation des poids
@@ -103,7 +113,7 @@ namespace Projet_IA_Partie2
                     {                       
                         for (int j = 0; j < 2; j++)
                         {
-                            poids[j] += inputsNorm[i, j];
+                            poids[j] += coeff*inputsNorm[i, j];
                         }
                         nbErreurs++;
                     }
@@ -111,14 +121,14 @@ namespace Projet_IA_Partie2
                     {
                         for (int k = 0; k < 2; k++)
                         {
-                            poids[k] -= inputsNorm[i, k];
+                            poids[k] -= coeff* inputsNorm[i, k];
                         }
                         nbErreurs++;
                     }
                     iteration++;
                 }
                 
-            } while (iteration < 1000);
+            } while (nbErreurs != 0 &&  iteration < nb);
 
         }
     }

@@ -19,11 +19,17 @@ namespace Projet_IA_Partie2
 
         private void lancer_simulation_Click(object sender, EventArgs e)
         {
+            int nb = Convert.ToInt32( numericUpDown1.Value);
             Perceptron p = new Perceptron();
-            p.Traitement();
+            p.Traitement(nb);
             textBoxX.Text = p.GetPoids(0).ToString();
             textBoxY.Text = p.GetPoids(1).ToString();
             tb_nbErreurs.Text = p.nbErreurs.ToString();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
