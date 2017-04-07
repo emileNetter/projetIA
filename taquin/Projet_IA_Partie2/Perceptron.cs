@@ -19,7 +19,7 @@ namespace Projet_IA_Partie2
         int nbpoids = 3;
         int iteration = 0;
         int seuil = 1;
-        double coeff = 0.2;
+        double coeff = 0.01;
 
         //entrees tests
         static double[,] inputs = new double[,]
@@ -103,7 +103,7 @@ namespace Projet_IA_Partie2
                     iteration++;
                 }
                 
-            } while (iteration < 500);
+            } while (iteration < 1000);
 
         }
     }
