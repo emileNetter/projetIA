@@ -98,15 +98,15 @@
             this.textBox_iterations.Name = "textBox_iterations";
             this.textBox_iterations.Size = new System.Drawing.Size(100, 20);
             this.textBox_iterations.TabIndex = 6;
-            this.textBox_iterations.Text = "500";
+            this.textBox_iterations.Text = "1";
             // 
             // pictureBox_test
             // 
             this.pictureBox_test.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox_test.Image = global::Classification.Properties.Resources.img;
-            this.pictureBox_test.Location = new System.Drawing.Point(315, 36);
+            this.pictureBox_test.Location = new System.Drawing.Point(270, 1);
             this.pictureBox_test.Name = "pictureBox_test";
-            this.pictureBox_test.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox_test.Size = new System.Drawing.Size(800, 800);
             this.pictureBox_test.TabIndex = 7;
             this.pictureBox_test.TabStop = false;
             // 
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1184, 741);
             this.Controls.Add(this.pictureBox_test);
             this.Controls.Add(this.textBox_iterations);
             this.Controls.Add(this.textBox_coeff);

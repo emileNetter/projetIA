@@ -88,12 +88,36 @@ namespace Classification
             lsortiesobtenues = reseau.ResultatsEnSortie(lvecteursentrees);
 
             // Affichage
-            for (x = 0; x < 400; x++)
+            for (x = 0; x < lsortiesobtenues.Count; x++)
             {
+                int r = x % 800; //reste de la div (correspond au x de l'mg)
+                int ligne = x / 800; // correspond au numéro de ligne de l'img 
                 z2 = lsortiesobtenues[x];
-                z = (int)(z2 * 400);
-                bmp.SetPixel(x, bmp.Height - z - 1, Color.Yellow);
+                z = (int)(z2 * 800);
+                if (z > 400)
+                {
+                    bmp.SetPixel(r , ligne, Color.Blue); //Classe A en bleu
+                }
+                else
+                {
+                    bmp.SetPixel(r, ligne, Color.Yellow);
+                }
+                
                 // z2 valeur attendu entre 0 et 1 ; conversion pour z qui est retenu pour l'affichage
+
+            }
+
+            // oncolorie les pixels de l'image avec les données du tableau 
+            for(int k=0;k<p.inputs.GetLength(0);k++)
+            {
+                if (k < 1500)
+                {
+                    bmp.SetPixel(Convert.ToInt32(p.inputs[k, 1]), Convert.ToInt32(p.inputs[k, 2]), Color.White);
+                }
+                else
+                {
+                    bmp.SetPixel(Convert.ToInt32(p.inputs[k, 1]), Convert.ToInt32(p.inputs[k, 2]), Color.Black);
+                }
 
             }
 
