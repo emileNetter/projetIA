@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.textBoxnbentrees = new System.Windows.Forms.TextBox();
             this.textBoxnbcouches = new System.Windows.Forms.TextBox();
             this.textBoxnbneurcouche = new System.Windows.Forms.TextBox();
@@ -68,7 +67,6 @@
             this.button1.Text = "Init réseau";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-        
             // 
             // textBoxnbentrees
             // 
@@ -86,7 +84,7 @@
             this.textBoxnbcouches.Name = "textBoxnbcouches";
             this.textBoxnbcouches.Size = new System.Drawing.Size(76, 20);
             this.textBoxnbcouches.TabIndex = 4;
-            this.textBoxnbcouches.Text = "3";
+            this.textBoxnbcouches.Text = "10";
             // 
             // textBoxnbneurcouche
             // 
@@ -95,7 +93,7 @@
             this.textBoxnbneurcouche.Name = "textBoxnbneurcouche";
             this.textBoxnbneurcouche.Size = new System.Drawing.Size(76, 20);
             this.textBoxnbneurcouche.TabIndex = 5;
-            this.textBoxnbneurcouche.Text = "6";
+            this.textBoxnbneurcouche.Text = "20";
             // 
             // label1
             // 
@@ -326,7 +324,6 @@
             this.Controls.Add(this.textBoxnbcouches);
             this.Controls.Add(this.textBoxnbentrees);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -342,7 +339,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox textBoxnbentrees;
         private System.Windows.Forms.TextBox textBoxnbcouches;

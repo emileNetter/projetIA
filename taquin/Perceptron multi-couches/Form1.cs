@@ -117,22 +117,37 @@ namespace WindowsFormsApplication1
             lsortiesobtenues = reseau.ResultatsEnSortie(lvecteursentrees);
 
             // Affichage
+            List<double> listIntensite = new List<double>();
+            List<double> listIntensiteCorrigee = new List<double>();
+
             for (x = 0; x < tabValeurs.GetLength(0); x++)
             {
                 z2 = lsortiesobtenues[x];
-                int intensite = Convert.ToInt32(Math.Floor(z2* 255));
+                listIntensite.Add(z2);                       
 
-                int abs = Convert.ToInt32(0.4 * tabValeurs[x, 0]); // a corriger en fonction du max de datasetregression !
-                int ord = Convert.ToInt32(0.4 * tabValeurs[x, 1]);
-                bmp.SetPixel(abs,ord, Color.FromArgb(intensite, intensite, intensite));
+            }
+            double min = listIntensite[0];
+            double max = listIntensite[0];
+            // On recherche le minimum et le maximum 
+            foreach(double element in listIntensite)
+            {
+                if (element < min) min = element;
+                else max = element;
+            }
 
+            for (int m=0; m<tabValeurs.GetLength(0);m++)
+            {
+                int abs = Convert.ToInt32(0.4 * tabValeurs[m, 0]); // a corriger en fonction du max de datasetregression !
+                int ord = Convert.ToInt32(0.4 * tabValeurs[m, 1]);
+                double intensite = Remap(listIntensite[m], min, max, 0, 255);
+                int i = Convert.ToInt32(Math.Floor(intensite));
+                bmp.SetPixel(abs, ord, Color.FromArgb(i, i, i));
             }
 
         }
 
         private void button4_Click(object sender, EventArgs e) // bouton apprentissage 2
         {
-            button2.Enabled = false;
             // En entrée on a une liste de k valeurs réelles correspondant aux k neurones
             // de la 1ère couche dite couche des entrées ou entrées tout court
             // On dispose en général d'une base de données de vecteurs d'entrées
@@ -165,6 +180,11 @@ namespace WindowsFormsApplication1
                                Convert.ToInt32(textBoxnbiter.Text));
             Tests(g, bmp);
             pictureBox1.Invalidate();
+        }
+
+        public double Remap(this double value, double from1, double to1, double from2, double to2)
+        {
+            return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
         }
     }
 }
