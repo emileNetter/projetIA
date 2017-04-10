@@ -11,6 +11,7 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -139,7 +140,7 @@ namespace WindowsFormsApplication1
             {
                 int abs = Convert.ToInt32(0.4 * tabValeurs[m, 0]); // a corriger en fonction du max de datasetregression !
                 int ord = Convert.ToInt32(0.4 * tabValeurs[m, 1]);
-                double intensite = Remap(listIntensite[m], min, max, 0, 255);
+                double intensite =Remap( listIntensite[m], min, max, 0, 255); // il faut maper
                 int i = Convert.ToInt32(Math.Floor(intensite));
                 bmp.SetPixel(abs, ord, Color.FromArgb(i, i, i));
             }
@@ -178,13 +179,16 @@ namespace WindowsFormsApplication1
             reseau.backprop(lvecteursentrees, lsortiesdesirees,
                                Convert.ToDouble(textBoxalpha.Text),
                                Convert.ToInt32(textBoxnbiter.Text));
-            Tests(g, bmp);
+            Tests(g, bmp2);
             pictureBox1.Invalidate();
         }
 
-        public double Remap(this double value, double from1, double to1, double from2, double to2)
-        {
-            return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
-        }
+            // Map des valeurs d'un interval sur un autre
+            public static double Remap(double value, double from1, double to1, double from2, double to2)
+            {
+                return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+            }
+        
+
     }
 }

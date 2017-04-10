@@ -82,5 +82,7 @@ namespace WindowsFormsApplication1
         public double Getdelta() { return delta; }
 
         public void ImposeSortie(double s) { sortie = s; }
+
+        
     }
 }
