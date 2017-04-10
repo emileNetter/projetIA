@@ -22,6 +22,7 @@ namespace Classification
             p = new Perceptron();
             p.InitialiseInputs();
             p.InitialiseOutputsSupervise();
+            p.NormaliseEntrees();
             reseau = new Reseau(Convert.ToInt32(textBox_caches.Text));
         }
 
@@ -36,7 +37,6 @@ namespace Classification
             List<double> lsortiesdesirees = new List<double>();
             for (int i = 0; i < p.inputs.GetLength(0); i++)
             {
-
                 List<double> vect = new List<double>();
                 vect.Add(p.inputs[i,1]);
                 vect.Add(p.inputs[i,2]);
@@ -112,11 +112,11 @@ namespace Classification
             {
                 if (k < 1500)
                 {
-                    bmp.SetPixel(Convert.ToInt32(p.inputs[k, 1]), Convert.ToInt32(p.inputs[k, 2]), Color.White);
+                    bmp.SetPixel(Convert.ToInt32(p.inputs[k, 1] *798 ), Convert.ToInt32(p.inputs[k, 2]*798), Color.White);
                 }
                 else
                 {
-                    bmp.SetPixel(Convert.ToInt32(p.inputs[k, 1]), Convert.ToInt32(p.inputs[k, 2]), Color.Black);
+                    bmp.SetPixel(Convert.ToInt32(p.inputs[k, 1]*798), Convert.ToInt32(p.inputs[k, 2]*798), Color.Black);
                 }
 
             }
