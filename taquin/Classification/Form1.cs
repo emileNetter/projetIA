@@ -16,6 +16,8 @@ namespace Classification
         Reseau reseau;
         static Graphics g;
         static Bitmap bmp;
+        static public List<Classe> listclasses = new List<Classe>();
+
         public Form1()
         {
             InitializeComponent();
@@ -62,7 +64,7 @@ namespace Classification
 
         private void Test(Graphics g , Bitmap bmp)
         {
-            int y, x, z;
+            int y, x;
             double z2;
                 
 
