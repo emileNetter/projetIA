@@ -34,14 +34,14 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.textBoxX = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_placement_alea_obj = new System.Windows.Forms.Button();
+            this.button_placement_manuel_chariot = new System.Windows.Forms.Button();
             this.btn_calcul_temps = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_placement_alea_chariot = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_ValiderPos = new System.Windows.Forms.Button();
+            this.btn_ajout_chariot = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -56,7 +56,7 @@
             this.lbCountObj = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.btnManuelObj = new System.Windows.Forms.Button();
+            this.button_placement_manuel_obj = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxXObj = new System.Windows.Forms.TextBox();
             this.btnAjoutObj = new System.Windows.Forms.Button();
@@ -143,27 +143,27 @@
             this.textBoxX.Size = new System.Drawing.Size(55, 22);
             this.textBoxX.TabIndex = 8;
             // 
-            // button2
+            // button_placement_alea_obj
             // 
-            this.button2.Location = new System.Drawing.Point(8, 358);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(165, 23);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Placement aléatoire";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button_placement_alea_obj.Location = new System.Drawing.Point(8, 358);
+            this.button_placement_alea_obj.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_placement_alea_obj.Name = "button_placement_alea_obj";
+            this.button_placement_alea_obj.Size = new System.Drawing.Size(165, 23);
+            this.button_placement_alea_obj.TabIndex = 16;
+            this.button_placement_alea_obj.Text = "Placement aléatoire";
+            this.button_placement_alea_obj.UseVisualStyleBackColor = true;
+            this.button_placement_alea_obj.Click += new System.EventHandler(this.button_placement_alea_obj_Click);
             // 
-            // button3
+            // button_placement_manuel_chariot
             // 
-            this.button3.Location = new System.Drawing.Point(264, 73);
-            this.button3.Margin = new System.Windows.Forms.Padding(5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(161, 28);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "placement manuel";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button_placement_manuel_chariot.Location = new System.Drawing.Point(264, 73);
+            this.button_placement_manuel_chariot.Margin = new System.Windows.Forms.Padding(5);
+            this.button_placement_manuel_chariot.Name = "button_placement_manuel_chariot";
+            this.button_placement_manuel_chariot.Size = new System.Drawing.Size(161, 28);
+            this.button_placement_manuel_chariot.TabIndex = 4;
+            this.button_placement_manuel_chariot.Text = "placement manuel";
+            this.button_placement_manuel_chariot.UseVisualStyleBackColor = true;
+            this.button_placement_manuel_chariot.Click += new System.EventHandler(this.button_placement_manuel_chariot_Click);
             // 
             // btn_calcul_temps
             // 
@@ -186,16 +186,16 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "y :";
             // 
-            // button1
+            // button_placement_alea_chariot
             // 
-            this.button1.Location = new System.Drawing.Point(8, 73);
-            this.button1.Margin = new System.Windows.Forms.Padding(5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(171, 28);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Placement aléatoire ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button_placement_alea_chariot.Location = new System.Drawing.Point(8, 73);
+            this.button_placement_alea_chariot.Margin = new System.Windows.Forms.Padding(5);
+            this.button_placement_alea_chariot.Name = "button_placement_alea_chariot";
+            this.button_placement_alea_chariot.Size = new System.Drawing.Size(171, 28);
+            this.button_placement_alea_chariot.TabIndex = 2;
+            this.button_placement_alea_chariot.Text = "Placement aléatoire ";
+            this.button_placement_alea_chariot.UseVisualStyleBackColor = true;
+            this.button_placement_alea_chariot.Click += new System.EventHandler(this.button_placement_alea_chariot_Click);
             // 
             // label5
             // 
@@ -216,17 +216,17 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "ou";
             // 
-            // btn_ValiderPos
+            // btn_ajout_chariot
             // 
-            this.btn_ValiderPos.Enabled = false;
-            this.btn_ValiderPos.Location = new System.Drawing.Point(302, 177);
-            this.btn_ValiderPos.Margin = new System.Windows.Forms.Padding(5);
-            this.btn_ValiderPos.Name = "btn_ValiderPos";
-            this.btn_ValiderPos.Size = new System.Drawing.Size(100, 57);
-            this.btn_ValiderPos.TabIndex = 12;
-            this.btn_ValiderPos.Text = "Ajouter Chariot";
-            this.btn_ValiderPos.UseVisualStyleBackColor = true;
-            this.btn_ValiderPos.Click += new System.EventHandler(this.btn_ValiderPos_Click);
+            this.btn_ajout_chariot.Enabled = false;
+            this.btn_ajout_chariot.Location = new System.Drawing.Point(302, 177);
+            this.btn_ajout_chariot.Margin = new System.Windows.Forms.Padding(5);
+            this.btn_ajout_chariot.Name = "btn_ajout_chariot";
+            this.btn_ajout_chariot.Size = new System.Drawing.Size(100, 57);
+            this.btn_ajout_chariot.TabIndex = 12;
+            this.btn_ajout_chariot.Text = "Ajouter Chariot";
+            this.btn_ajout_chariot.UseVisualStyleBackColor = true;
+            this.btn_ajout_chariot.Click += new System.EventHandler(this.btn_ajout_chariot_Click);
             // 
             // numericUpDown1
             // 
@@ -260,7 +260,7 @@
             this.groupBox2.Controls.Add(this.lbCountObj);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.btnManuelObj);
+            this.groupBox2.Controls.Add(this.button_placement_manuel_obj);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.textBoxXObj);
             this.groupBox2.Controls.Add(this.btnAjoutObj);
@@ -276,15 +276,15 @@
             this.groupBox2.Controls.Add(this.label_error);
             this.groupBox2.Controls.Add(this.btn_calcul_temps);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.button_placement_manuel_chariot);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button_placement_alea_obj);
+            this.groupBox2.Controls.Add(this.button_placement_alea_chariot);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.textBoxX);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.btn_ValiderPos);
+            this.groupBox2.Controls.Add(this.btn_ajout_chariot);
             this.groupBox2.Controls.Add(this.textBoxY);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.numericUpDown2);
@@ -397,16 +397,16 @@
             this.label12.TabIndex = 31;
             this.label12.Text = "ou";
             // 
-            // btnManuelObj
+            // button_placement_manuel_obj
             // 
-            this.btnManuelObj.Location = new System.Drawing.Point(261, 355);
-            this.btnManuelObj.Margin = new System.Windows.Forms.Padding(5);
-            this.btnManuelObj.Name = "btnManuelObj";
-            this.btnManuelObj.Size = new System.Drawing.Size(161, 28);
-            this.btnManuelObj.TabIndex = 30;
-            this.btnManuelObj.Text = "placement manuel";
-            this.btnManuelObj.UseVisualStyleBackColor = true;
-            this.btnManuelObj.Click += new System.EventHandler(this.btnManuelObj_Click);
+            this.button_placement_manuel_obj.Location = new System.Drawing.Point(261, 355);
+            this.button_placement_manuel_obj.Margin = new System.Windows.Forms.Padding(5);
+            this.button_placement_manuel_obj.Name = "button_placement_manuel_obj";
+            this.button_placement_manuel_obj.Size = new System.Drawing.Size(161, 28);
+            this.button_placement_manuel_obj.TabIndex = 30;
+            this.button_placement_manuel_obj.Text = "placement manuel";
+            this.button_placement_manuel_obj.UseVisualStyleBackColor = true;
+            this.button_placement_manuel_obj.Click += new System.EventHandler(this.button_placement_manuel_obj_Click);
             // 
             // label13
             // 
@@ -583,14 +583,14 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.TextBox textBoxY;
         private System.Windows.Forms.TextBox textBoxX;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_placement_alea_obj;
+        private System.Windows.Forms.Button button_placement_manuel_chariot;
         private System.Windows.Forms.Button btn_calcul_temps;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_placement_alea_chariot;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btn_ValiderPos;
+        private System.Windows.Forms.Button btn_ajout_chariot;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -607,7 +607,7 @@
         private System.Windows.Forms.Label lbCountObj;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button btnManuelObj;
+        private System.Windows.Forms.Button button_placement_manuel_obj;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBoxXObj;
         private System.Windows.Forms.Button btnAjoutObj;

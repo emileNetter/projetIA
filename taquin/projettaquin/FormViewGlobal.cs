@@ -13,92 +13,187 @@ namespace projettaquin
 {
     public partial class FormViewGlobal : Form
     {   
-        private Objet[] tabObjet = null;
-        private Chariot[] tabChariot = null;
-        private FormeRectangle[,] tabForme = null;
-        public int[,] tabEntrepot;
-        private static int compteurCharMan = 0;
-        private static int compteurObjMan = 0;
+        private Objet[] tabObjet = null;//permet de stocker les différents objets saisies dans le form
+        private Chariot[] tabChariot = null;// permet de stocker les chariots saisis dans le form
+        private FormeRectangle[,] tabForme = null;// permet de stocker les formes de la grille
+        public int[,] tabEntrepot; //on stocke les données de la grille 
+        private static int compteurCharMan = 0;// compteur du nombre de chariots choisis
+        private static int compteurObjMan = 0;// compteur du nbre d'objets choisis
 
         private static Chariot charChoisi;
         private static Objet objChoisi;
 
-        private static List<GenericNode> Lres;
-        private static List<GenericNode> TrajectoireF = new List<GenericNode>();
-        private static List<List<GenericNode>> EnsembleTrajectoiresF = new List<List<GenericNode>>();
-        List<GenericNode> bestTrajectoire = new List<GenericNode>();
+        private static List<GenericNode> Lres;//Liste finale des noeuds appartenant au chemin optimal pour récupérer l'objet
+        private static List<GenericNode> TrajectoireF = new List<GenericNode>(); // Liste des noeuds amenant à une case verte
+        private static List<List<GenericNode>> EnsembleTrajectoiresF = new List<List<GenericNode>>();// Stockage de l'ensemble des listes de noeuds amenant à une case verte
+        List<GenericNode> bestTrajectoire = new List<GenericNode>();// Liste finale des noeds appartenant au chemin optimal pour retourner sur la case verte
 
         private Objet objet;
         private Graph g;
-        private GenericNode Ninit;
-        private GenericNode Nfinal;
-        private GenericNode Nobj;
+        private GenericNode Ninit; // Noeud correspondant à la position du chariot
+        private GenericNode Nobj;//Noeud correspondant à la position de l'objet
 
-        private static List<List<GenericNode>> EnsembleTrajectoiresInit = new List<List<GenericNode>>();
+      
         
 
-        private static Boolean nodeTemps;
-
-        int hForm;
-        int lForm;
+        private static Boolean nodeTemps;//Boolean pour savoir si il s'agit d'un nodeTemps ou d'un nodeDistance. Pas meme traitement en fonction
+       
 
         public FormViewGlobal()
         {
             InitializeComponent();
-            hForm = this.Height;
-            lForm = this.Width;
             numericUpDown1.Value = 3;
+            numericUpDown2.Value = 1;
             
            
         }
 
 
-        public void setViewEntrepot()
+        public void setViewEntrepot()//fonction permettant la mise en place de la view de l'entrepot
         {
-            //Refresh();
+            Refresh();
             
             this.Height = 800;
             this.Width = 1000;
-            tabForme = new FormeRectangle[25, 25];
-            string color = "";
+            
             //Définition de la position des cases 
+            setCaseView();
+            setGrilleView(); //Definition des couleurs de la grille
+
+            
+        } 
+
+        protected override void OnPaint(PaintEventArgs e) // fonction dessinant l'ensemble de la grille et des chemins parcourus par le chariot 
+        {
+            base.OnPaint(e);
+            if (tabForme != null)
+            {
+                for (int i = 0; i < tabEntrepot.GetLength(0); i++)//Pour toute les formes dans tabForme
+                {
+                    for (int j = 0; j < tabEntrepot.GetLength(1); j++)
+                    {
+                        FormeRectangle.creationFormeColorée(tabForme[i, j], this);//On dessine la forme avec sa taille et sa couleur passée au préalable dans setGrilleView()
+                    }
+                }
+                foreach(Chariot c in tabChariot)//Pour tout les chariots on les dessine sur la grille
+                {
+                    int positionX= 25*c.posX;
+                    int positionY= 25*c.posY;
+                    FormeRectangle chariot = new FormeRectangle("black", positionX, positionY);//Un chariot est un carré noir sur la grille.
+                    FormeRectangle.creationFormeColorée(chariot, this);
+                }
+                foreach(Objet o in tabObjet)//Pour tout les objets on les dessine sur la grille
+                {
+                    int positionX = 25 * o.posX;
+                    int positionY = 25 * o.posY;
+                    FormeRectangle objet = new FormeRectangle("orange", positionX, positionY);// Un objet est un carré orange sur la grille
+                    FormeRectangle.creationFormeColorée(objet, this);
+                }
+                // Colorie le chemin du noeud initial jusqu'à l'objet
+                
+                    if (Lres != null)
+                    {
+                        foreach (GenericNode n in Lres)
+                        {
+                            int positionX = 0;
+                            int positionY = 0;
+                            if (nodeTemps)// Si on gère des nodeTemps ou des NodeDistance 
+                            {
+                                NodeTemps node = (NodeTemps)n;
+                                positionX = 25 + 25 * node.posX;
+                                positionY = 25 + 25 * node.posY;
+                            }
+                            else
+                            {
+                                NodeDistance node = (NodeDistance)n;
+                                positionX = 25 + 25 * node.posX;
+                                positionY = 25 + 25 * node.posY;
+                            }
+
+
+                            FormeRectangle objet = new FormeRectangle("red", positionX, positionY);//colorie la case de la grille correspondnat à chaque noeud en rouge; le chemin suivi par le chariot apparait tout en rouge
+                            FormeRectangle.creationFormeColorée(objet, this);
+                        //}
+                    }
+
+                   //Colore le chemin retour : de l'objet à une des cases 1 la plus proche de la grille
+                    if (bestTrajectoire != null)
+                    {
+                        foreach (GenericNode n in bestTrajectoire)
+                        {
+                            int positionX = 0;
+                            int positionY = 0;
+                            if (nodeTemps)
+                            {
+                                NodeTemps node = (NodeTemps)n;
+                                positionX = 25 + 25 * node.posX;
+                                positionY = 25 + 25 * node.posY;
+                                
+                                
+                            }
+                            else
+                            {
+                                NodeDistance node = (NodeDistance)n;
+                                positionX = 25 + 25 * node.posX;
+                                positionY = 25 + 25 * node.posY;
+                            }
+                            FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
+                            FormeRectangle.creationFormeColorée(objet, this);
+                        }
+                    }
+                }
+            }
+
+        }  
+
+      
+
+        
+
+        private void setCaseView()//Dessine les cases des abscisses et ordonnes 
+        {
             for (int i = 0; i < 26; i++)
             {
                 Label labelX = new Label();
                 Label labelY = new Label();
 
                 labelX.Parent = this;
-                labelX.Location = new Point(25*i , 0);
+                labelX.Location = new Point(25 * i, 0);
                 labelX.BorderStyle = BorderStyle.FixedSingle;
                 labelX.Text = i.ToString();
                 labelX.TextAlign = ContentAlignment.MiddleCenter;
-                labelX.Size=new Size(25,25);
+                labelX.Size = new Size(25, 25);
                 labelX.Name = "labelX" + i;
                 this.Controls.Add(labelX);
 
-               
+
                 labelY.Parent = this;
                 labelY.BorderStyle = BorderStyle.FixedSingle;
-                labelY.Location = new Point(0,25*i);
+                labelY.Location = new Point(0, 25 * i);
                 labelY.Text = i.ToString();
                 labelY.TextAlign = ContentAlignment.MiddleCenter;
-                labelY.Size = new Size(25,25);
+                labelY.Size = new Size(25, 25);
                 labelY.Name = "labelY" + i;
                 this.Controls.Add(labelY);
 
 
             }
+        }
 
-            if (tabEntrepot==null) { tabEntrepot = GenericNode.InitialiserEntrepot(); }
+        private void setGrilleView()// Dessine les cases de la grille
+        {
+            tabForme = new FormeRectangle[25, 25];
+            string color = "";
+            if (tabEntrepot == null) { tabEntrepot = GenericNode.InitialiserEntrepot(); }
             else
             {
 
-                for (int i = 0; i < tabEntrepot.GetLength(0); i++)
+                for (int i = 0; i < tabEntrepot.GetLength(0); i++)// On récupère tout les éléments du tableau et suivant les valeurs passées dans GenericNode.InitialiserEntrepot on définit la couleur correspondante à la case.
                 {
                     for (int j = 0; j < tabEntrepot.GetLength(1); j++)
                     {
-                        int positionX = 25+i*25;
-                        int positionY = 25+j*25;
+                        int positionX = 25 + i * 25;
+                        int positionY = 25 + j * 25;
                         int value = tabEntrepot[i, j];
                         switch (value)
                         {
@@ -120,110 +215,48 @@ namespace projettaquin
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        private void reinitialiserView()// On appelle cette méthode lorqu'on appuie sur un des boutons de calcul. Permet de faire disparaitre tout les boutons de base du formulaire
         {
-            base.OnPaint(e);
-            if (tabForme != null)
+
+            label_error.Visible = false;
+            groupBox2.Visible = false;
+            button_nouveau1.Visible = true;
+            if (nodeTemps)/// Si on cherche à trouve le temps le plus court, on affiche le temps total.
             {
-                for (int i = 0; i < tabEntrepot.GetLength(0); i++)
-                {
-                    for (int j = 0; j < tabEntrepot.GetLength(1); j++)
-                    {
-                        FormeRectangle.creationFormeColorée(tabForme[i, j], this);
-                    }
-                }
-                foreach(Chariot c in tabChariot)
-                {
-                    int positionX= 25*c.posX;
-                    int positionY= 25*c.posY;
-                    FormeRectangle chariot = new FormeRectangle("black", positionX, positionY);
-                    FormeRectangle.creationFormeColorée(chariot, this);
-                }
-                foreach(Objet o in tabObjet)
-                {
-                    int positionX = 25 * o.posX;
-                    int positionY = 25 * o.posY;
-                    FormeRectangle objet = new FormeRectangle("orange", positionX, positionY);
-                    FormeRectangle.creationFormeColorée(objet, this);
-                }
-                // Colorie le chemin du noeud initial jusqu'à l'objet
-                foreach (List<GenericNode> Lres in EnsembleTrajectoiresInit)
-                {
-
-
-                    if (Lres != null)
-                    {
-                        foreach (GenericNode n in Lres)
-                        {
-                            int positionX = 0;
-                            int positionY = 0;
-                            if (nodeTemps)
-                            {
-                                NodeTemps node = (NodeTemps)n;
-                                positionX = 25 + 25 * node.posX;
-                                positionY = 25 + 25 * node.posY;
-                            }
-                            else
-                            {
-                                NodeDistance node = (NodeDistance)n;
-                                positionX = 25 + 25 * node.posX;
-                                positionY = 25 + 25 * node.posY;
-                            }
-
-
-                            FormeRectangle objet = new FormeRectangle("red", positionX, positionY);
-                            FormeRectangle.creationFormeColorée(objet, this);
-                        }
-                    }
-                    if (bestTrajectoire != null)
-                    {
-                        foreach (GenericNode n in bestTrajectoire)
-                        {
-                            if (n is NodeDistance)
-                            {
-                                NodeDistance node = (NodeDistance)n;
-                                int positionX = 25 + 25 * node.posX;
-                                int positionY = 25 + 25 * node.posY;
-                                FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
-                                FormeRectangle.creationFormeColorée(objet, this);
-                            }
-                            else
-                            {
-                                NodeTemps node = (NodeTemps)n;
-                                int positionX = 25 + 25 * node.posX;
-                                int positionY = 25 + 25 * node.posY;
-                                FormeRectangle objet = new FormeRectangle("purple", positionX, positionY);
-                                FormeRectangle.creationFormeColorée(objet, this);
-                            }
-                        }
-                    }
-                }
+                label17.Visible = true;
+                lbTimeTot.Visible = true;
             }
+        }
 
-        }  
+        private double CalculTempsTot()//Calcul du temps total 
+        {
+            
+            int b = bestTrajectoire.Count();
+            double TempsTot = bestTrajectoire[b-1].Cout_Total+ objet.hauteur * 2 + 10;//On récupère le temps total mis(stocké sur le dernier noeud de la liste) puis on y ajoute le temps du retour, puis le temps mis pour récupérer l'objet
+            return TempsTot;
+        }
 
-      
 
-        private void button3_Click(object sender, EventArgs e) // Bouton placement manuel chariot
+        private void button_placement_manuel_chariot_Click(object sender, EventArgs e) //Traitement Bouton placement manuel chariot
         {
             textBoxPosChar.Clear();
             listBoxChar.Items.Clear();
             textBoxX.Enabled = true;
             textBoxY.Enabled = true;
-            btn_ValiderPos.Enabled = true;
+            btn_ajout_chariot.Enabled = true;
             label8.Visible = true;
             countNbCharMan.Visible = true;
             btn_calcul_temps.Enabled = false;
             btn_calcul_distance.Enabled = false;
-            countNbCharMan.Text = (compteurCharMan+1).ToString();
+            countNbCharMan.Text = (compteurCharMan + 1).ToString();
             tabEntrepot = GenericNode.InitialiserEntrepot(); // On initialise le tableau "source"
             int NBC = Convert.ToInt32(numericUpDown1.Value);
-            tabChariot = new Chariot[NBC];
+            tabChariot = new Chariot[NBC];//On définit le nombre de chariot à rentrer
 
 
         }
 
-        private void button1_Click(object sender, EventArgs e) // Bonton placement aléaoire chariot
+        private void button_placement_alea_chariot_Click(object sender, EventArgs e) // Bonton placement aléaoire chariot
         {
             textBoxPosChar.Clear();
             btn_calcul_temps.Enabled = true;
@@ -233,164 +266,120 @@ namespace projettaquin
 
             Random rd = new Random();
             int NBC = Convert.ToInt32(numericUpDown1.Value);
-            tabChariot = new Chariot[NBC];
+            tabChariot = new Chariot[NBC];//On initialise le tableau avec la taille de NBC 
 
             for (int i = 0; i < tabChariot.Length; i++)
             {
                 int posX = rd.Next(1, 25);
                 int posY = rd.Next(1, 25);
-                while ( GenericNode.tabEntrepot[posX-1,posY-1] < 0) // -1 car le tableau est décalé
+                //On définit des position aléatoires tant que les valeurs correspondantes aux positions ne sont pas égales à 0 : un chariot ne doit pas être sur un obstacle 
+                while (GenericNode.tabEntrepot[posX - 1, posY - 1] < 0) // -1 car le tableau est décalé
                 {
                     posX = rd.Next(1, 25);
                     posY = rd.Next(1, 25);
                 }
-                tabChariot[i] = new Chariot(posX, posY);
-                GenericNode.tabEntrepot[posX-1, posY-1] = -1; //on utilise le tab du Node distance !
+                tabChariot[i] = new Chariot(posX, posY);//On crée un nouveau chariot que l'on stocke dans le tableau
+                GenericNode.tabEntrepot[posX - 1, posY - 1] = -1; //on remplace la valeur dans notre tableau global de l'entrepot correspondante aux positions du chariot  par -1 pour pas qu'un chariot puisse apparaitre sur un chariot prédéfini et que tout chariot soit considéré comme un obstacle
             }
-           
+
             foreach (Chariot c in tabChariot)
             {
-                listBoxChar.Items.Add(c);
+                listBoxChar.Items.Add(c);//On ajoute chaque chariot à la listBox pour pouvoir par la suite en séléctionner un.
             }
         }
 
         private void btn_valider_Click(object sender, EventArgs e) // Methode pour bouton Calcul
         {
 
-           // if (textBoxPosChar.Text != "" && tbObjChois.Text != "")
-           // {
+
+            if (objChoisi != null & charChoisi != null)
+            {
 
 
-
-                objet = new Objet(objChoisi.posX - 1, objChoisi.posY - 1, objChoisi.orientation, objChoisi.hauteur);
+                objet = new Objet(objChoisi.posX - 1, objChoisi.posY - 1, objChoisi.orientation, objChoisi.hauteur);//On définit l'objet avec les valeurs récupérés dans l'éditText (objet choisi)
                 g = new Graph(objet);
 
-                if (sender.Equals(btn_calcul_distance))
+                if (sender.Equals(btn_calcul_distance))//Si on clique sur le bouton calcul distance
                 {
-                    /* Ninit = new NodeDistance(charChoisi.posX - 1, charChoisi.posY - 1); 
-                     nodeTemps = false;*/
-                    foreach (Chariot c in tabChariot)
-                    {
-                        Ninit = new NodeDistance(c.posX - 1, c.posY - 1);
-                        Lres = g.RechercheSolutionAEtoile(Ninit);
-                        EnsembleTrajectoiresInit.Add(Lres);
-
+                    Ninit = new NodeDistance(charChoisi.posX - 1, charChoisi.posY - 1); // On définit la position du chariot choisi comme la position Initiale d'un Noeud distance
+                    nodeTemps = false;
 
                 }
-                }
-                else if(sender.Equals(btn_calcul_temps))
+                else if (sender.Equals(btn_calcul_temps))
                 {
-                Ninit = new NodeTemps(charChoisi.posX - 1, charChoisi.posY - 1, new Point(0, 0));
-                nodeTemps = true;
+                    Ninit = new NodeTemps(charChoisi.posX - 1, charChoisi.posY - 1, new Point(0, 0));
+                    nodeTemps = true;
                 }
-               /* else
-                {
-                    foreach (Chariot c in tabChariot)
-                    {
-                        Ninit = new NodeDistance(c.posX - 1, c.posY - 1);
-                        Lres = g.RechercheSolutionAEtoile(Ninit);
 
+                Lres = g.RechercheSolutionAEtoile(Ninit);//On calcule la liste des noeuds répondant à la distance la plus courte ou au temps le plus court
 
-                    }
-                }*/
-                //Lres = g.RechercheSolutionAEtoile(Ninit);
-
-                if(nodeTemps)// On  le trajet final si c'est un calcul de temps 
+                if (nodeTemps)// Nobj sera un nodeTemps, on va chercher à avoir le cout en temps 
                 {
                     // Trajet vers la zone finale
                     Nobj = (NodeTemps)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
-
-                    List<Objet> zoneFinale = new List<Objet>(tabEntrepot.GetLength(0));
-                    for (int k = 0; k < tabEntrepot.GetLength(0) - 1; k++)
-                    {
-                        Objet o = new Objet(0, k - 1, Objet.Orientation.Sud, 0);
-                        zoneFinale.Add(o);
-                    }
-
-                    foreach (Objet o in zoneFinale)
-                    {
-                        Graph g = new Graph(o);
-                        TrajectoireF = g.RechercheSolutionAEtoile(Nobj);
-                        EnsembleTrajectoiresF.Add(TrajectoireF);
-                    }
-
-                    bestTrajectoire = EnsembleTrajectoiresF[0];
-                    double cout = 1000000;
-                    foreach (List<GenericNode> l in EnsembleTrajectoiresF)
-                    {
-                        double c = l[l.Count - 1].Cout_Total;
-                        if (c < cout)
-                        {
-                            cout = c;
-                            bestTrajectoire = l;
-                        }
-
-
-                    }
-
-
-                    lbTimeTot.Text=CalculTempsTot().ToString()+" secondes" ;
-               }
-
-                else // c'est un calcul de distance (au plus court)
-                {
-                    // Trajet vers la zone finale
-                    Nobj = (NodeDistance)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
-
-                    List<Objet> zoneFinale = new List<Objet>(tabEntrepot.GetLength(0));
-                    for (int k = 0; k < tabEntrepot.GetLength(0) - 1; k++)
-                    {
-                        Objet o = new Objet(0, k - 1, Objet.Orientation.Sud, 0);
-                        zoneFinale.Add(o);
-                    }
-
-                    foreach (Objet o in zoneFinale)
-                    {
-                        Graph g = new Graph(o);
-                        TrajectoireF = g.RechercheSolutionAEtoile(Nobj);
-                        EnsembleTrajectoiresF.Add(TrajectoireF);
-                    }
-
-                    bestTrajectoire = EnsembleTrajectoiresF[0];
-                    double cout = 1000000;
-                    foreach (List<GenericNode> l in EnsembleTrajectoiresF)
-                    {
-                        double c = l[l.Count - 1].Cout_Total;
-                        if (c < cout)
-                        {
-                            cout = c;
-                            bestTrajectoire = l;
-                        }
-
-
-                    }
-
-                    lbTimeTot.Text = CalculTempsTot().ToString() + " secondes";
                 }
+                else//Nobj sera un nodeDistance, on va chercher à avoir le cout en distance
+                {
+                    Nobj = (NodeDistance)Lres[Lres.Count - 1]; //Noeud sur lequel est le chariot lorsqu'il prend l'objet
+                }
+
+                List<Objet> zoneFinale = new List<Objet>(tabEntrepot.GetLength(0));
+                for (int k = 0; k < tabEntrepot.GetLength(0) - 1; k++)
+                {
+                    Objet o = new Objet(0, k - 1, Objet.Orientation.Sud, 0);//On imagine un objet correspondant à la ligne 1.
+                    zoneFinale.Add(o);//On ajoute à la liste des zones finales.
+                }
+
+                foreach (Objet o in zoneFinale)
+                {
+                    Graph g = new Graph(o);
+                    TrajectoireF = g.RechercheSolutionAEtoile(Nobj);//On stocke la liste de noeuds correspondant à chaque chemin pour aller vers une des zones finales et on le stocke dans la liste
+                    EnsembleTrajectoiresF.Add(TrajectoireF);//On ajoute cette trajectoire à l'ensemble des trajectoires
+                }
+
+                bestTrajectoire = EnsembleTrajectoiresF[0];
+                double cout = 1000000;
+                foreach (List<GenericNode> l in EnsembleTrajectoiresF)
+                {
+                    double c = l[l.Count - 1].Cout_Total;// Pour chaque liste de chemins dans l'ensemble des trajectoires, on récupère le cout total.
+                    if (c < cout)
+                    {
+                        cout = c;
+                        bestTrajectoire = l;//On garde la trajectoire où le cout est le plus faible
+                    }
+
+
+                }
+
+                if (nodeTemps)
+                {
+                    lbTimeTot.Text = CalculTempsTot().ToString() + " secondes";// On appelle la méthode pour calculer le temps et on l'affiche dans un label.
+                }
+
 
                 if (Lres.Count > 1)
                 {
                     Lres.RemoveAt(0); //On supprime le premier noeud correspondant à la position du chariot
                 }
-                reinitialiserView();
-                setViewEntrepot();
+                reinitialiserView();// On reinitialise la View
+                setViewEntrepot();// On dessine la grille
 
 
-                
 
-                    
-                    
-                //}
-            /*else
+
+
+            }
+
+            else
             {
                 label_error.Visible = true;
-            }*/
+            }
 
-            
+
 
         }
 
-        
+
         private void listBoxChar_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBoxChar.SelectedItem != null)
@@ -400,9 +389,9 @@ namespace projettaquin
                 charChoisi = (Chariot)listBoxChar.SelectedItem;
             }
 
-        }
+        }// Methode pour sélection du chariot dans la listBox
 
-        private void btn_ValiderPos_Click(object sender, EventArgs e) // bouton AjoutChariot
+        private void btn_ajout_chariot_Click(object sender, EventArgs e) // bouton AjoutChariot
         {
             compteurCharMan++;
             Chariot c = new Chariot(int.Parse(textBoxX.Text), int.Parse(textBoxY.Text));
@@ -416,7 +405,7 @@ namespace projettaquin
             {
                 btn_calcul_temps.Enabled = true;
                 btn_calcul_distance.Enabled = true;
-                btn_ValiderPos.Enabled = false;
+                btn_ajout_chariot.Enabled = false;
                 textBoxX.Enabled = false;
                 textBoxY.Enabled = false;
                 countNbCharMan.Text = (compteurCharMan).ToString();
@@ -424,7 +413,7 @@ namespace projettaquin
 
         }
 
-        private void button2_Click(object sender, EventArgs e) // placement aléatoire des objets
+        private void button_placement_alea_obj_Click(object sender, EventArgs e) // placement aléatoire des objets
         {
             tbObjChois.Clear();
             listBoxObj.Items.Clear();
@@ -455,20 +444,6 @@ namespace projettaquin
             }
         }
 
-
-        private void reinitialiserView()
-        {
-            
-            label_error.Visible = false;
-            groupBox2.Visible = false;
-            button_nouveau1.Visible = true;
-            if(nodeTemps)
-            {
-                label17.Visible = true;
-                lbTimeTot.Visible = true;
-            }
-        }
-
         private void button_nouveau_Click(object sender, EventArgs e)
         {
             listBoxChar.Items.Clear();
@@ -476,6 +451,10 @@ namespace projettaquin
             listBoxObj.Items.Clear();
             tbObjChois.Clear();
             tabEntrepot = GenericNode.InitialiserEntrepot();
+            GenericNode Ninit; // Noeud correspondant à la position du chariot
+            GenericNode Nobj;//Noeud correspondant à la position de l'objet
+            List<GenericNode> Lres;
+            List<GenericNode> bestTrajectoire;
             label_error.Visible = false;
             groupBox2.Visible = true;
             button_nouveau1.Visible = false;
@@ -488,14 +467,7 @@ namespace projettaquin
             label17.Visible = false;
             lbTimeTot.Visible = false;
 
-        }
-
-        public double CalculTempsTot()
-        {
-            int a = Lres.Count();
-            double TempsTot = Lres[a-1].Cout_Total + objet.hauteur * 2 + 10;
-            return TempsTot;
-        }
+        }// Bouton pour pouvoir faire une nouvelle simulation
 
         private void listBoxObj_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -506,7 +478,7 @@ namespace projettaquin
                 label_error.Visible = false;
             }
             
-        }
+        }// Methode pour séléection de l'objet dans la listBox
 
         private void btnAjoutObj_Click(object sender, EventArgs e)
         {
@@ -544,7 +516,7 @@ namespace projettaquin
 
         } // bouton ajout objet manuel
 
-        private void btnManuelObj_Click(object sender, EventArgs e)//bouton placement objet manuel
+        private void button_placement_manuel_obj_Click(object sender, EventArgs e)//bouton placement objet manuel
         {
             tbObjChois.Clear();
             btnAjoutObj.Enabled = true;
@@ -565,5 +537,7 @@ namespace projettaquin
             int NBC = Convert.ToInt32(numericUpDown2.Value);
             tabObjet = new Objet[NBC];
         }
+
+       
     }
 }
