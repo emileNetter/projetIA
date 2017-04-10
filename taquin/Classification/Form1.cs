@@ -23,11 +23,11 @@ namespace Classification
             p.InitialiseInputs();
             p.InitialiseOutputsSupervise();
             p.NormaliseEntrees();
-            reseau = new Reseau(Convert.ToInt32(textBox_caches.Text));
         }
 
         private void button_initialise_Click(object sender, EventArgs e)
         {
+            reseau = new Reseau(Convert.ToInt32(textBox_caches.Text));
             List<List<double>> lvecteursentrees = new List<List<double>>();
 
             // On a 1 seule sortie associée à chaque vecteur d'entrée
@@ -78,8 +78,8 @@ namespace Classification
                 for(x=0; x < bmp.Width; x++)
                 {
                     List<double> vect = new List<double>();
-                    vect.Add(x); // Une seule valeur ici pour ce vecteur 
-                    vect.Add(y);
+                    vect.Add(x/800.0); // Une seule valeur ici pour ce vecteur 
+                    vect.Add(y/800.0);
                     lvecteursentrees.Add(vect);
                 }                               
                 
@@ -96,7 +96,7 @@ namespace Classification
                 z = (int)(z2 * 800);
                 if (z > 400)
                 {
-                    bmp.SetPixel(r , ligne, Color.Red); //Classe A en bleu
+                    bmp.SetPixel(r , ligne, Color.Blue); //Classe A en bleu
                 }
                 else
                 {
