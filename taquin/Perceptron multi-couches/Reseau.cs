@@ -170,10 +170,11 @@ namespace WindowsFormsApplication1
         {
             for (int numexemple = 0; numexemple < lvecteursentrees.Count; numexemple++)
             {
-                // les entrées sont affectées aux sorties des neurones de la couche 0
-                for (i = 0; i < lvecteursentrees[0].Count; i++)
-                    tabcouches[0][i].ImposeSortie(lvecteursentrees[numexemple][i]);
+                    // les entrées sont affectées aux sorties des neurones de la couche 0
+                    for (i = 0; i < lvecteursentrees[0].Count; i++)
+                    { tabcouches[0][i].ImposeSortie(lvecteursentrees[numexemple][i]); }
 
+                    int test = lvecteursentrees[0].Count;
                 // On impose ensuite une constante sur le dernier neurone d'entrée
                 neur = tabcouches[0][lvecteursentrees[0].Count];
                 neur.ImposeSortie(1);

@@ -18,6 +18,7 @@ namespace WindowsFormsApplication1
 
         static Graphics g;
         static Bitmap bmp;
+        static Bitmap bmp2;
         Random rnd = new Random();
         static double[,] tabValeurs = new double[3000, 3];
         Reseau reseau;
@@ -52,43 +53,12 @@ namespace WindowsFormsApplication1
                                         Convert.ToInt32(textBoxnbneurcouche.Text));
         }
 
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            // En entrée on a une liste de k valeurs réelles correspondant aux k neurones
-            // de la 1ère couche dite couche des entrées ou entrées tout court
-            // On dispose en général d'une base de données de vecteurs d'entrées
-            // c'est pour cela qu'on a une liste de vecteurs, donc une liste de liste 
-            List<List<double>> lvecteursentrees = new List<List<double>>();
-
-            // On a 1 seule sortie associée à chaque vecteur d'entrée
-            // donc on a seulement 1 liste de réels
-            // Attention, on suppose ici que le nième élément de cette liste est
-            // la sortie désirée du nième vecteur de levecteurentrees
-            List<double> lsortiesdesirees = new List<double>();
-            for (int i = 0; i < 1000; i++)
-            {
-                List<double> vect = new List<double>();
-                double x = rnd.NextDouble();
-                vect.Add(x); // Une seule valeur ici pour ce vecteur 
-                             // EN général, un vecteur sera récupéré dans un fichier de données
-                lvecteursentrees.Add(vect);
-                // Pour la sortie, idem, en général, on la récupère dans le fichier 
-                // de données; ici on la crée de toute pièce à partir d'une fonction
-                // modèle
-                lsortiesdesirees.Add(fonctionmodele(x));
-            }
-
-            reseau.backprop(lvecteursentrees, lsortiesdesirees,
-                               Convert.ToDouble(textBoxalpha.Text),
-                               Convert.ToInt32(textBoxnbiter.Text));
-            Tests(g, bmp);
-            pictureBox1.Invalidate();
-        }
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
             bmp = (Bitmap)pictureBox1.Image;
+            bmp2 = (Bitmap)pictureBox2.Image;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -98,14 +68,6 @@ namespace WindowsFormsApplication1
                                        Convert.ToInt32(textBoxnumneur.Text),
                                        listBox1);
 
-        }
-        /*****************************************************************/
-        // Attention, la fonction à apprendre doit fournir des valeurs entre 0 et 1 !!!
-        double fonctionmodele(double x)
-        {
-            // return Math.Sin(x * 20) / 2.5 + 0.5;
-            if (x < 0.2 || x > 0.8) return 0.8;
-            else return 0.2;
         }
 
         public void TestsTriplet(Graphics g, Bitmap bmp, double[,] tab)
@@ -127,11 +89,12 @@ namespace WindowsFormsApplication1
         /**********************************************************************/
         public void Tests(Graphics g, Bitmap bmp)
         {
-            int x, z, zdesire;
-            double x2, z2;
+            int x, z;
+            double z2;
+            // image blanche 
             for (x = 0; x < bmp.Width; x++)
                 for (z = 0; z < bmp.Height; z++)
-                    bmp.SetPixel(x, z, Color.Black);
+                    bmp.SetPixel(x, z, Color.White);
 
             List<List<double>> lvecteursentrees = new List<List<double>>();
             List<double> lsortiesdesirees = new List<double>();
@@ -141,33 +104,67 @@ namespace WindowsFormsApplication1
             // mais pour illustrer le fonctionnement, on se propose ici de tester 200 valeurs
             // de x (dimension 1 pour les entrées ici) entre 0 et 1, ramenées entre 0 et 200
             // idem pour la sortie, pour permettre l'affichage dans une image.
-            for (x = 0; x < 200; x++)
+            for (x = 0; x < tabValeurs.GetLength(0); x++)
             {
-                x2 = x / 200.0;
                 // Initialisation des activations  ai correspondant aux entrées xi
                 // Le premier neurone est une constante égale à 1
                 List<double> vect = new List<double>();
-                vect.Add(x2); // Une seule valeur ici pour ce vecteur 
+                vect.Add(tabValeurs[x,0]); // Une seule valeur ici pour ce vecteur
+                vect.Add(tabValeurs[x, 1]);
                 lvecteursentrees.Add(vect);
-                lsortiesdesirees.Add(fonctionmodele(x2));
             }
 
             lsortiesobtenues = reseau.ResultatsEnSortie(lvecteursentrees);
 
             // Affichage
-            for (x = 0; x < 200; x++)
+            for (x = 0; x < tabValeurs.GetLength(0); x++)
             {
                 z2 = lsortiesobtenues[x];
+                int intensite = Convert.ToInt32(Math.Floor(z2* 255));
 
-                // z2 valeur attendu entre 0 et 1 ; conversion pour z qui est retenu pour l'affichage
-                z = (int)(z2 * 200);
-                zdesire = (int)(lsortiesdesirees[x] * 200);
-                bmp.SetPixel(x, bmp.Height - z - 1, Color.Yellow);
+                int abs = Convert.ToInt32(0.4 * tabValeurs[x, 0]); // a corriger en fonction du max de datasetregression !
+                int ord = Convert.ToInt32(0.4 * tabValeurs[x, 1]);
+                bmp.SetPixel(abs,ord, Color.FromArgb(intensite, intensite, intensite));
 
-                bmp.SetPixel(x, bmp.Height - zdesire - 1, Color.White);
             }
 
         }
 
+        private void button4_Click(object sender, EventArgs e) // bouton apprentissage 2
+        {
+            button2.Enabled = false;
+            // En entrée on a une liste de k valeurs réelles correspondant aux k neurones
+            // de la 1ère couche dite couche des entrées ou entrées tout court
+            // On dispose en général d'une base de données de vecteurs d'entrées
+            // c'est pour cela qu'on a une liste de vecteurs, donc une liste de liste 
+            List<List<double>> lvecteursentrees = new List<List<double>>();
+
+            // On a 1 seule sortie associée à chaque vecteur d'entrée
+            // donc on a seulement 1 liste de réels
+            // Attention, on suppose ici que le nième élément de cette liste est
+            // la sortie désirée du nième vecteur de levecteurentrees
+            List<double> lsortiesdesirees = new List<double>();
+            for (int i = 0; i < tabValeurs.GetLength(0); i++)
+            {
+                double x =(tabValeurs[i, 0])/500;
+                double y = (tabValeurs[i, 1])/500;
+
+                List<double> vect = new List<double>();
+
+                vect.Add(x); vect.Add(y); // deux valeurs dans notre cas         
+                // EN général, un vecteur sera récupéré dans un fichier de données
+                lvecteursentrees.Add(vect);
+                // Pour la sortie, idem, en général, on la récupère dans le fichier 
+                // de données; ici on la crée de toute pièce à partir d'une fonction
+                // modèle
+                lsortiesdesirees.Add(tabValeurs[i,2]);
+            }
+
+            reseau.backprop(lvecteursentrees, lsortiesdesirees,
+                               Convert.ToDouble(textBoxalpha.Text),
+                               Convert.ToInt32(textBoxnbiter.Text));
+            Tests(g, bmp);
+            pictureBox1.Invalidate();
+        }
     }
 }
