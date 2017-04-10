@@ -53,6 +53,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -67,17 +68,7 @@
             this.button1.Text = "Init réseau";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(266, 148);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 47);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "apprentissage";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+        
             // 
             // textBoxnbentrees
             // 
@@ -86,7 +77,7 @@
             this.textBoxnbentrees.Name = "textBoxnbentrees";
             this.textBoxnbentrees.Size = new System.Drawing.Size(76, 20);
             this.textBoxnbentrees.TabIndex = 3;
-            this.textBoxnbentrees.Text = "2";
+            this.textBoxnbentrees.Text = "3";
             // 
             // textBoxnbcouches
             // 
@@ -296,11 +287,22 @@
             this.pictureBox2.TabIndex = 25;
             this.pictureBox2.TabStop = false;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(266, 223);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(128, 51);
+            this.button4.TabIndex = 26;
+            this.button4.Text = "apprentissage 2";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 620);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -364,5 +366,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button button4;
     }
 }
