@@ -96,7 +96,7 @@ namespace Classification
                 z = (int)(z2 * 800);
                 if (z > 400)
                 {
-                    bmp.SetPixel(r , ligne, Color.Blue); //Classe A en bleu
+                    bmp.SetPixel(r , ligne, Color.Red); //Classe A en bleu
                 }
                 else
                 {

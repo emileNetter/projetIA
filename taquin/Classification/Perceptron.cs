@@ -15,6 +15,7 @@ namespace Classification
         public double[,] outputs = new double[3000, 1];
 
         public double maxInputs;
+        Random rnd;
 
         public Perceptron()
         {
@@ -37,6 +38,7 @@ namespace Classification
                     }
                 }
                 sr.Close();
+                RandomizeInputs();
             }
             
         } 
@@ -45,14 +47,9 @@ namespace Classification
         {
             for(int i =0; i < outputs.GetLength(0); i++)
             {
-                if (i < 1500) outputs[i, 0] = 0.9;
+                if (inputs[i,0]<1500) outputs[i, 0] = 0.9;
                 else outputs[i, 0] = 0.1;
             }
-        }
-
-        public void Supervise()
-        {
-
         }
 
         public void NormaliseEntrees()
@@ -64,13 +61,28 @@ namespace Classification
                     inputs[i, j] = inputs[i, j].Remap(0, maxInputs, 0, 1);
                 }
             }
+
+        }
+
+        private void RandomizeInputs()
+        {
+            rnd = new Random();
+            int k = 0;
+            foreach (int i in Enumerable.Range(0, 3000).OrderBy(x => rnd.Next()))
+            {
+                for(int j = 0; j < 3; j++)
+                {
+                    inputs[k, j] = inputs[i, j];
+                }
+                k++;
+            }
         }
 
     }
 
     public static class ExtensionMethods
     {
-
+        // Map des valeurs d'un interval sur un autre
         public static double Remap(this double value, double from1, double to1, double from2, double to2)
         {
             return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
