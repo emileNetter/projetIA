@@ -14,6 +14,9 @@ namespace Classification
 
         public double[,] outputs = new double[3000, 1];
 
+        public double maxInputs;
+        Random rnd;
+
         public Perceptron()
         {
 
@@ -21,6 +24,8 @@ namespace Classification
 
         public void InitialiseInputs()
         {
+            maxInputs = 0;
+           
             using(StreamReader sr = new StreamReader("datasetclassif.txt"))
             {
                 for(int i =0; i < inputs.GetLength(0); i++)
@@ -29,9 +34,11 @@ namespace Classification
                     {
                         // Read the stream to a string, and write the string to the console.
                         inputs[i,j] = Convert.ToDouble(sr.ReadLine());
+                        if (j!=0 && inputs[i, j] > maxInputs) maxInputs = inputs[i, j];
                     }
                 }
                 sr.Close();
+                RandomizeInputs();
             }
             
         } 
@@ -40,14 +47,45 @@ namespace Classification
         {
             for(int i =0; i < outputs.GetLength(0); i++)
             {
-                if (i < 1500) outputs[i, 0] = 1;
-                else outputs[i, 0] = 0;
+                if (inputs[i,0]<1500) outputs[i, 0] = 0.9;
+                else outputs[i, 0] = 0.1;
             }
         }
 
-        public void Supervise()
+        public void NormaliseEntrees()
         {
+            for (int i = 0; i < inputs.GetLength(0); i++)
+            {
+                for (int j = 1; j < inputs.GetLength(1); j++)
+                {
+                    inputs[i, j] = inputs[i, j].Remap(0, maxInputs, 0, 1);
+                }
+            }
 
+        }
+
+        private void RandomizeInputs()
+        {
+            rnd = new Random();
+            int k = 0;
+            foreach (int i in Enumerable.Range(0, 3000).OrderBy(x => rnd.Next()))
+            {
+                for(int j = 0; j < 3; j++)
+                {
+                    inputs[k, j] = inputs[i, j];
+                }
+                k++;
+            }
+        }
+
+    }
+
+    public static class ExtensionMethods
+    {
+        // Map des valeurs d'un interval sur un autre
+        public static double Remap(this double value, double from1, double to1, double from2, double to2)
+        {
+            return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
         }
 
     }

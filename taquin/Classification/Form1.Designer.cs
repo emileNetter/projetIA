@@ -98,7 +98,7 @@
             this.textBox_iterations.Name = "textBox_iterations";
             this.textBox_iterations.Size = new System.Drawing.Size(100, 20);
             this.textBox_iterations.TabIndex = 6;
-            this.textBox_iterations.Text = "1";
+            this.textBox_iterations.Text = "100";
             // 
             // pictureBox_test
             // 
