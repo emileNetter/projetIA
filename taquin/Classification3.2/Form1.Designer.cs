@@ -45,6 +45,7 @@
             this.button_initialise.TabIndex = 0;
             this.button_initialise.Text = "Initialiser les données";
             this.button_initialise.UseVisualStyleBackColor = true;
+            this.button_initialise.Click += new System.EventHandler(this.button_initialise_Click);
             // 
             // pictureBox1
             // 
