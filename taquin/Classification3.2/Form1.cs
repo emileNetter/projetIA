@@ -18,8 +18,8 @@ namespace Classification3._2
         private Graphics g;	// Objet graphique placé en global
         private Bitmap bmp;
         private Pen pen;		// Crayon placé en global
-        private int nbcol;      // nb de colonnes de la carte de Kohonen
-        private int nblignes;   // nb de lignes de la carte
+        private int nbCol;     // nb de colonnes de la carte de Kohonen
+        private int nbLignes;  // nb de lignes de la carte
 
         private double[,] inputs = new double[3000, 3];
         private double minInputs;
@@ -35,7 +35,6 @@ namespace Classification3._2
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(pictureBox1.Image);
             InitialiseInputs();
-
         }
 
         //Ecris les lignes du ficher dataset dans un tableau de 3000 lignes et 3 colonnes
@@ -82,7 +81,7 @@ namespace Classification3._2
             {
                 for (int j = 1; j < inputs.GetLength(1); j++)
                 {
-                    inputs[i, j] = inputs[i, j].Remap(minInputs, maxInputs, 0, 1);
+                    inputs[i, j] = inputs[i, j].Remap(minInputs, maxInputs, 0, 799);
                 }
             }
 
@@ -90,16 +89,126 @@ namespace Classification3._2
 
         private void InitialiseObs()
         {
-
+            lobs.Clear();
+            for (int i =0; i < inputs.GetLength(0); i++)
+            {
+                lobs.Add(new Observation(inputs[i, 1], inputs[i, 2]));
+            }
         }
 
         private void button_initialise_Click(object sender, EventArgs e)
         {
             bmp = (Bitmap)pictureBox1.Image;
             pen = new Pen(Color.White, 1);
+            nbCol = Convert.ToInt32(textBox_colonnes.Text);
+            nbLignes = Convert.ToInt32(textBox_lignes.Text);
             g.FillRectangle(pen.Brush, 0, 0, bmp.Width, bmp.Height);
+
+            // Initialisation de la liste d'Observations
+            InitialiseObs();
+
+            CAO = new CarteAutoOrg(nbLignes,nbCol,2,bmp.Width);
+            AfficheDonnees();
+            AfficheCarteSOM();
+
             pictureBox1.Refresh();
         }
+        public void AfficheDonnees()
+        {
+            for (int i = 0; i < lobs.Count; i++)
+            {
+                bmp.SetPixel(Convert.ToInt32(lobs[i].Getx()), Convert.ToInt32(lobs[i].Gety()), Color.Red);
+            }
+        }
+
+        private void AfficheCarteSOM()
+        {
+
+            int x, y;
+
+            pen.Color = Color.Blue;
+            for (int i = 0; i < nbCol; i++)
+                for (int j = 0; j < nbLignes; j++)
+                {
+                    x = Convert.ToInt32(CAO.GetNeurone(i, j).GetPoids(0));
+                    y = Convert.ToInt32(CAO.GetNeurone(i, j).GetPoids(1));
+                    g.DrawEllipse(pen, x - 2, y - 2, 4, 4);
+
+                }
+            pictureBox1.Refresh();
+        }
+
+        private void button_algoKohonen_Click(object sender, EventArgs e)
+        {
+            CAO.AlgoKohonen(lobs, Convert.ToDouble(textBox_coeff.Text));
+            pen.Color = Color.White;
+            g.FillRectangle(pen.Brush, 0, 0, bmp.Width, bmp.Height);
+            AfficheDonnees();
+            AfficheCarteSOM();
+        }
+
+        private void button_regroupement_Click(object sender, EventArgs e)
+        {
+            listclasses.Clear();
+            // Regroupement pour obtenir 6 classes
+            CAO.regroupement(lobs, 6);
+            pen.Color = Color.White;
+            g.FillRectangle(pen.Brush, 0, 0, bmp.Width, bmp.Height);
+            AfficheDonnees();
+
+            // Affichage final des 2 classes
+            int x, y;
+            pen.Color = Color.Blue;
+            foreach (Neurone n in listclasses[0].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                g.DrawEllipse(pen, x - 2, y - 2, 4, 4);
+            }
+
+            pen.Color = Color.Green;
+            foreach (Neurone n in listclasses[1].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                g.DrawEllipse(pen, x - 2, y - 2, 4, 4);
+            }
+
+            pen.Color = Color.Gray;
+            foreach (Neurone n in listclasses[2].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                g.DrawEllipse(pen, x - 2, y - 2, 4, 4);
+            }
+
+            pen.Color = Color.DeepPink;
+            foreach (Neurone n in listclasses[3].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                g.DrawEllipse(pen, x - 2, y - 2, 4, 4);
+            }
+
+            pen.Color = Color.BlueViolet;
+            foreach (Neurone n in listclasses[4].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                g.DrawEllipse(pen, x - 2, y - 2, 4, 4);
+            }
+
+            pen.Color = Color.Black;
+            foreach (Neurone n in listclasses[5].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                g.DrawEllipse(pen, x - 2, y - 2, 4, 4);
+            }
+
+            pictureBox1.Refresh();
+        }
+
     }
 
     public static class ExtensionMethods

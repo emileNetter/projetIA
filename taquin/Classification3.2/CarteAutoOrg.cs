@@ -15,9 +15,9 @@ namespace Classification3._2
         {
             this.nbcol = nbcol;
             this.nblignes = nblignes;
-            tab = new Neurone[nbcol, nblignes];
-            for (int i = 0; i < nbcol; i++)
-                for (int j = 0; j < nblignes; j++)
+            tab = new Neurone[nblignes, nbcol];
+            for (int i = 0; i < nblignes; i++)
+                for (int j = 0; j < nbcol; j++)
                 {
                     tab[i, j] = new Neurone(nbpoids, valeurmax);
                 }
@@ -36,8 +36,8 @@ namespace Classification3._2
                 double minerreur = 1000;
                 alpha = alpha - 0.00001;
                 int besti = 0; int bestj = 0;
-                for (int i = 0; i < nbcol; i++)
-                    for (int j = 0; j < nblignes; j++)
+                for (int i = 0; i < nblignes; i++)
+                    for (int j = 0; j < nbcol; j++)
                     {
                         double erreur = tab[i, j].CalculeErreur(obs);
                         if (erreur < minerreur)
@@ -50,12 +50,9 @@ namespace Classification3._2
                 //        mettre à jour les poids du neurone
                 for (int i = besti - distmax; i <= besti + distmax; i++)
                     for (int j = bestj - distmax; j <= bestj + distmax; j++)
-                        if (i >= 0 && i < nbcol &&
-                            j >= 0 && j < nblignes)
-                            tab[i, j].ModifiePoids(obs,
-
-                                alpha);
-
+                        if (i >= 0 && i < nblignes &&
+                            j >= 0 && j < nbcol)
+                            tab[i, j].ModifiePoids(obs,alpha);
             }
         }
 
@@ -63,16 +60,16 @@ namespace Classification3._2
         {
             // Recherche des neurones qui ne gagnent jamais ou presque jamais
             int[,] comptage = new int[nblignes, nbcol];
-            for (int i = 0; i < nbcol; i++)
-                for (int j = 0; j < nblignes; j++)
+            for (int i = 0; i < nblignes; i++)
+                for (int j = 0; j < nbcol; j++)
                     comptage[i, j] = 0;
 
             foreach (Observation obs in lobs)
             {
                 double minerreur = 100000;
                 int besti = 0; int bestj = 0;
-                for (int i = 0; i < nbcol; i++)
-                    for (int j = 0; j < nblignes; j++)
+                for (int i = 0; i < nblignes; i++)
+                    for (int j = 0; j <nbcol; j++)
                     {
                         double erreur = tab[i, j].CalculeErreur(obs);
                         if (erreur < minerreur)
@@ -86,8 +83,8 @@ namespace Classification3._2
 
 
             // Initialisation des classes
-            for (int i = 0; i < nbcol; i++)
-                for (int j = 0; j < nblignes; j++)
+            for (int i = 0; i < nblignes; i++)
+                for (int j = 0; j < nbcol; j++)
                     if (comptage[i, j] > 5)
                         Form1.listclasses.Add(new Classe(tab[i, j]));
 
