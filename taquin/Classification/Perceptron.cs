@@ -14,7 +14,8 @@ namespace Classification
 
         public double[,] outputs = new double[3000, 1];
 
-        public double maxInputs;
+        private double maxInputs;
+        private double minInputs;
         Random rnd;
 
         public Perceptron()
@@ -25,16 +26,18 @@ namespace Classification
         public void InitialiseInputs()
         {
             maxInputs = 0;
+            minInputs = 1000; // valeur max = 785,...
            
             using(StreamReader sr = new StreamReader("datasetclassif.txt"))
             {
-                for(int i =0; i < inputs.GetLength(0); i++)
+                for (int i = 0; i < inputs.GetLength(0); i++)
                 {
                     for (int j=0; j < inputs.GetLength(1); j++)
                     {
                         // Read the stream to a string, and write the string to the console.
                         inputs[i,j] = Convert.ToDouble(sr.ReadLine());
                         if (j!=0 && inputs[i, j] > maxInputs) maxInputs = inputs[i, j];
+                        if (j != 0 && inputs[i, j] < minInputs) minInputs = inputs[i, j];
                     }
                 }
                 sr.Close();
@@ -58,7 +61,7 @@ namespace Classification
             {
                 for (int j = 1; j < inputs.GetLength(1); j++)
                 {
-                    inputs[i, j] = inputs[i, j].Remap(0, maxInputs, 0, 1);
+                    inputs[i, j] = inputs[i, j].Remap(minInputs, maxInputs, 0, 1);
                 }
             }
 

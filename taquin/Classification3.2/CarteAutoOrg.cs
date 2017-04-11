@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Classification
+namespace Classification3._2
 {
     class CarteAutoOrg
     {

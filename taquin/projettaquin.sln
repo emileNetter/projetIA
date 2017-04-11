@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "projettaquin", "projettaquin\projettaquin.csproj", "{2D064FDA-009D-482D-B99E-9AABD9D89A47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet_IA_Partie2", "Projet_IA_Partie2\Projet_IA_Partie2.csproj", "{BCBC456F-3390-44EB-8EAA-39746798D547}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classification", "Classification\Classification.csproj", "{C3E93913-8AFE-4CF8-A695-2D7A9BDE9282}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classification3.1", "Classification\Classification3.1.csproj", "{C3E93913-8AFE-4CF8-A695-2D7A9BDE9282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perceptron multi-couches", "Perceptron multi-couches\Perceptron multi-couches.csproj", "{29D7FC19-6BA9-494C-9369-9BBE41D13880}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classification3.2", "Classification3.2\Classification3.2.csproj", "{B9E9BA3E-6D13-4ED4-81FF-A7034BF1B301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{29D7FC19-6BA9-494C-9369-9BBE41D13880}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D7FC19-6BA9-494C-9369-9BBE41D13880}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29D7FC19-6BA9-494C-9369-9BBE41D13880}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E9BA3E-6D13-4ED4-81FF-A7034BF1B301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E9BA3E-6D13-4ED4-81FF-A7034BF1B301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E9BA3E-6D13-4ED4-81FF-A7034BF1B301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E9BA3E-6D13-4ED4-81FF-A7034BF1B301}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

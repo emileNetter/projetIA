@@ -14,9 +14,7 @@ namespace Classification
     {
         Perceptron p;
         Reseau reseau;
-        static Graphics g;
         static Bitmap bmp;
-        static public List<Classe> listclasses = new List<Classe>();
 
         public Form1()
         {
@@ -53,7 +51,7 @@ namespace Classification
                                Convert.ToDouble(textBox_coeff.Text),
                                Convert.ToInt32(textBox_iterations.Text));
 
-            Test(g, bmp);
+            Test(bmp);
             pictureBox_test.Invalidate();
         }
 
@@ -62,7 +60,7 @@ namespace Classification
             bmp = (Bitmap)pictureBox_test.Image;           
         }
 
-        private void Test(Graphics g , Bitmap bmp)
+        private void Test(Bitmap bmp)
         {
             int y, x;
             double z2;
@@ -80,7 +78,7 @@ namespace Classification
                 for(x=0; x < bmp.Width; x++)
                 {
                     List<double> vect = new List<double>();
-                    vect.Add(x/800.0); // Une seule valeur ici pour ce vecteur 
+                    vect.Add(x/800.0); //On normalise les entrées ausis ici 
                     vect.Add(y/800.0);
                     lvecteursentrees.Add(vect);
                 }                               
@@ -95,7 +93,7 @@ namespace Classification
                 int r = x % 800; //reste de la div (correspond au x de l'mg)
                 int ligne = x / 800; // correspond au numéro de ligne de l'img 
                 z2 = lsortiesobtenues[x];
-                if (z2 >= 0.8)
+                if (z2 >= 0.75)
                 {
                     bmp.SetPixel(r , ligne, Color.Blue); //Classe A en bleu
                 }

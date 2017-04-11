@@ -62,7 +62,7 @@
             this.button_initialise.Name = "button_initialise";
             this.button_initialise.Size = new System.Drawing.Size(108, 52);
             this.button_initialise.TabIndex = 2;
-            this.button_initialise.Text = "Initialiser le réseau";
+            this.button_initialise.Text = "Lancer l\'apprentissage";
             this.button_initialise.UseVisualStyleBackColor = true;
             this.button_initialise.Click += new System.EventHandler(this.button_initialise_Click);
             // 

@@ -16,8 +16,6 @@ namespace Classification
         public double somme = 0;
         public double delta;
 
-        private List<double> poids;
-
         public Neurone(int num, int numcouche)
         {
             numero = num;
@@ -80,30 +78,6 @@ namespace Classification
 
         public void ImposeSortie(double s) { sortie = s; }
 
-        public void ModifiePoids(Observation obs, double alpha)
-        {
-            for (int i = 0; i < poids.Count; i++)
-                poids[i] = poids[i] - alpha * (poids[i] - obs.GetValue(i));
-        }
-
-        public double DistInterNeurone(Neurone n2)
-        {
-            double dist = 0;
-            for (int i = 0; i < poids.Count; i++)
-            {
-                dist = dist + (poids[i] - n2.poids[i]) * (poids[i] - n2.poids[i]);
-            }
-            return Math.Sqrt(dist);
-        }
-
-        public double CalculeErreur(Observation obs)
-        {
-            double somme = 0;
-            for (int i = 0; i < poids.Count; i++)
-                somme = somme + (poids[i] - obs.GetValue(i))
-                               * (poids[i] - obs.GetValue(i));
-            return Math.Sqrt(somme);
-        }
     }
     
 }
