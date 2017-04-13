@@ -156,7 +156,7 @@ namespace Classification3._2
             g.FillRectangle(pen.Brush, 0, 0, bmp.Width, bmp.Height);
             AfficheDonnees();
 
-            // Affichage final des 2 classes
+            // Affichage final des 6 classes
             int x, y;
             pen.Color = Color.Blue;
             foreach (Neurone n in listclasses[0].GetNeurones())
@@ -207,6 +207,68 @@ namespace Classification3._2
             }
 
             pictureBox1.Refresh();
+            //Test();
+        }
+
+        private void Test()
+        {
+            List<Observation> testObs = new List<Observation>();
+            for(int i =0; i < bmp.Height; i++)
+            {
+                for(int j=0; j < bmp.Width; j++)
+                {
+                    testObs.Add(new Observation(j,i));
+                }
+            }
+
+            CAO.AlgoKohonen(testObs, Convert.ToDouble(textBox_coeff.Text));
+            CAO.regroupement(testObs, 6);
+            int x, y;
+
+            foreach (Neurone n in listclasses[0].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                bmp.SetPixel(x, y, Color.Blue);
+           }
+
+            foreach (Neurone n in listclasses[1].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                bmp.SetPixel(x, y, Color.Green);
+            }
+
+            foreach (Neurone n in listclasses[2].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                bmp.SetPixel(x, y, Color.Gray);
+            }
+
+            foreach (Neurone n in listclasses[3].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                bmp.SetPixel(x, y, Color.DeepPink);
+            }
+
+            foreach (Neurone n in listclasses[4].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                bmp.SetPixel(x, y, Color.BlueViolet);
+            }
+
+            foreach (Neurone n in listclasses[5].GetNeurones())
+            {
+                x = Convert.ToInt32(n.GetPoids(0));
+                y = Convert.ToInt32(n.GetPoids(1));
+                bmp.SetPixel(x, y, Color.Black);
+            }
+
+            pictureBox1.Refresh();
+
         }
 
     }
