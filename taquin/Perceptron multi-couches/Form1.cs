@@ -20,6 +20,7 @@ namespace WindowsFormsApplication1
         static Graphics g;
         static Bitmap bmp;
         static Bitmap bmp2;
+        static Bitmap bmp3;
         Random rnd = new Random();
         static double[,] tabValeurs = new double[3000, 3];
         Reseau reseau;
@@ -60,6 +61,7 @@ namespace WindowsFormsApplication1
         {
             bmp = (Bitmap)pictureBox1.Image;
             bmp2 = (Bitmap)pictureBox2.Image;
+            bmp3 = (Bitmap)pictureBox2.Image;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -88,7 +90,8 @@ namespace WindowsFormsApplication1
         }
 
         /**********************************************************************/
-        public void Tests(Graphics g, Bitmap bmp)
+
+        public void TestsErreur(Graphics g, Bitmap bmp)
         {
             int x, z;
             double z2;
@@ -97,7 +100,7 @@ namespace WindowsFormsApplication1
             {
                 for (z = 0; z < bmp.Height; z++)
                 {
-                    bmp.SetPixel(x, z, Color.Yellow);
+                    bmp.SetPixel(x, z, Color.White);
                 }
             }
 
@@ -122,6 +125,7 @@ namespace WindowsFormsApplication1
             lsortiesobtenues = reseau.ResultatsEnSortie(lvecteursentrees);
 
             // Affichage
+
             List<double> listIntensite = new List<double>();
             List<double> listIntensiteCorrigee = new List<double>();
 
@@ -150,7 +154,72 @@ namespace WindowsFormsApplication1
             }
 
         }
-      //************************************************************************************************************************
+
+        public void TestsAffichage(Graphics g, Bitmap bmp)
+        {
+            int x, z;
+            double z2;
+            // image blanche 
+            for (x = 0; x < bmp.Width; x++)
+            {
+                for (z = 0; z < bmp.Height; z++)
+                {
+                    bmp.SetPixel(x, z, Color.White);
+                }
+            }
+
+            List<List<double>> lvecteursentrees = new List<List<double>>();
+            List<double> lsortiesdesirees = new List<double>();
+            List<double> lsortiesobtenues;
+
+            // EN général, on reprend ici les données récupérées du fichier base de données
+            // mais pour illustrer le fonctionnement, on se propose ici de tester 200 valeurs
+            // de x (dimension 1 pour les entrées ici) entre 0 et 1, ramenées entre 0 et 200
+            // idem pour la sortie, pour permettre l'affichage dans une image.
+            for (x = 0; x < tabValeurs.GetLength(0); x++)
+            {
+                // Initialisation des activations  ai correspondant aux entrées xi
+                // Le premier neurone est une constante égale à 1
+                List<double> vect = new List<double>();
+                vect.Add(tabValeurs[x, 0] / 500); // Une seule valeur ici pour ce vecteur
+                vect.Add(tabValeurs[x, 1] / 500);
+                lvecteursentrees.Add(vect);
+            }
+
+            lsortiesobtenues = reseau.ResultatsEnSortie(lvecteursentrees);
+
+            // Affichage
+
+            List<double> listIntensite = new List<double>();
+            List<double> listIntensiteCorrigee = new List<double>();
+
+            for (x = 0; x < tabValeurs.GetLength(0); x++)
+            {
+                z2 = lsortiesobtenues[x];
+                listIntensite.Add(z2);
+
+            }
+            double min = listIntensite[0];
+            double max = listIntensite[0];
+            // On recherche le minimum et le maximum 
+            foreach (double element in listIntensite)
+            {
+                if (element < min) min = element;
+                else max = element;
+            }
+
+            for (int m = 0; m < tabValeurs.GetLength(0); m++)
+            {
+                int abs = Convert.ToInt32(0.4 * tabValeurs[m, 0]); // a corriger en fonction du max de datasetregression !
+                int ord = Convert.ToInt32(0.4 * tabValeurs[m, 1]);
+                double intensite = listIntensite[m] * 255;//Remap( listIntensite[m], min, max, 0, 255); // il faut maper
+                int i = Convert.ToInt32(Math.Floor(intensite));
+                bmp.SetPixel(abs, ord, Color.FromArgb(i, i, i));
+            }
+
+        }
+
+        /************************************************************************************************************************/
 
         private void button4_Click(object sender, EventArgs e) // bouton apprentissage 2
         {
@@ -181,11 +250,18 @@ namespace WindowsFormsApplication1
                 lsortiesdesirees.Add(tabValeurs[i,2]);
             }
 
+            //Calcul du reseau 
             reseau.backprop(lvecteursentrees, lsortiesdesirees,
                                Convert.ToDouble(textBoxalpha.Text),
                                Convert.ToInt32(textBoxnbiter.Text));
-            Tests(g, bmp2);
+
+
+            TestsAffichage(g, bmp2);
+            TestsErreur(g, bmp3);
+
             pictureBox2.Invalidate();
+            pictureBox3.Invalidate();
+            
         }
 
             // Map des valeurs d'un interval sur un autre
