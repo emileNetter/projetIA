@@ -94,8 +94,12 @@ namespace WindowsFormsApplication1
             double z2;
             // image blanche 
             for (x = 0; x < bmp.Width; x++)
+            {
                 for (z = 0; z < bmp.Height; z++)
-                    bmp.SetPixel(x, z, Color.White);
+                {
+                    bmp.SetPixel(x, z, Color.Yellow);
+                }
+            }
 
             List<List<double>> lvecteursentrees = new List<List<double>>();
             List<double> lsortiesdesirees = new List<double>();
@@ -110,8 +114,8 @@ namespace WindowsFormsApplication1
                 // Initialisation des activations  ai correspondant aux entrées xi
                 // Le premier neurone est une constante égale à 1
                 List<double> vect = new List<double>();
-                vect.Add(tabValeurs[x,0]); // Une seule valeur ici pour ce vecteur
-                vect.Add(tabValeurs[x, 1]);
+                vect.Add(tabValeurs[x,0]/500); // Une seule valeur ici pour ce vecteur
+                vect.Add(tabValeurs[x, 1]/500);
                 lvecteursentrees.Add(vect);
             }
 
@@ -140,12 +144,13 @@ namespace WindowsFormsApplication1
             {
                 int abs = Convert.ToInt32(0.4 * tabValeurs[m, 0]); // a corriger en fonction du max de datasetregression !
                 int ord = Convert.ToInt32(0.4 * tabValeurs[m, 1]);
-                double intensite =Remap( listIntensite[m], min, max, 0, 255); // il faut maper
+                double intensite = listIntensite[m] * 255;//Remap( listIntensite[m], min, max, 0, 255); // il faut maper
                 int i = Convert.ToInt32(Math.Floor(intensite));
                 bmp.SetPixel(abs, ord, Color.FromArgb(i, i, i));
             }
 
         }
+      //************************************************************************************************************************
 
         private void button4_Click(object sender, EventArgs e) // bouton apprentissage 2
         {
@@ -180,7 +185,7 @@ namespace WindowsFormsApplication1
                                Convert.ToDouble(textBoxalpha.Text),
                                Convert.ToInt32(textBoxnbiter.Text));
             Tests(g, bmp2);
-            pictureBox1.Invalidate();
+            pictureBox2.Invalidate();
         }
 
             // Map des valeurs d'un interval sur un autre
