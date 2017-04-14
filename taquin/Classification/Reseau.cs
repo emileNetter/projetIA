@@ -11,15 +11,16 @@ namespace Classification
     {
         private int nbNeurEntrees = 3;
         private int nbNeurCouche;
-        private int nbCouches = 3;
+        private int nbCouches;
 
         List<Neurone> listeneurones;     // Liste des neurones du réseau
         List<Neurone>[] tabcouches;  // tableau des couches de neurones
         double[,] tabpoids;      // Matrice d'adjacence des poids synaptiques
 
-        public Reseau(int nbNeurCouche)
+        public Reseau(int nbNeurCouche,int nbCouches)
         {
             this.nbNeurCouche = nbNeurCouche;
+            this.nbCouches = nbCouches;
             Initialisation(this.nbNeurEntrees, this.nbCouches, this.nbNeurCouche);
         }
 

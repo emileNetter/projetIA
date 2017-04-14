@@ -27,7 +27,7 @@ namespace Classification
 
         private void button_initialise_Click(object sender, EventArgs e)
         {
-            reseau = new Reseau(Convert.ToInt32(textBox_caches.Text));
+            reseau = new Reseau(Convert.ToInt32(textBox_caches.Text),Convert.ToInt32(textBox_nbCouches.Text));
             List<List<double>> lvecteursentrees = new List<List<double>>();
 
             // On a 1 seule sortie associée à chaque vecteur d'entrée
@@ -100,6 +100,10 @@ namespace Classification
                 else if (z2<=0.2)
                 {
                     bmp.SetPixel(r, ligne, Color.Yellow);
+                }
+                else
+                {
+                    bmp.SetPixel(r, ligne, Color.Black);
                 }
                 
                 // z2 valeur attendu entre 0 et 1 ; conversion pour z qui est retenu pour l'affichage

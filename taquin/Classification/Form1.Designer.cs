@@ -36,6 +36,8 @@
             this.textBox_coeff = new System.Windows.Forms.TextBox();
             this.textBox_iterations = new System.Windows.Forms.TextBox();
             this.pictureBox_test = new System.Windows.Forms.PictureBox();
+            this.textBox_nbCouches = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_test)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,11 +112,30 @@
             this.pictureBox_test.TabIndex = 7;
             this.pictureBox_test.TabStop = false;
             // 
+            // textBox_nbCouches
+            // 
+            this.textBox_nbCouches.Location = new System.Drawing.Point(189, 46);
+            this.textBox_nbCouches.Name = "textBox_nbCouches";
+            this.textBox_nbCouches.Size = new System.Drawing.Size(75, 20);
+            this.textBox_nbCouches.TabIndex = 8;
+            this.textBox_nbCouches.Text = "3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(29, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(88, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Nombre couches";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 741);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox_nbCouches);
             this.Controls.Add(this.pictureBox_test);
             this.Controls.Add(this.textBox_iterations);
             this.Controls.Add(this.textBox_coeff);
@@ -142,6 +163,8 @@
         private System.Windows.Forms.TextBox textBox_coeff;
         private System.Windows.Forms.TextBox textBox_iterations;
         private System.Windows.Forms.PictureBox pictureBox_test;
+        private System.Windows.Forms.TextBox textBox_nbCouches;
+        private System.Windows.Forms.Label label4;
     }
 }
 
